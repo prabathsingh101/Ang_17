@@ -53,7 +53,7 @@ export const loginInterceptor: HttpInterceptorFn = (req, next) => {
       }),
       catchError((err) => {
         return throwError(() => {
-          toast.warning('Token is expired, Please Login again', 'warning');
+          toast.warning('Session is expired, Please Login again', 'warning');
           loginSvc.Logout();
         });
       })

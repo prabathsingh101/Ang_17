@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{ inputdata }}</h1>
+<div mat-dialog-content></div>
+<mat-form-field>
+  <mat-label>Name</mat-label>
+  <input matInput />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>User Name</mat-label>
+  <input matInput />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Email</mat-label>
+  <input matInput />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Role</mat-label>
+  <input matInput />
+</mat-form-field>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="closepopup()">Close</button>
+  <button mat-raised-button color="acent" [mat-dialog-close]="closemessage">Cancel</button>
+</div>
