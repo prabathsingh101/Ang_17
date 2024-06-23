@@ -12,4 +12,5 @@ import { MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, Mat
 })
 export class DialogAnimationsExampleDialogComponent {
   readonly dialogRef = inject(MatDialogRef<DialogAnimationsExampleDialogComponent>);
+
 }
