@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginService {
 
-  private baseUrl: string = 'https://localhost:7060/api/Auth/';
+  private baseUrl: string = 'https://localhost:7226/api/Auth/';
 
   private userPayload:any;
 

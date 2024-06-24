@@ -1,14 +1,84 @@
-
-
 <div class="row">
   <div class="col-sm-12">
     <app-card cardTitle="Create User" [options]="false">
-      <p>create-user works!</p>
+      <form [formGroup]="usersForms" (ngSubmit)="submit()">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Firt Name</mat-label>
+              <input matInput formControlName="firstname" name="firstname">
+              <mat-error *ngIf="!usersForms.controls['firstname'].valid && usersForms.controls['firstname'].touched">
+                First name is required.
+              </mat-error>
+              <mat-error *ngIf="usersForms.get('firstname').hasError('maxLength')">Maximum 10 char</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastname" name="lastname">
+              <mat-error *ngIf="!usersForms.controls['lastname'].valid && usersForms.controls['lastname'].touched">
+                {{ titleAlert }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>User Name</mat-label>
+              <input matInput  formControlName="username" name="username">
+              <!-- <mat-hint>User name of at least eight characters, one uppercase letter and one number</mat-hint> -->
+              <!-- <mat-error *ngIf="!usersForms.controls['username'].valid && usersForms.controls['username'].touched">
+                {{ getErrorUserName() }}
+              </mat-error> -->
+              <!-- <mat-error *ngIf="!usersForms.get('username').hasError('maxLength').valid && usersForms.get('username').touched">
+                only 10 digits required
+              </mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput required formControlName="email">
+              <mat-error *ngIf="!usersForms.controls['email'].valid && usersForms.controls['email'].touched">
+                {{ getErrorEmail() }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input matInput required formControlName="password" name="password">
+              <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint>
+              <mat-error *ngIf="!usersForms.controls['password'].valid && usersForms.controls['password'].touched">
+                {{ getErrorPassword() }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="roles">
+                <mat-option value="Admin">Admin</mat-option>
+                <mat-option value="User">User</mat-option>
+                <mat-option value="Staff">Staff</mat-option>
+              </mat-select>
+              <mat-error *ngIf="!usersForms.controls['roles'].valid && usersForms.controls['roles'].touched">
+                {{ titleAlert }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button mat-raised-button>Cancel</button>
+            <button mat-flat-button color="primary">Register</button>
+          </div>
+        </div>
+      </form>
     </app-card>
   </div>
 </div>
-
-
-
-
-

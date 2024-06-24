@@ -4,7 +4,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../user.service';
-import { UserElement } from '../models/user.model';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,6 +16,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UserPopupComponent } from '../user-popup/user-popup.component';
 import { title } from 'process';
 import { DialogAnimationsExampleDialogComponent } from '../dialog-animations-example-dialog/dialog-animations-example-dialog.component';
+import { UserRegistration } from '../models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -63,7 +64,7 @@ export default class UserListComponent implements OnInit {
     this.userSvc.GetAllUsers().subscribe({
       next: (res) => {
         this.usersList = res;
-        this.dataSource = new MatTableDataSource<UserElement>(this.usersList);
+        this.dataSource = new MatTableDataSource<UserRegistration>(this.usersList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }

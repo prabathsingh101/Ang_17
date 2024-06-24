@@ -44,8 +44,22 @@ export default class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+      Username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+          Validators.pattern('^[0-9A-Za-z]{6,16}$')]],
+      Password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+          Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,32}$')
+        ]
+      ]
     });
   }
   get f() {
@@ -55,7 +69,7 @@ export default class SignInComponent implements OnInit {
   submit() {
     if (this.loginForm.valid) {
       this.user = {
-        Username: this.loginForm.value.email,
+        Username: this.loginForm.value.Username,
         Password: this.loginForm.value.Password
       };
       this.loginSvc.login(this.user).subscribe({
@@ -63,7 +77,7 @@ export default class SignInComponent implements OnInit {
           let data = JSON.stringify(res);
           let loggeduser = JSON.parse(data);
           if (loggeduser.statusCode === 0) {
-            this.toast.success(loggeduser.message, 'Login failed.', {
+            this.toast.error(loggeduser.message, 'Login failed.', {
               timeOut: 3000
             });
           } else {

@@ -9,11 +9,12 @@
             <h4 class="mb-3 f-w-400">SignIn</h4>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1"><i class="feather icon-mail"></i></span>
-              <input type="text" formControlName="email" class="form-control" placeholder="Email address" aria-label="Username" name="Username" aria-describedby="basic-addon1" />
+              <input type="text" formControlName="Username" class="form-control" placeholder="User name" aria-label="Username" name="Username" aria-describedby="basic-addon1" />
             </div>
-            <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
-              <span *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</span>
-              <span *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid email address.</span>
+            <div *ngIf="f['Username'].touched && f['Username'].invalid" class="alert alert-danger">
+              <span *ngIf="f['Username'].errors && f['Username'].errors['required']">User name is required.</span>
+              <span *ngIf="f['Username'].errors && f['Username'].errors['minlength']">Name should be 6 character.</span>
+              <span *ngIf="f['Username'].errors && f['Username'].errors['maxlength']">Name should be 20 character.</span>
             </div>
             <div class="input-group mb-4">
               <span class="input-group-text" id="basic-addon3"><i class="feather icon-lock"></i></span>

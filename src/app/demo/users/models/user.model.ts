@@ -1,5 +1,11 @@
-export class UserElement {
-  Id?: string;
-  Name?: string;
-  Email?: string;
+export class UserRegistration {
+  id?:string;
+  username?: string;
+  email?: string;
+  password?: string;
+  firstName?: string;
+  lastName?: string;
+  address?: string;
+  phoneNumber?: string;
+  roles?: string;
 }
