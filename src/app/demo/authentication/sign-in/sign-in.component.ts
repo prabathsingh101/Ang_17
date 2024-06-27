@@ -14,11 +14,16 @@ import { LoginService } from '../services/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserStoreService } from '../services/user-store.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [SharedModule, RouterModule, MatFormFieldModule, MatInputModule, HttpClientModule],
+  imports: [SharedModule, RouterModule, MatFormFieldModule, MatCardModule, MatButtonModule,
+    MatDividerModule,
+    MatInputModule, HttpClientModule],
   providers: [LoginService, UserStoreService, ToastrService],
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
@@ -30,7 +35,7 @@ export default class SignInComponent implements OnInit {
   });
   submitted = false;
 
-  loginForm!: FormGroup;
+  loginForm:any =FormGroup;
 
   user: any;
 
@@ -48,15 +53,15 @@ export default class SignInComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
+          Validators.minLength(8),
+          Validators.maxLength(15),
           Validators.pattern('^[0-9A-Za-z]{6,16}$')]],
       Password: [
         '',
         [
           Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
+          Validators.minLength(8),
+          Validators.maxLength(15),
           Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,32}$')
         ]
       ]
@@ -64,6 +69,20 @@ export default class SignInComponent implements OnInit {
   }
   get f() {
     return this.loginForm.controls;
+  }
+  getErrorUserName() {
+    return this.loginForm.get('Username').hasError('required')
+      ? 'User name is required (at least eight characters, one uppercase letter and one number)'
+      : this.loginForm.get('Username').hasError('Username')
+        ? 'User name needs to be at least eight characters, one uppercase letter and one number'
+        : '';
+  }
+  getErrorPassword() {
+    return this.loginForm.get('Password').hasError('required')
+      ? 'Password is required (at least eight characters, one uppercase letter and one number and one spacial character)'
+      : this.loginForm.get('Password').hasError('Password')
+        ? 'Password needs to be at least eight characters, one uppercase letter and one number and one spacial character'
+        : '';
   }
 
   submit() {

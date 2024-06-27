@@ -4,71 +4,97 @@
       <form [formGroup]="usersForms" (ngSubmit)="submit()">
         <div class="row">
           <div class="col-md-6">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Firt Name</mat-label>
               <input matInput formControlName="firstname" name="firstname">
-              <mat-error *ngIf="!usersForms.controls['firstname'].valid && usersForms.controls['firstname'].touched">
-                First name is required.
-              </mat-error>
-              <mat-error *ngIf="usersForms.get('firstname').hasError('maxLength')">Maximum 10 char</mat-error>
+              <mat-error
+                *ngIf="usersForms.controls['firstname'].hasError('required') && usersForms.controls['firstname'].touched">
+                First name is required</mat-error>
+              <mat-error
+                *ngIf="usersForms.controls['firstname'].hasError('maxlength') && usersForms.controls['firstname'].touched">
+                Max len 10 characters</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Last Name</mat-label>
               <input matInput formControlName="lastname" name="lastname">
-              <mat-error *ngIf="!usersForms.controls['lastname'].valid && usersForms.controls['lastname'].touched">
-                {{ titleAlert }}
-              </mat-error>
+              <mat-error
+                *ngIf="usersForms.controls['lastname'].hasError('required') && usersForms.controls['lastname'].touched">
+                Last name is required</mat-error>
+              <mat-error
+                *ngIf="usersForms.controls['lastname'].hasError('maxlength') && usersForms.controls['lastname'].touched">
+                Max len 10 characters</mat-error>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <mat-form-field class="example-full-width">
+            <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>User Name</mat-label>
-              <input matInput  formControlName="username" name="username">
-              <!-- <mat-hint>User name of at least eight characters, one uppercase letter and one number</mat-hint> -->
+              <input matInput formControlName="username" name="username">
+              <mat-hint>User name of at least eight characters, one uppercase letter and one number</mat-hint>
               <!-- <mat-error *ngIf="!usersForms.controls['username'].valid && usersForms.controls['username'].touched">
                 {{ getErrorUserName() }}
               </mat-error> -->
-              <!-- <mat-error *ngIf="!usersForms.get('username').hasError('maxLength').valid && usersForms.get('username').touched">
-                only 10 digits required
-              </mat-error> -->
+              <mat-error
+                *ngIf="usersForms.controls['username'].hasError('required') && usersForms.controls['username'].touched">
+                User name is required</mat-error>
+              <mat-error
+                *ngIf="usersForms.controls['username'].hasError('maxlength') && usersForms.controls['username'].touched">
+                Max len 15 characters</mat-error>
+                <mat-error
+                *ngIf="usersForms.controls['username'].hasError('minlength') && usersForms.controls['username'].touched">
+                Min len 8 characters</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Email</mat-label>
               <input matInput required formControlName="email">
-              <mat-error *ngIf="!usersForms.controls['email'].valid && usersForms.controls['email'].touched">
+              <!-- <mat-error *ngIf="!usersForms.controls['email'].valid && usersForms.controls['email'].touched">
                 {{ getErrorEmail() }}
-              </mat-error>
+              </mat-error> -->
+              <mat-error
+                *ngIf="usersForms.controls['email'].hasError('required') && usersForms.controls['email'].touched">
+                Email is required</mat-error>
+              <mat-error
+                *ngIf="usersForms.controls['email'].hasError('pattern') && usersForms.controls['email'].touched">
+                Email is not valid !</mat-error>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Password</mat-label>
               <input matInput required formControlName="password" name="password">
-              <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint>
+              <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number one spacial character</mat-hint>
               <mat-error *ngIf="!usersForms.controls['password'].valid && usersForms.controls['password'].touched">
                 {{ getErrorPassword() }}
               </mat-error>
+              <mat-error
+                *ngIf="usersForms.controls['password'].hasError('required') && usersForms.controls['password'].touched">
+                Password is required</mat-error>
+                <mat-error
+                *ngIf="usersForms.controls['password'].hasError('maxlength') && usersForms.controls['password'].touched">
+                Max len 15 characters</mat-error>
+                <mat-error
+                *ngIf="usersForms.controls['password'].hasError('minlength') && usersForms.controls['password'].touched">
+                Min len 8 characters</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Role</mat-label>
               <mat-select formControlName="roles">
                 <mat-option value="Admin">Admin</mat-option>
                 <mat-option value="User">User</mat-option>
                 <mat-option value="Staff">Staff</mat-option>
               </mat-select>
-              <mat-error *ngIf="!usersForms.controls['roles'].valid && usersForms.controls['roles'].touched">
-                {{ titleAlert }}
-              </mat-error>
+              <mat-error
+                *ngIf="usersForms.controls['roles'].hasError('required') && usersForms.controls['roles'].touched">
+                Role is required</mat-error>
             </mat-form-field>
           </div>
         </div>

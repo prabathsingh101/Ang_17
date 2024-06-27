@@ -50,9 +50,34 @@ export default class CreateUserComponent implements OnInit {
     this.usersForms = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10)]],
       lastname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10)]],
-      username: ['', [Validators.required, Validators.maxLength(10)]],
-      email: ['', [Validators.required, Validators.pattern(emailregex)]],
-      password: ['', [Validators.required]],
+      username: ['',
+        [
+        Validators.required,
+        Validators.pattern('^[0-9A-Za-z]{6,16}$'),
+        Validators.maxLength(15),
+        Validators.minLength(8),
+      ]],
+      //email: ['', [Validators.required, Validators.pattern(emailregex)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          ),
+          Validators.minLength(10),
+          Validators.maxLength(50)
+        ]
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,32}$'),
+          Validators.maxLength(15),
+          Validators.minLength(8)
+        ]
+      ],
       roles: ['', [Validators.required]]
     });
   }
@@ -81,14 +106,14 @@ export default class CreateUserComponent implements OnInit {
 
   getErrorPassword() {
     return this.usersForms.get('password').hasError('required')
-      ? 'Field is required (at least eight characters, one uppercase letter and one number)'
+      ? 'Field is required (at least eight characters, one uppercase letter and one number and one spacial character)'
       : this.usersForms.get('password').hasError('requirements')
-        ? 'Password needs to be at least eight characters, one uppercase letter and one number'
+        ? 'Password needs to be at least eight characters, one uppercase letter and one number and one spacial character'
         : '';
   }
   submit() {
     if (this.usersForms.valid) {
-      debugger
+      debugger;
       this.registrationForm = {
         username: this.usersForms.value.username,
         email: this.usersForms.value.email,
@@ -97,11 +122,13 @@ export default class CreateUserComponent implements OnInit {
         lastName: this.usersForms.value.lastname,
         roles: this.usersForms.value.roles
       };
-      this.userSvc.postUser(this.registrationForm).subscribe({next:(res)=>{
-        console.log(res);
-      }});
+      this.userSvc.postUser(this.registrationForm).subscribe({
+        next: (res) => {
+          console.log(res);
+        }
+      });
     }
   }
 }
 
-//Ratnesh 
+//Ratnesh
