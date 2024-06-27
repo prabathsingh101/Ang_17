@@ -17,11 +17,14 @@ import { ToastrService } from 'ngx-toastr';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
   imports: [SharedModule, RouterModule, MatFormFieldModule, MatCardModule, MatButtonModule,
+MatToolbarModule, MatIconModule,
     MatDividerModule,
     MatInputModule, HttpClientModule],
   providers: [LoginService, UserStoreService, ToastrService],
