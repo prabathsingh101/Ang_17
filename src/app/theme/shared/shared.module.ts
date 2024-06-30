@@ -37,6 +37,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
+import { provideToastr } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -103,6 +104,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
   ],
   declarations: [DataFilterPipe, SpinnerComponent],
-  providers: [provideHttpClient(withInterceptors([loginInterceptor]))]
+  providers: [
+
+    provideHttpClient(withInterceptors([loginInterceptor]))]
 })
 export class SharedModule {}

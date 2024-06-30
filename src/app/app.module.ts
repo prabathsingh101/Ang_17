@@ -23,7 +23,7 @@ import { NavCollapseComponent } from './theme/layout/admin/navigation/nav-conten
 import { NavGroupComponent } from './theme/layout/admin/navigation/nav-content/nav-group/nav-group.component';
 import { NavItemComponent } from './theme/layout/admin/navigation/nav-content/nav-item/nav-item.component';
 import { SharedModule } from './theme/shared/shared.module';
-import { provideToastr } from 'ngx-toastr';
+import { ToastrModule, ToastrService, provideToastr } from 'ngx-toastr';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loginInterceptor } from './demo/authentication/services/login.interceptor';
 import { CommonModule } from '@angular/common';
