@@ -23,10 +23,18 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [SharedModule, RouterModule, MatFormFieldModule, MatCardModule, MatButtonModule,
-MatToolbarModule, MatIconModule,
+  imports: [
+    SharedModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
     MatDividerModule,
-    MatInputModule, HttpClientModule],
+    MatInputModule,
+    HttpClientModule
+  ],
   providers: [LoginService, UserStoreService, ToastrService],
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
@@ -38,7 +46,7 @@ export default class SignInComponent implements OnInit {
   });
   submitted = false;
 
-  loginForm:any =FormGroup;
+  loginForm: any = FormGroup;
 
   user: any;
 
@@ -52,20 +60,14 @@ export default class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      Username: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(15),
-          Validators.pattern('^[0-9A-Za-z]{6,16}$')]],
+      Username: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
       Password: [
         '',
         [
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(15),
-          Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,32}$')
+
         ]
       ]
     });
@@ -94,17 +96,20 @@ export default class SignInComponent implements OnInit {
         Username: this.loginForm.value.Username,
         Password: this.loginForm.value.Password
       };
+      console.log(this.user);
       this.loginSvc.login(this.user).subscribe({
         next: (res) => {
           let data = JSON.stringify(res);
           let loggeduser = JSON.parse(data);
-          if (loggeduser.statusCode === 0) {
+          console.log('loggeduser', loggeduser);
+          if (loggeduser.StatusCode === 0) {
             this.toast.error(loggeduser.message, 'Login failed.', {
               timeOut: 3000
             });
           } else {
-            this.loginSvc.storeToken(loggeduser.token);
-            this.loginSvc.storeRefreshToken(loggeduser.refreshToken);
+            console.log('token', loggeduser.Token);
+            this.loginSvc.storeToken(loggeduser.Token);
+            this.loginSvc.storeRefreshToken(loggeduser.RefreshToken);
             const tokenPayload = this.loginSvc.decodedToken();
             this.userStore.setFullNameForStore(tokenPayload.name);
             this.userStore.setRoleForStore(tokenPayload.role);

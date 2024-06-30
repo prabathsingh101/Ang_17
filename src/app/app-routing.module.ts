@@ -9,6 +9,8 @@ import StudentsComponent from './demo/students/students.component';
 import SignInComponent from './demo/authentication/sign-in/sign-in.component';
 import { authGuard } from './demo/authentication/services/auth.guard';
 
+import {courseResolver} from "./demo/course-details/services/course.resolver";
+
 const routes: Routes = [
   {
     path: '',
@@ -73,7 +75,19 @@ const routes: Routes = [
       },
       {
         path: 'departments/list', canActivate:[authGuard],
-        loadComponent: () => import('./demo/departments/department-list/department-list.component')
+        loadComponent: () => import('./demo/departments/departments.component')
+      },
+      {
+        path: 'course-details/course', canActivate:[authGuard],
+        loadComponent: () => import('./demo/course-details/course-details.component')
+      },
+      {
+        path: 'course-details/add-new-course', canActivate:[authGuard],
+        loadComponent: () => import('./demo/course-details/create-course/create-course.component')
+      },
+      {
+        path: 'course-details/course/:id', canActivate:[authGuard], resolve:{course: courseResolver},
+        loadComponent: () => import('./demo/course-details/course/course.component')
       },
       {
         path: 'users/create', canActivate:[authGuard],

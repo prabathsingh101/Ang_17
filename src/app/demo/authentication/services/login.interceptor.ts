@@ -17,11 +17,14 @@ export const loginInterceptor: HttpInterceptorFn = (req, next) => {
 
   let cloneRequest: any;
 
+  //alert(myToken)
   //if (myToken!=null) {
     //alert(myToken)
     cloneRequest = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${myToken}`
+        Authorization: `Bearer ${myToken}`,
+        'Accept':'application/json',
+        'Content-Type':'application/json'
       }
     });
   // } else{

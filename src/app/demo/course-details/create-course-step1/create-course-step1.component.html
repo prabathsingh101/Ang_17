@@ -1,0 +1,37 @@
+<div [formGroup]="form" class="course-details-form">
+
+  <mat-form-field>
+    <mat-select formControlName="Classid" placeholder="Select Class">
+      @for (item of classNames; track item) {
+        <mat-option [value]="item.Classid">{{item.Name}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+
+    <input matInput placeholder="Course title" formControlName="title" #title>
+
+    <mat-hint align="end">
+
+      {{title.value.length}} / 60
+
+    </mat-hint>
+
+    <mat-error *ngIf="courseTitle.errors?.minlength">
+
+      A minimum length of 5 characters is required.
+
+    </mat-error>
+
+
+  </mat-form-field>
+
+
+
+  <mat-form-field appearance="outline">
+    <textarea matInput placeholder="Description" formControlName="longDescription" cdkTextareaAutosize
+      [cdkAutosizeMinRows]="2" [cdkAutosizeMaxRows]="5" #longDescription>
+      </textarea>
+  </mat-form-field>
+</div>

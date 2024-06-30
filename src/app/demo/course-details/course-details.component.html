@@ -1,0 +1,44 @@
+
+<div class="courses-panel">
+
+  <div class="header">
+
+    <h2 class="title">All Courses</h2>
+
+    <button mat-mini-fab routerLink="/course-details/add-new-course"
+            [matTooltip]="'Create a course'" matTooltipPosition="above"
+            [matTooltipShowDelay]="1000"
+            [matTooltipHideDelay]="2000"
+            [matTooltipDisabled]="true">
+      <mat-icon class="add-course-btn">add</mat-icon>
+    </button>
+
+  </div>
+
+    <mat-tab-group>
+
+        <mat-tab label="Beginners">
+
+            <app-course-card-list [courses]="courses">
+
+
+            </app-course-card-list>
+
+
+        </mat-tab>
+
+
+        <mat-tab label="Advanced">
+
+            <!-- <app-course-card-list [courses]="advancedCourses$ | async">
+
+
+            </app-course-card-list> -->
+
+        </mat-tab>
+
+    </mat-tab-group>
+
+
+</div>
+

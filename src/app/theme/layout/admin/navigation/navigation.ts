@@ -183,6 +183,40 @@ export const NavigationItems: NavigationItem[] = [
   },
 
 
+  {
+    id: 'courses',
+    title: 'Courses',
+    type: 'group',
+    icon: 'icon-group',
+    children: [
+      {
+        id: 'courses',
+        title: 'Courses',
+        type: 'collapse',
+        icon: 'feather icon-box',
+        children: [
+          {
+            id: 'course',
+            title: 'Course',
+            type: 'item',
+            icon:'feather icon-at-sign',
+            url: '/course-details/course'
+          },
+          {
+            id: 'add-new-course',
+            title: 'Add New Course',
+            type: 'item',
+            icon:'feather icon-at-sign',
+            url: '/course-details/add-new-course'
+          }
+        ]
+      }
+    ]
+  },
+
+
+
+
 
   {
     id: 'settings',
