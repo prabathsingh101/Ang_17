@@ -42,15 +42,10 @@ export default class CreateDepartmentComponent implements OnInit {
       this.deptSvc.Post(this.departments).subscribe((res: any) => {
         //console.log(res.StatusCode);
         //console.log(res.Message);
-        if (res.StatusCode === 201) {
-          this.toast.success(res.Message, 'Saved.', {
-            timeOut: 3000
-          });
+        if (res.StatusCode === 201) {this.toast.success(res.Message, 'Saved.', {timeOut: 3000});
           this.router.navigateByUrl('departments/list');
-        } else {
-          this.toast.error('Not saved', 'Error.', {
-            timeOut: 3000
-          });
+        } else if(res.StatusCode === 204) {
+          this.toast.error(res.Message, 'Error.', {timeOut: 3000});
         }
       });
     } else {
