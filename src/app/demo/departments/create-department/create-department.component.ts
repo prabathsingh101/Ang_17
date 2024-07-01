@@ -44,7 +44,7 @@ export default class CreateDepartmentComponent implements OnInit {
         //console.log(res.Message);
         if (res.StatusCode === 201) {this.toast.success(res.Message, 'Saved.', {timeOut: 3000});
           this.router.navigateByUrl('departments/list');
-        } else if(res.StatusCode === 204) {
+        } else {
           this.toast.error(res.Message, 'Error.', {timeOut: 3000});
         }
       });

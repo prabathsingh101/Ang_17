@@ -17,4 +17,12 @@ export class DepartmentService {
   GetAll(departments: Department[]) {
     return this.http.get(`${this.baseUrl}GetAll`)
   }
+
+  GetDeptById(id:number) {
+    return this.http.get(`${this.baseUrl}${id}`)
+  }
+
+  PUT(id: number, departments: Department) {
+    return this.http.put(`${this.baseUrl}${id}`,departments);
+  }
 }

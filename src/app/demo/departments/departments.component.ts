@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { DepartmentModalComponent } from './department-modal/department-modal.component';
+
 import { MatDialog } from '@angular/material/dialog';
 import { DepartmentService } from './department.service';
 import { Department } from './department.model';
 import { MatTableDataSource } from '@angular/material/table';
+import DepartmentModalComponent from './department-modal/department-modal.component';
 
 @Component({
   selector: 'app-departments',
@@ -38,20 +39,26 @@ export default class DepartmentsComponent implements OnInit {
     this.dataSource.filter = value;
   }
 
-  openpoup() {
+  openpoup(id:number, title:any) {
     var _popup = this.dialog.open(DepartmentModalComponent, {
-      width: '530px',
+      width: '400px',
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
       data: {
-        title: 'User Edit'
+        title: title,
+        id:id
       }
     });
     _popup.afterClosed().subscribe({
       next: (res) => {
         console.log(res);
+        this.getAlldept();
       }
     });
+  }
+
+  editDept(id: number) {
+    this.openpoup(id,"Edit Department")
   }
 
   getAlldept() {
@@ -63,8 +70,7 @@ export default class DepartmentsComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.loading = true;
-      }else{
-
+      } else {
       }
     });
   }
@@ -72,4 +78,4 @@ export default class DepartmentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAlldept();
   }
-}
+ }

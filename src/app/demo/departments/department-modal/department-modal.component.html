@@ -1,1 +1,42 @@
-<p>department-modal works!</p>
+<form [formGroup]="modalPopupForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <h2>{{inputdata.title}}</h2>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Department" #department  formControlName="departmentname">
+      <mat-hint align="end">
+        {{department.value.length}} / 20
+      </mat-hint>
+      <mat-error *ngIf="departmentName.errors?.required">
+        Department is required.
+      </mat-error>
+      <mat-error *ngIf="departmentName.errors?.minlength">
+        A minimum length of 5 characters is required.
+      </mat-error>
+      <mat-error *ngIf="departmentName.errors?.maxlength">
+        A maximum length of 20 characters is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Description" #description formControlName="description"
+      name="description"></textarea>
+      <mat-hint align="end">
+        {{description.value.length}} / 100
+      </mat-hint>
+      <mat-error *ngIf="descriptionName.errors?.required">
+        Description is required.
+      </mat-error>
+      <mat-error *ngIf="descriptionName.errors?.minlength">
+        A minimum length of 15 characters is required.
+      </mat-error>
+      <mat-error *ngIf="descriptionName.errors?.maxlength">
+        A maximum length of 100 characters is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-dialog-actions align="center">
+      <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      <button mat-raised-button color="primary">Update</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>
