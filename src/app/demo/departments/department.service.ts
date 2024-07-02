@@ -25,4 +25,8 @@ export class DepartmentService {
   PUT(id: number, departments: Department) {
     return this.http.put(`${this.baseUrl}${id}`,departments);
   }
+
+  DELETE(id: number) {
+    return this.http.delete(`${this.baseUrl}${id}`);
+  }
 }

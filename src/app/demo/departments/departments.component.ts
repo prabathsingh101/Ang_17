@@ -8,19 +8,23 @@ import { DepartmentService } from './department.service';
 import { Department } from './department.model';
 import { MatTableDataSource } from '@angular/material/table';
 import DepartmentModalComponent from './department-modal/department-modal.component';
+import { PromptService } from '../shared/prompt.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-departments',
   standalone: true,
   imports: [SharedModule],
-  providers: [DepartmentService],
+  providers: [DepartmentService, ToastrService],
   templateUrl: './departments.component.html',
   styleUrl: './departments.component.scss'
 })
 export default class DepartmentsComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
-    private deptSvc: DepartmentService
+    private toast: ToastrService,
+    private deptSvc: DepartmentService,
+    private promptSvc: PromptService,
   ) {}
 
   displayedColumns: string[] = ['Id', 'DepartmentName', 'Description', 'action'];
@@ -39,14 +43,14 @@ export default class DepartmentsComponent implements OnInit {
     this.dataSource.filter = value;
   }
 
-  openpoup(id:number, title:any) {
+  openpoup(id: number, title: any) {
     var _popup = this.dialog.open(DepartmentModalComponent, {
       width: '400px',
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
       data: {
         title: title,
-        id:id
+        id: id
       }
     });
     _popup.afterClosed().subscribe({
@@ -58,7 +62,7 @@ export default class DepartmentsComponent implements OnInit {
   }
 
   editDept(id: number) {
-    this.openpoup(id,"Edit Department")
+    this.openpoup(id, 'Edit Department');
   }
 
   getAlldept() {
@@ -78,4 +82,15 @@ export default class DepartmentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAlldept();
   }
- }
+
+  deletePromptPopup(id: number) {
+    this.promptSvc.openPromptDialog(id).subscribe((res: any) => {
+      if (res === true) {
+        this.deptSvc.DELETE(id).subscribe((res:any)=>{
+          this.toast.success('Deleted successfully.', 'Deleted.', {timeOut: 3000});
+          this.getAlldept();
+        })
+      }
+    });
+  }
+}

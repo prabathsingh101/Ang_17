@@ -38,12 +38,12 @@ export default class DepartmentModalComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.inputdata = this.data;
-    //alert(this.inputdata.id);
     this.setPopupData(this.inputdata.id);
   }
 
   createForm() {
     this.modalPopupForm = this.fb.group({
+      
       departmentname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
 
       description: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100)]]
