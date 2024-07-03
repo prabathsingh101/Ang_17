@@ -54,7 +54,7 @@ export const NavigationItems: NavigationItem[] = [
           },
           {
             id: 'list',
-            title: 'Registration-List',
+            title: 'Registration List',
             type: 'item',
             url: '/students/reg-list'
           },
@@ -66,7 +66,7 @@ export const NavigationItems: NavigationItem[] = [
           },
           {
             id: 'admission-list',
-            title: 'Admission-List',
+            title: 'Admission List',
             type: 'item',
             url: '/students/adm-list'
           },
@@ -76,30 +76,30 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             url: '/students/student-attendance'
           },
-          {
-            id: 'breadcrumb-pagination',
-            title: 'Breadcrumb & Pagination',
-            type: 'item',
-            url: '/component/breadcrumb-paging'
-          },
-          {
-            id: 'collapse',
-            title: 'Collapse',
-            type: 'item',
-            url: '/component/collapse'
-          },
-          {
-            id: 'tabs-pills',
-            title: 'Tabs & Pills',
-            type: 'item',
-            url: '/component/tabs-pills'
-          },
-          {
-            id: 'typography',
-            title: 'Typography',
-            type: 'item',
-            url: '/component/typography'
-          }
+          // {
+          //   id: 'breadcrumb-pagination',
+          //   title: 'Breadcrumb & Pagination',
+          //   type: 'item',
+          //   url: '/component/breadcrumb-paging'
+          // },
+          // {
+          //   id: 'collapse',
+          //   title: 'Collapse',
+          //   type: 'item',
+          //   url: '/component/collapse'
+          // },
+          // {
+          //   id: 'tabs-pills',
+          //   title: 'Tabs & Pills',
+          //   type: 'item',
+          //   url: '/component/tabs-pills'
+          // },
+          // {
+          //   id: 'typography',
+          //   title: 'Typography',
+          //   type: 'item',
+          //   url: '/component/typography'
+          // }
         ]
       }
     ]
@@ -214,7 +214,43 @@ export const NavigationItems: NavigationItem[] = [
     ]
   },
 
-
+  {
+    id: 'holidays',
+    title: 'Holidays',
+    type: 'group',
+    icon: 'icon-group',
+    children: [
+      {
+        id: 'holidays',
+        title: 'Holidays',
+        type: 'collapse',
+        icon: 'feather icon-box',
+        children: [
+          {
+            id: 'holiday',
+            title: 'Create Holidays',
+            type: 'item',
+            icon:'feather icon-at-sign',
+            url: '/holidays/create-holiday'
+          },
+          {
+            id: 'holiday-list',
+            title: 'Holiday List',
+            type: 'item',
+            icon:'feather icon-at-sign',
+            url: '/holidays/holiday-list'
+          },
+          {
+            id: 'holiday-calendar',
+            title: 'Holiday Calendar',
+            type: 'item',
+            icon:'feather icon-at-sign',
+            url: '/holidays/holiday-calendar'
+          }
+        ]
+      }
+    ]
+  },
 
 
 

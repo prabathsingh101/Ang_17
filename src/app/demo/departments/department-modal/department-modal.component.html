@@ -1,6 +1,8 @@
 <form [formGroup]="modalPopupForm" (ngSubmit)="onSubmit()">
+  <mat-toolbar color="accent">
+    <h1>{{inputdata.title}}</h1>
+  </mat-toolbar>
   <mat-dialog-content>
-    <h2 mat-dialog-title>{{inputdata.title}}</h2>
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Department" #department  formControlName="departmentname">
       <mat-hint align="end">
@@ -34,8 +36,8 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-dialog-actions align="center">
-      <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button color="accent" matDialogClose>Cancel</button>
       <button mat-raised-button color="primary">Update</button>
     </mat-dialog-actions>
   </mat-dialog-content>

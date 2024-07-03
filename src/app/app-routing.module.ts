@@ -77,18 +77,18 @@ const routes: Routes = [
         path: 'departments/list', canActivate:[authGuard],
         loadComponent: () => import('./demo/departments/departments.component')
       },
-      {
-        path: 'course-details/course', canActivate:[authGuard],
-        loadComponent: () => import('./demo/course-details/course-details.component')
-      },
-      {
-        path: 'course-details/add-new-course', canActivate:[authGuard],
-        loadComponent: () => import('./demo/course-details/create-course/create-course.component')
-      },
-      {
-        path: 'course-details/course/:id', canActivate:[authGuard], resolve:{course: courseResolver},
-        loadComponent: () => import('./demo/course-details/course/course.component')
-      },
+      // {
+      //   path: 'course-details/course', canActivate:[authGuard],
+      //   loadComponent: () => import('./demo/course-details/course-details.component')
+      // },
+      // {
+      //   path: 'course-details/add-new-course', canActivate:[authGuard],
+      //   loadComponent: () => import('./demo/course-details/create-course/create-course.component')
+      // },
+      // {
+      //   path: 'course-details/course/:id', canActivate:[authGuard], resolve:{course: courseResolver},
+      //   loadComponent: () => import('./demo/course-details/course/course.component')
+      // },
       {
         path: 'users/create', canActivate:[authGuard],
         loadComponent: () => import('./demo/users/create-user/create-user.component')
@@ -124,6 +124,18 @@ const routes: Routes = [
       {
         path: 'students/student-attendance', canActivate:[authGuard],
         loadComponent: () => import('./demo/students/student-attendance/student-attendance.component')
+      },
+      {
+        path: 'holidays/create-holiday', canActivate:[authGuard],
+        loadComponent: () => import('./demo/holidays/create-holiday/create-holiday.component')
+      },
+      {
+        path: 'holidays/holiday-list', canActivate:[authGuard],
+        loadComponent: () => import('./demo/holidays/holidays.component')
+      },
+      {
+        path: 'holidays/holiday-calendar', canActivate:[authGuard],
+        loadComponent: () => import('./demo/holidays/holidays-calendar/holidays-calendar.component')
       }
     ]
   },
