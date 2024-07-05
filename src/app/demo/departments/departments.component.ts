@@ -73,8 +73,13 @@ export default class DepartmentsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.deptList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.loading = true;
+        this.loading = false;
       } else {
+        this.deptList = res;
+        this.dataSource = new MatTableDataSource(this.deptList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.loading = false;
       }
     });
   }

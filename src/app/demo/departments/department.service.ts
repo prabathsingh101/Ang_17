@@ -6,6 +6,7 @@ import { Department } from './department.model';
   providedIn: 'root'
 })
 export class DepartmentService {
+  
   private readonly baseUrl = 'https://localhost:7226/api/Department/';
 
   constructor(private http: HttpClient) {}

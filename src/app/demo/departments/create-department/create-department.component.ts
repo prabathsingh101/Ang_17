@@ -40,8 +40,6 @@ export default class CreateDepartmentComponent implements OnInit {
       this.departments = { DepartmentName: this.departmentForm.value.departmentname, Description: this.departmentForm.value.description };
       console.log('departments', this.departments);
       this.deptSvc.Post(this.departments).subscribe((res: any) => {
-        //console.log(res.StatusCode);
-        //console.log(res.Message);
         if (res.StatusCode === 201) {this.toast.success(res.Message, 'Saved.', {timeOut: 3000});
           this.router.navigateByUrl('departments/list');
         } else {
