@@ -1,6 +1,6 @@
 // angular import
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, PatternValidator, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
 // project import
@@ -44,6 +44,8 @@ export default class SignInComponent implements OnInit {
     Username: new FormControl(''),
     Password: new FormControl('')
   });
+
+   StrongPasswordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
   submitted = false;
 
   loginForm: any = FormGroup;
@@ -58,15 +60,27 @@ export default class SignInComponent implements OnInit {
     private router: Router
   ) {}
 
+  get username() {
+    return this.loginForm.controls['Username'];
+  }
+  get password() {
+    return this.loginForm.controls['Password'];
+  }
+
+
+
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      Username: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
+      Username: ['',
+        [Validators.required, Validators.email]
+        ],
       Password: [
         '',
         [
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(15),
+          Validators.pattern(this.StrongPasswordRegx)
 
         ]
       ]

@@ -12,31 +12,35 @@
             <!-- <mat-error *ngIf="!loginForm.controls['Username'].valid && loginForm.controls['Username'].touched">
                 {{ getErrorUserName() }}
               </mat-error> -->
-            <mat-error
-              *ngIf="loginForm.controls['Username'].hasError('maxlength') && loginForm.controls['Username'].touched">
-              Max length 15 characters</mat-error>
-            <mat-error
-              *ngIf="loginForm.controls['Username'].hasError('minlength') && loginForm.controls['Username'].touched">
-              Min length 8 characters</mat-error>
+            <mat-error *ngIf="username.errors?.required">
+              Email is required.
+            </mat-error>
 
           </mat-form-field>
           <mat-form-field appearance="fill" class="example-full-width">
-            <input type="text" matInput placeholder="User Password" formControlName="Password" name="Password">
+            <input type="text" matInput placeholder="User Password" #passwords formControlName="Password"
+              name="Password">
             <mat-icon matSuffix>vpn_key</mat-icon>
             <!-- <mat-error *ngIf="!loginForm.controls['Password'].valid && loginForm.controls['Password'].touched">
                 {{ getErrorPassword() }}
               </mat-error> -->
-            <mat-error
-              *ngIf="loginForm.controls['Password'].hasError('maxlength') && loginForm.controls['Password'].touched">
-              Max length 15 characters</mat-error>
-            <mat-error
-              *ngIf="loginForm.controls['Password'].hasError('minlength') && loginForm.controls['Password'].touched">
-              Min length 8 characters</mat-error>
+            <mat-hint align="end">
+              Password shoould be alphanumeric.
+            </mat-hint>
+
+            <mat-error *ngIf="password.errors?.required">
+              Password is required.
+            </mat-error>
+            <mat-error *ngIf="password.errors?.minlength">
+              Min lenght is 8 character.
+            </mat-error>
+            <mat-error *ngIf="password.errors?.maxlength">
+              Max length is 15 characters.
+            </mat-error>
           </mat-form-field>
           <mat-card-actions align="end">
             <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
           </mat-card-actions>
-
         </form>
       </mat-card>
 
