@@ -7,7 +7,7 @@
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Title" #titles formControlName="title" name="title">
         <mat-hint align="end">
-          {{titles.value.length}} / 20
+          {{titles.value.length}} / 100
         </mat-hint>
         <mat-error *ngIf="title.errors?.required">
           Title is required.
@@ -16,7 +16,7 @@
           A minimum length of 2 characters is required.
         </mat-error>
         <mat-error *ngIf="title.errors?.maxlength">
-          A maximum length of 20 characters is required.
+          A maximum length of 100 characters is required.
         </mat-error>
       </mat-form-field>
     </div>

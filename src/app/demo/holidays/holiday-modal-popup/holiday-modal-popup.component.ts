@@ -44,8 +44,8 @@ export default class HolidayModalPopupComponent implements OnInit {
 
   createForm() {
     this.forms = this.fb.group({
-      
-      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+
+      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
 
       description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
 

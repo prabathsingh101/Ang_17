@@ -32,7 +32,7 @@ export default class CreateHolidayComponent implements OnInit {
   createForm() {
     this.forms = this.fb.group({
 
-      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
 
       description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
 
@@ -55,7 +55,11 @@ export default class CreateHolidayComponent implements OnInit {
 
   onSubmit(){
     if (this.forms.valid) {
-      this.holidays = { Title: this.forms.value.title, Description: this.forms.value.description,HolidayDate: this.forms.value.holidaydate };
+      this.holidays = {
+        Title: this.forms.value.title,
+        Description: this.forms.value.description,
+        HolidayDate: this.forms.value.holidaydate.toLocaleDateString()
+      };
       console.log('holidays', this.holidays);
       this.svc.Post(this.holidays).subscribe((res: any) => {
         if (res.StatusCode === 201) {this.toast.success(res.Message, 'Saved.', {timeOut: 3000});
