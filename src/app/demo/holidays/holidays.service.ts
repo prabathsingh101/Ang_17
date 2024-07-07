@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Holidays } from './holiday.model';
+import { HolidayEvents, Holidays } from './holiday.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class HolidaysService {
 
   GetAll(holidays: Holidays[]) {
     return this.http.get(`${this.baseUrl}GetAll`)
+  }
+
+  GetHolidayEvents(holidays: HolidayEvents[]) {
+    return this.http.get(`${this.baseUrl}getevents`)
   }
 
   GetHolidayById(id:number) {

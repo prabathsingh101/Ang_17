@@ -4,7 +4,7 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { Holidays } from '../holiday.model';
+import { HolidayEvents, Holidays } from '../holiday.model';
 import { HolidaysService } from '../holidays.service';
 import { title } from 'process';
 
@@ -18,10 +18,8 @@ import { title } from 'process';
 export default class HolidaysCalendarComponent implements OnInit {
   constructor(private svc: HolidaysService) {}
 
-  events: Holidays[] = [];
+  holidayEvents: HolidayEvents[] = [];
 
-  arrdata!: any;
-  data!: any;
   //calendarOptions!: CalendarOptions;
 
   // events: any = [
@@ -38,9 +36,9 @@ export default class HolidaysCalendarComponent implements OnInit {
   // ];
 
   calendarOptions: CalendarOptions = {
-     plugins: [dayGridPlugin],
-    initialView: 'dayGridMonth',
-    weekends: true,
+    plugins: [dayGridPlugin],
+    //initialView: 'dayGridMonth',
+    //weekends: true,
     eventClick: this.handleDateClick.bind(this)
   };
   handleDateClick(arg: any) {
@@ -50,18 +48,14 @@ export default class HolidaysCalendarComponent implements OnInit {
     this.bindCal();
   }
   bindCal() {
-    this.svc.GetAll(this.events).subscribe((res: any) => {
-      this.events = res;
-      this.arrdata = this.events;
-      this.data = this.arrdata.map((q: any) => {
-        return { title: q.Title, date: q.HolidayDate ,color:q.color};
-      });
-      console.log(this.events)
+    this.svc.GetHolidayEvents(this.holidayEvents).subscribe((res: any) => {
+      this.holidayEvents = res;
+      console.log(this.holidayEvents);
       this.calendarOptions = {
-        //plugins: [dayGridPlugin],
-        //initialView: 'dayGridMonth',
-        //weekends: true,
-        events: this.data
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridMonth',
+        weekends: true,
+        events: this.holidayEvents,
       };
     });
   }
