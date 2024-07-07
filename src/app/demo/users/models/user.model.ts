@@ -1,5 +1,5 @@
 export class UserRegistration {
-  id?:string;
+  id?: string;
   username?: string;
   email?: string;
   password?: string;
@@ -8,4 +8,29 @@ export class UserRegistration {
   address?: string;
   phoneNumber?: string;
   roles?: string;
+}
+
+export interface UsersModel {
+  id?: string;
+
+  name?: string;
+
+  username?: string;
+
+  firstname?: string;
+
+  lastname?: string;
+
+  address?: string;
+
+  mobileno?: string;
+
+  email?: string;
+
+  role?: string;
+}
+
+export interface Roles{
+  id?: string;
+  name?: string;
 }

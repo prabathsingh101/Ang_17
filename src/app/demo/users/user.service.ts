@@ -1,18 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserRegistration } from './models/user.model';
+import { UserRegistration, UsersModel } from './models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl: string = 'https://localhost:7226/api/';
+  private baseUrl: string = 'https://localhost:7226/api/auth/';
+
   constructor(private http: HttpClient) {}
 
   GetAllUsers() {
-    return this.http.get(this.baseUrl +'user/'+ 'getAllUser');
+    return this.http.get(`${this.baseUrl}getusers`);
   }
+  GetAllRoles() {
+    return this.http.get(`${this.baseUrl}getallrole`);
+  }
+
   postUser(user:UserRegistration){
-    return this.http.post(this.baseUrl +'auth/'+ 'user-registration', user)
+    return this.http.post(`${this.baseUrl}user-registration`, user)
   }
 }

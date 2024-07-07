@@ -9,9 +9,7 @@
           <mat-form-field appearance="fill" class="example-full-width">
             <input matInput placeholder="User Email" formControlName="Username" name="Username">
             <mat-icon matSuffix>email</mat-icon>
-            <!-- <mat-error *ngIf="!loginForm.controls['Username'].valid && loginForm.controls['Username'].touched">
-                {{ getErrorUserName() }}
-              </mat-error> -->
+           
             <mat-error *ngIf="username.errors?.required">
               Email is required.
             </mat-error>

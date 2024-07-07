@@ -1,22 +1,91 @@
-<h1 mat-dialog-title>{{ inputdata }}</h1>
-<div mat-dialog-content></div>
-<mat-form-field>
-  <mat-label>Name</mat-label>
-  <input matInput />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>User Name</mat-label>
-  <input matInput />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Email</mat-label>
-  <input matInput />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Role</mat-label>
-  <input matInput />
-</mat-form-field>
-<div mat-dialog-actions>
-  <button mat-raised-button color="warn" (click)="closepopup()">Close</button>
-  <button mat-raised-button color="acent" [mat-dialog-close]="closemessage">Cancel</button>
-</div>
+<form [formGroup]="usersForms" (ngSubmit)="onSubmit()">
+  <mat-toolbar color="accent">
+    <h1>{{inputdata.title}}</h1>
+  </mat-toolbar>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Firt Name</mat-label>
+          <input matInput formControlName="firstname" name="firstname" #firstname>
+          <mat-hint align="end">
+            {{firstname.value.length}} / 20
+          </mat-hint>
+          <mat-error *ngIf="fname.errors?.required">
+            First name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastname" name="lastname" #lastname>
+          <mat-hint align="end">
+            {{lastname.value.length}} / 20
+          </mat-hint>
+          <mat-error *ngIf="lname.errors?.required">
+            Last name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" name="address">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput required formControlName="email" #email>
+          <mat-hint align="end">
+            {{email.value.length}} / 200
+          </mat-hint>
+          <mat-error *ngIf="getemail.errors?.maxlength">
+            A maximum length upto 200 characters.
+          </mat-error>
+          <mat-error *ngIf="usersForms.controls['email'].hasError('required') && usersForms.controls['email'].touched">
+            Email is required</mat-error>
+          <mat-error *ngIf="usersForms.controls['email'].hasError('pattern') && usersForms.controls['email'].touched">
+            Email is not valid !</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Mobile No</mat-label>
+          <input matInput formControlName="mobileno" #mobileno>
+          <mat-hint align="end">
+            {{mobileno.value.length}} / 10
+          </mat-hint>
+          <mat-error *ngIf="getmobileno.errors?.maxlength">
+            A maximum length upto 10 characters.
+          </mat-error>
+          <mat-error *ngIf="getmobileno.errors?.maxlength">
+            A minimum length upto 10 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Role</mat-label>
+          <mat-select name="role" formControlName="role">
+            @for (role of roles; track role) {
+            <mat-option [value]="role.id">{{role.name}}</mat-option>
+            }
+          </mat-select>
+          <mat-error *ngIf="getrole.errors?.required">
+            Role is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button color="accent" matDialogClose>Cancel</button>
+      <button mat-flat-button color="primary">Save</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

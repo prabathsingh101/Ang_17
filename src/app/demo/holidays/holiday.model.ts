@@ -7,6 +7,6 @@ export interface Holidays{
 
 export interface HolidayEvents{
   title?: string;
-  date?: Date;
+  start?: Date;
   color?: string
 }

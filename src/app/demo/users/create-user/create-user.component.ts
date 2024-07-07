@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserRegistration } from '../models/user.model';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -22,7 +23,8 @@ import { UserService } from '../user.service';
 export default class CreateUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private router: Router
   ) {}
 
   usersForms: any = FormGroup;
@@ -32,41 +34,19 @@ export default class CreateUserComponent implements OnInit {
   registrationForm!: any;
 
   ngOnInit(): void {
-    // this.usersForms = this.fb.group({
-    //   firstname: ['', Validators.required, Validators.minLength(6), Validators.maxLength(20)],
-    //   lastname: ['', Validators.required, Validators.minLength(6), Validators.maxLength(20)],
-    //   username: ['', Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^[0-9A-Za-z]{6,16}$')],
-    //   email: ['', Validators.required, Validators.email],
-    //   password: ['', Validators.required, Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,32}$')],
-    //   role: ['', Validators.required]
-    // });
     this.createForm();
-    //this.setChangeValidate();
   }
 
   createForm() {
-    let emailregex: RegExp =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     this.usersForms = this.fb.group({
-      firstname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10)]],
-      lastname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10)]],
-      username: ['',
-        [
-        Validators.required,
-        Validators.pattern('^[0-9A-Za-z]{6,16}$'),
-        Validators.maxLength(15),
-        Validators.minLength(8),
-      ]],
-      //email: ['', [Validators.required, Validators.pattern(emailregex)]],
-      email: [
-        '',
+      firstname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(20)]],
+      lastname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(20)]],
+      username: ['', []],
+      email: ['',
         [
           Validators.required,
-          Validators.pattern(
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          ),
-          Validators.minLength(10),
-          Validators.maxLength(50)
+          Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+          Validators.maxLength(200)
         ]
       ],
       password: [
@@ -81,7 +61,15 @@ export default class CreateUserComponent implements OnInit {
       roles: ['', [Validators.required]]
     });
   }
-
+  get getemail() {
+    return this.usersForms.controls['email'];
+  }
+  get fname() {
+    return this.usersForms.controls['firstname'];
+  }
+  get lname() {
+    return this.usersForms.controls['lastname'];
+  }
   getErrorUserName() {
     return this.usersForms.get('username').hasError('required')
       ? 'Field is required (at least eight characters, one uppercase letter and one number)'
@@ -94,37 +82,29 @@ export default class CreateUserComponent implements OnInit {
   //   let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
   //   return !passwordCheck.test(enteredPassword) && enteredPassword ? { requirements: true } : null;
   // }
-  getErrorEmail() {
-    return this.usersForms.get('email').hasError('required')
-      ? 'Field is required'
-      : this.usersForms.get('email').hasError('pattern')
-        ? 'Not a valid emailaddress'
-        : this.usersForms.get('email').hasError('alreadyInUse')
-          ? 'This emailaddress is already in use'
-          : '';
-  }
 
   getErrorPassword() {
     return this.usersForms.get('password').hasError('required')
       ? 'Field is required (at least eight characters, one uppercase letter and one number and one spacial character)'
-      : this.usersForms.get('password').hasError('requirements')
+      : this.usersForms.get('password').hasError('required')
         ? 'Password needs to be at least eight characters, one uppercase letter and one number and one spacial character'
         : '';
   }
   submit() {
     if (this.usersForms.valid) {
-      debugger;
       this.registrationForm = {
-        username: this.usersForms.value.username,
+        username: this.usersForms.value.email,
         email: this.usersForms.value.email,
         password: this.usersForms.value.password,
         firstName: this.usersForms.value.firstname,
         lastName: this.usersForms.value.lastname,
         roles: this.usersForms.value.roles
       };
-      this.userSvc.postUser(this.registrationForm).subscribe({
-        next: (res) => {
+      this.userSvc.postUser(this.registrationForm).subscribe((res: any) => {
+        if (res.StatusCode == 1) {
           console.log(res);
+          this.router.navigateByUrl('users/list');
+        } else {
         }
       });
     }
