@@ -1,0 +1,175 @@
+<form [formGroup]="teacherForms" (ngSubmit)="onSubmit()">
+  <mat-toolbar color="primary">
+    <h1>{{inputdata.title}}</h1>
+  </mat-toolbar>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="First Name" #fname name="fname" formControlName="fname">
+          <mat-hint align="end">
+            {{fname.value.length}} / 50
+          </mat-hint>
+          <mat-error *ngIf="getfname.errors?.required">
+            First name is required.
+          </mat-error>
+          <mat-error *ngIf="getfname.errors?.maxlength">
+            A maximum length of 50 characters is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Middle Name" #mname name="mname" formControlName="mname">
+          <mat-hint align="end">
+            {{mname.value.length}} / 50
+          </mat-hint>
+          <mat-error *ngIf="getmname.errors?.maxlength">
+            A maximum length of 50 characters is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Last Name" #lname name="lname" formControlName="lname">
+          <mat-hint align="end">
+            {{lname.value.length}} / 50
+          </mat-hint>
+          <mat-error *ngIf="getlname.errors?.required">
+            Last name is required.
+          </mat-error>
+          <mat-error *ngIf="getlname.errors?.maxlength">
+            A maximum length of 50 characters is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" #email name="email" formControlName="email">
+          <mat-hint align="end">
+            {{email.value.length}} / 100
+          </mat-hint>
+          <mat-error *ngIf="getemail.errors?.maxlength">
+            A maximum length of 100 characters is required.
+          </mat-error>
+          <mat-error
+            *ngIf="teacherForms.controls['email'].hasError('pattern') && teacherForms.controls['email'].touched">
+            Email is not valid !</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Phone no" #phone name="phone" formControlName="phone">
+          <mat-hint align="end">
+            {{phone.value.length}} / 10
+          </mat-hint>
+          <mat-error *ngIf="getphone.errors?.required">
+            Phone no is required.
+          </mat-error>
+          <mat-error *ngIf="getphone.errors?.minlength">
+            A minimum length of 10 digits is required.
+          </mat-error>
+          <mat-error *ngIf="getphone.errors?.maxlength">
+            A maximum length of 10 digits is required.
+          </mat-error>
+          <mat-error
+            *ngIf="teacherForms.controls['phone'].hasError('pattern') && teacherForms.controls['phone'].touched">
+            Only Digits allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <mat-label>Choose Dob</mat-label>
+          <input matInput [matDatepicker]="dobdatepicker" formControlName="dob" name="dob" />
+          <mat-hint align="end">MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="dobdatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #dobdatepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Degree" formControlName="degree" name="degree">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Proficiency" formControlName="proficiency" name="proficiency">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Choose Doj</mat-label>
+          <input matInput [matDatepicker]="dojdatepicker" formControlName="dateofjoining" name="dateofjoining" />
+          <mat-hint align="end">MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="dojdatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #dojdatepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+
+
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Pincode" #pincode formControlName="pincode" name="pincode">
+          <mat-hint align="end">
+            {{pincode.value.length}} / 6
+          </mat-hint>
+          <mat-error *ngIf="getpincode.errors?.minlength">
+            A minium length of 6 characters is required.
+          </mat-error>
+          <mat-error *ngIf="getpincode.errors?.maxlength">
+            A maximum length of 6 characters is required.
+          </mat-error>
+          <mat-error
+            *ngIf="teacherForms.controls['pincode'].hasError('pattern') && teacherForms.controls['pincode'].touched">
+            Only Digits allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-8">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Address" #address formControlName="address" name="address">
+          <mat-hint align="end">
+            {{address.value.length}} / 500
+          </mat-hint>
+          <mat-error *ngIf="getaddress.errors?.minlength">
+            A maximum length of 500 characters is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="accent" class="button" matDialogClose type="button"
+        (click)="reset($event)">Cancel</button>
+      <button mat-raised-button color="primary">Save</button>
+    </mat-card-actions>
+  </mat-dialog-content>
+</form>

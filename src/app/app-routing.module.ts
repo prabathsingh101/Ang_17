@@ -90,6 +90,22 @@ const routes: Routes = [
       //   loadComponent: () => import('./demo/course-details/course/course.component')
       // },
       {
+        path: 'courses/new-course', canActivate:[authGuard],
+        loadComponent: () => import('./demo/cources/create-course/create-course.component')
+      },
+      {
+        path: 'courses/course-list', canActivate:[authGuard],
+        loadComponent: () => import('./demo/cources/cources.component')
+      },
+      {
+        path: 'courses/new-lesson', canActivate:[authGuard],
+        loadComponent: () => import('./demo/cources/create-lesson/create-lesson.component')
+      },
+      {
+        path: 'courses/lesson-list', canActivate:[authGuard],
+        loadComponent: () => import('./demo/cources/lesson-list/lesson-list.component')
+      },
+      {
         path: 'users/create', canActivate:[authGuard],
         loadComponent: () => import('./demo/users/create-user/create-user.component')
       },

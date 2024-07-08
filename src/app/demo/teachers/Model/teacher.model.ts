@@ -1,17 +1,19 @@
 
 export interface Teachers {
-    Id?: number;
+    id?: number;
     fname?: string;
-    Name?: string;
+    mname?: string;
     lname?: string;
     email?: string;
     dob?: Date;
-    Phone?: string;
-    Degree?: string;
-    ContactNo?: string;
-    Proficiency?: string;
-    Address?: string;
-    DateofJoining?: Date;
+    phone?: string;
+    degree?: string;
+    proficiency?: string;
+    address?: string;
+    dateofjoining?: Date;
+    pincode?:string;
+    createdated?:Date;
+    modfieddate?: Date;
 }
 
 

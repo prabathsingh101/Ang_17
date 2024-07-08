@@ -1,16 +1,88 @@
-
-
 <div class="row">
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
   <div class="col-sm-12">
-    <app-card cardTitle="Teacher Lists" [options]="false">
-      <p>teacher-list works!</p>
+    <app-card cardTitle="Teacher List" [options]="false">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Enter text search" (keyup)="filterchange($event)" />
+      </mat-form-field>
+      <table matSort mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+          <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="fname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> FName </th>
+          <td mat-cell *matCellDef="let element"> {{ element.fname }} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <!-- <ng-container matColumnDef="mname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> MName </th>
+          <td mat-cell *matCellDef="let element"> {{ element.mname }} </td>
+        </ng-container> -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="lname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> LName </th>
+          <td mat-cell *matCellDef="let element"> {{ element.lname }} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+          <td mat-cell *matCellDef="let element"> {{ element.phone }} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="degree">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Degree </th>
+          <td mat-cell *matCellDef="let element"> {{ element.degree }} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="proficiency">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Proficiency </th>
+          <td mat-cell *matCellDef="let element"> {{ element.proficiency }} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+          <td mat-cell *matCellDef="let element"> {{ element.address }} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <!-- <ng-container matColumnDef="pincode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Pincode </th>
+          <td mat-cell *matCellDef="let element"> {{ element.pincode }} </td>
+        </ng-container> -->
+
+        <!-- action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" class="button" (click)="editTeacher(element.id)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="accent" (click)="deleteData(element.id)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
     </app-card>
   </div>
 </div>
-
-
-
-
-
-
 
