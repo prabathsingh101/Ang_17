@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form [formGroup]="forms" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Class Name" #class name="classname" formControlName="classname">
+            <mat-hint align="end">
+              {{class.value.length}} / 20
+            </mat-hint>
+            <mat-error *ngIf="getclassname.errors?.required">
+              Class name is required.
+            </mat-error>
+            <mat-error *ngIf="getclassname.errors?.maxlength">
+              A maximum length of 20 characters is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width">
+            <mat-select name="teacherid" #teacher placeholder="Teacher" formControlName="teacherid">
+              @for (teacher of teacherName; track teacher) {
+                <mat-option [value]="teacher.id">{{teacher.name}}</mat-option>
+                }
+            </mat-select>
+            <mat-error *ngIf="getteacher.errors?.required">
+              Select teacher.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Student Limit" #limit formControlName="studentlimit" name="studentlimit">
+            <mat-hint align="end">
+              {{limit.value.length}} / 2
+            </mat-hint>
+            <mat-error *ngIf="getlimit.errors?.required">
+              Limit is required.
+            </mat-error>
+            <mat-error *ngIf="getlimit.errors?.maxlength">
+              A maximum length of 2 characters is required.
+            </mat-error>
+            <mat-error
+              *ngIf="forms.controls['studentlimit'].hasError('pattern') && forms.controls['studentlimit'].touched">
+              Only Digits allowed</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button mat-raised-button color="accent" class="mat-button">Cancel </button>
+          <button mat-raised-button color="primary">Save </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -34,6 +34,31 @@ export const NavigationItems: NavigationItem[] = [
       }
     ]
   },
+
+  {
+    id: 'class',
+    title: 'Class',
+    type: 'group',
+    icon: 'icon-group',
+    children: [
+      {
+        id: 'class',
+        title: 'Class',
+        type: 'collapse',
+        icon: 'feather icon-box',
+        children: [
+          {
+            id: 'create-class',
+            title: 'Add Class',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/classes/create-class'
+          }
+        ]
+      }
+    ]
+  },
+
   {
     id: 'student',
     title: 'Students',
@@ -75,7 +100,7 @@ export const NavigationItems: NavigationItem[] = [
             title: 'Attendance',
             type: 'item',
             url: '/students/student-attendance'
-          },
+          }
           // {
           //   id: 'breadcrumb-pagination',
           //   title: 'Breadcrumb & Pagination',
@@ -121,35 +146,34 @@ export const NavigationItems: NavigationItem[] = [
             id: 'creates',
             title: 'Creates',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/create'
           },
           {
             id: 'lists',
             title: 'Lists',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/list'
           },
           {
             id: 'teacher-attendance',
             title: 'Attendance',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/attendance'
           },
           {
             id: 'payslip',
             title: 'Payslip',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/payslip'
           }
         ]
       }
     ]
   },
-
 
   {
     id: 'departments',
@@ -167,21 +191,20 @@ export const NavigationItems: NavigationItem[] = [
             id: 'create',
             title: 'Create',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/departments/create'
           },
           {
             id: 'list',
             title: 'Lists',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/departments/list'
           }
         ]
       }
     ]
   },
-
 
   {
     id: 'courses',
@@ -199,23 +222,23 @@ export const NavigationItems: NavigationItem[] = [
             id: 'add-new-course',
             title: 'Add New Course',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/courses/new-course'
           },
           {
             id: 'add-new-lesson',
             title: 'Add New Lesson',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/courses/new-lesson'
           },
           {
             id: 'course-list',
             title: 'Course List',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/courses/course-list'
-          },
+          }
 
           // {
           //   id: 'add-new-lesson-list',
@@ -245,29 +268,27 @@ export const NavigationItems: NavigationItem[] = [
             id: 'holiday',
             title: 'Create Holidays',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/holidays/create-holiday'
           },
           {
             id: 'holiday-list',
             title: 'Holiday List',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/holidays/holiday-list'
           },
           {
             id: 'holiday-calendar',
             title: 'Holiday Calendar',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/holidays/holiday-calendar'
           }
         ]
       }
     ]
   },
-
-
 
   {
     id: 'settings',
@@ -285,36 +306,34 @@ export const NavigationItems: NavigationItem[] = [
             id: 'create',
             title: 'Create',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/users/create'
           },
           {
             id: 'list',
             title: 'Lists',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/users/list'
           },
           {
             id: 'profile',
             title: 'Profiles',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/users/profiles'
           },
           {
             id: 'changepassword',
             title: 'Change Password',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/users/change-password'
           }
         ]
       }
     ]
   },
-
-
 
   {
     id: 'Authentication',
@@ -382,7 +401,7 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'feather icon-server'
       }
     ]
-  },
+  }
 
   // {
   //   id: 'other',

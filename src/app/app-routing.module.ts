@@ -90,6 +90,10 @@ const routes: Routes = [
       //   loadComponent: () => import('./demo/course-details/course/course.component')
       // },
       {
+        path: 'classes/create-class', canActivate:[authGuard],
+        loadComponent: () => import('./demo/classes/classes.component')
+      },
+      {
         path: 'courses/new-course', canActivate:[authGuard],
         loadComponent: () => import('./demo/cources/create-course/create-course.component')
       },

@@ -31,5 +31,7 @@ private readonly baseUrl='https://localhost:7226/api/Teacher/'
   DELETE(id: number) {
     return this.http.delete(`${this.baseUrl}${id}`);
   }
-  
+  GetTeacherName() {
+    return this.http.get<Teachers[]>(`${this.baseUrl}teachername`)
+  }
 }

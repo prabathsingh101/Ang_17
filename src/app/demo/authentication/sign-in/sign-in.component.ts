@@ -35,7 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     HttpClientModule
   ],
-  providers: [LoginService, UserStoreService, ToastrService],
+  providers: [LoginService, UserStoreService, ToastrService, SharedModule],
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
@@ -51,6 +51,8 @@ export default class SignInComponent implements OnInit {
   loginForm: any = FormGroup;
 
   user: any;
+
+  loading=false;
 
   constructor(
     private fb: FormBuilder,
@@ -106,6 +108,7 @@ export default class SignInComponent implements OnInit {
 
   submit() {
     if (this.loginForm.valid) {
+      this.loading=true;
       this.user = {
         Username: this.loginForm.value.Username,
         Password: this.loginForm.value.Password
@@ -130,6 +133,7 @@ export default class SignInComponent implements OnInit {
             this.toast.success('Logged in successfully.', 'Success', {
               timeOut: 3000
             });
+            this.loading=false;
             this.router.navigateByUrl('analytics');
           }
         }
