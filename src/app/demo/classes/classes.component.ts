@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import CreateClassComponent from './create-class/create-class.component';
 import { ClassService } from './services/class.service';
-import { Classes } from './model/classes';
+
 import { catchError, finalize, throwError } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -27,14 +27,25 @@ export default class ClassesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  //classList: Classes[] = [];
-
   classList: ClassDetail[] = [];
 
   loading = false;
 
   ngOnInit(): void {
     this.getClasses();
+  }
+
+  parentFunction(data: any) {
+    console.log('parent',data)
+    if (this.classList.length > 0) {
+      this.dataSource = new MatTableDataSource<ClassDetail>(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    } else {
+      this.dataSource = new MatTableDataSource<ClassDetail>(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   filterchange(data: Event) {

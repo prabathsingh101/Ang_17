@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { TeachersService } from '../../teachers/teachers.service';
 import { Classes, TeacherName } from '../model/classes';
 import { ClassService } from '../services/class.service';
 import { ToastrService } from 'ngx-toastr';
+import { ClassDetail } from '../model/classdetail.model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-create-class',
@@ -15,7 +17,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './create-class.component.scss'
 })
 export default class CreateClassComponent implements OnInit {
+  @Output() parentFunction: EventEmitter<any> = new EventEmitter();
+
   classes!: Classes;
+
+  classList: ClassDetail[] = [];
+
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +35,7 @@ export default class CreateClassComponent implements OnInit {
   ngOnInit(): void {
     this.createform();
     this.getTeacherName();
+    //this.parentFunction.emit('page load  send data');
   }
 
   forms: any = FormGroup;
@@ -50,7 +59,6 @@ export default class CreateClassComponent implements OnInit {
   get getlimit() {
     return this.forms.controls['studentlimit'];
   }
-
   getTeacherName() {
     this.teacherSvc.GetTeacherName().subscribe((res: any) => {
       this.teacherName = res;
@@ -64,15 +72,27 @@ export default class CreateClassComponent implements OnInit {
         teacherid: this.forms.value.teacherid,
         studentlimit: this.forms.value.studentlimit
       };
-      this.classSvc.Post(this.classes).subscribe((res: any) => {
-        if (res.StatusCode === 201) {
-          {
-            this.toast.success(res.Message, 'Saved.', { timeOut: 3000 });
+      forkJoin({
+        postData: this.classSvc.Post(this.classes),
+        classData: this.classSvc.getclassDetails()
+      }).subscribe(
+        (results: any) => {
+          if (results.postData.StatusCode === 201) {
+            this.classes = results.postData;
+            this.classList = results.classData;
+            console.log('child',results.classData);
+            this.parentFunction.emit(this.classList);
+            this.toast.success(results.postData.Message, 'Saved.', { timeOut: 3000 });
+            this.loading = false;
+          } else {
+            this.toast.success(results.postData.Message, 'Saved.', { timeOut: 3000 });
           }
-        } else {
-          this.toast.error(res.Message, 'Error.', { timeOut: 3000 });
+        },
+        (error) => {
+          console.error('Error in API calls', error);
+          this.loading = false;
         }
-      });
+      );
     }
   }
 }
