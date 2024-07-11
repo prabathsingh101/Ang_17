@@ -54,6 +54,8 @@ export default class SignInComponent implements OnInit {
 
   loading=false;
 
+  islogin=false;
+
   constructor(
     private fb: FormBuilder,
     private loginSvc: LoginService,
@@ -109,6 +111,7 @@ export default class SignInComponent implements OnInit {
   submit() {
     if (this.loginForm.valid) {
       this.loading=true;
+      this.islogin=true;
       this.user = {
         Username: this.loginForm.value.Username,
         Password: this.loginForm.value.Password
@@ -134,6 +137,7 @@ export default class SignInComponent implements OnInit {
               timeOut: 3000
             });
             this.loading=false;
+            this.islogin=false;
             this.router.navigateByUrl('analytics');
           }
         }

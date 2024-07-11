@@ -6,6 +6,7 @@ import { Teachers } from './Model/teacher.model';
   providedIn: 'root'
 })
 export class TeachersService {
+  
 private readonly baseUrl='https://localhost:7226/api/Teacher/'
 
 

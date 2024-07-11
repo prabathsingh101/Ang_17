@@ -53,6 +53,13 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             icon: 'feather icon-at-sign',
             url: '/classes/create-class'
+          },
+          {
+            id: 'create-attendance',
+            title: 'Atendance Type',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/classes/create-attendance'
           }
         ]
       }

@@ -94,6 +94,10 @@ const routes: Routes = [
         loadComponent: () => import('./demo/classes/classes.component')
       },
       {
+        path: 'classes/create-attendance', canActivate:[authGuard],
+        loadComponent: () => import('./demo/classes/attendance-type/attendance-type.component')
+      },
+      {
         path: 'courses/new-course', canActivate:[authGuard],
         loadComponent: () => import('./demo/cources/create-course/create-course.component')
       },

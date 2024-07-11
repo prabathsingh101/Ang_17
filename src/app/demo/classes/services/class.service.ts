@@ -38,4 +38,8 @@ export class ClassService {
     return this.http.get<ClassDetail[]>(`${this.baseUrl}getclassdetail`)
   }
 
+  getclassName() {
+    return this.http.get<ClassDetail[]>(`${this.baseUrl}classname`)
+  }
+
 }

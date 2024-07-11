@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Attendane Type" [options]="false">
+      <form [formGroup]="AttendanceForms" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="classid" #classid name="classid" placeholder="Select Class">
+                @for (items of className; track items) {
+                  <mat-option [value]="items.id">{{items.classname}}</mat-option>
+                  }
+              </mat-select>
+              <mat-error *ngIf="getclass.errors?.required">
+                Class is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="Attendance Type" formControlName="attendancetype"
+              name="attendancetype" #attendancetype>
+                <mat-option value="Student">Student</mat-option>
+                <mat-option value="Teacher">Teacher</mat-option>
+              </mat-select>
+              <mat-error *ngIf="getattendancetype.errors?.required">
+                Attendance type is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="attendancedate"
+                name="attendancedate" #attendancedate>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="getattendancedate.errors?.required">
+                Attendance date is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <button mat-raised-button color="accent">Take Attendance</button>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>

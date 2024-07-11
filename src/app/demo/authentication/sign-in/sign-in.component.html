@@ -40,7 +40,7 @@
             </mat-error>
           </mat-form-field>
           <mat-card-actions align="end">
-            <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+            <button mat-raised-button color="primary" [disabled]="loginForm.invalid" *ngIf="!islogin">Login</button>
           </mat-card-actions>
         </form>
       </mat-card>
