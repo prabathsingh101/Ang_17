@@ -25,7 +25,11 @@ export default class HolidayModalPopupComponent implements OnInit {
     private svc: HolidaysService,
     private ref: MatDialogRef<DepartmentModalComponent>,
   ) {}
-
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
   forms: any = FormGroup;
 
   inputdata: any;
@@ -85,7 +89,7 @@ export default class HolidayModalPopupComponent implements OnInit {
 
   onSubmit() {
     if (this.forms.valid) {
-      this.holidays = { Title: this.forms.value.title, Description: this.forms.value.description, HolidayDate: this.forms.value.holidaydate };
+      this.holidays = { Title: this.forms.value.title, Description: this.forms.value.description, HolidayDate: this.forms.value.holidaydate.toLocaleDateString() };
       this.svc.PUT(this.inputdata.id, this.holidays).subscribe((res: any) => {
         this.closepopup();
       });

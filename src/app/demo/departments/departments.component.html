@@ -1,8 +1,11 @@
 <div class="col-sm-12">
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Enter text search" (keyup)="filterchange($event)" />
   </mat-form-field>
-  <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z7">
+  <table matSort mat-table [dataSource]="dataSource">
     <!-- Position Column -->
     <ng-container matColumnDef="Id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>

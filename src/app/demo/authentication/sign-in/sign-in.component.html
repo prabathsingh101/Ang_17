@@ -1,7 +1,7 @@
 <div class="auth-wrapper">
   <div class="auth-content">
     <div class="col-md-12 main-div">
-      <div class="spinner-container" *ngIf="loading">
+      <div class="loader" *ngIf="loading">
         <mat-spinner></mat-spinner>
       </div>
       <mat-card>
@@ -22,11 +22,11 @@
             <input type="text" matInput placeholder="User Password" #passwords formControlName="Password"
               name="Password">
             <mat-icon matSuffix>vpn_key</mat-icon>
-            <!-- <mat-error *ngIf="!loginForm.controls['Password'].valid && loginForm.controls['Password'].touched">
-                {{ getErrorPassword() }}
-              </mat-error> -->
+            <mat-error
+              *ngIf="loginForm.controls['Password'].hasError('pattern') && loginForm.controls['Password'].touched">
+              Atleast one upper one spacial one number</mat-error>
             <mat-hint align="end">
-              Password shoould be alphanumeric.
+              Atleast one upper one spacial one number
             </mat-hint>
 
             <mat-error *ngIf="password.errors?.required">
@@ -40,7 +40,7 @@
             </mat-error>
           </mat-form-field>
           <mat-card-actions align="end">
-            <button mat-raised-button color="primary" [disabled]="islogin">Login</button>
+            <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
           </mat-card-actions>
         </form>
       </mat-card>

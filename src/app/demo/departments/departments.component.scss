@@ -6,17 +6,16 @@
   margin: 4px;
 }
 
-.spinner-container {
-  height: 360px;
-  width: 390px;
-  position: fixed;
+.spinner-container mat-spinner {
+  margin: 130px auto 0 auto;
 }
 
 .spinner-container mat-spinner {
   margin: 130px auto 0 auto;
 }
-
-table {
-  width: 100%;
+ th, td {
+  overflow: hidden;
+  width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-

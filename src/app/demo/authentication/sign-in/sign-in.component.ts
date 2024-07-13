@@ -1,6 +1,15 @@
 // angular import
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, PatternValidator, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  PatternValidator,
+  Validators
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
 // project import
@@ -45,16 +54,16 @@ export default class SignInComponent implements OnInit {
     Password: new FormControl('')
   });
 
-   StrongPasswordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
+  StrongPasswordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
   submitted = false;
 
   loginForm: any = FormGroup;
 
   user: any;
 
-  loading=false;
+  loading = false;
 
-  islogin=false;
+  islogin = false;
 
   constructor(
     private fb: FormBuilder,
@@ -71,21 +80,16 @@ export default class SignInComponent implements OnInit {
     return this.loginForm.controls['Password'];
   }
 
-
-
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      Username: ['',
-        [Validators.required, Validators.email]
-        ],
+      Username: ['', [Validators.required, Validators.email]],
       Password: [
         '',
         [
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(15),
-          Validators.pattern(this.StrongPasswordRegx)
-
+          Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,32}$')
         ]
       ]
     });
@@ -93,42 +97,24 @@ export default class SignInComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
-  getErrorUserName() {
-    return this.loginForm.get('Username').hasError('required')
-      ? 'User name is required (at least eight characters, one uppercase letter and one number)'
-      : this.loginForm.get('Username').hasError('Username')
-        ? 'User name needs to be at least eight characters, one uppercase letter and one number'
-        : '';
-  }
-  getErrorPassword() {
-    return this.loginForm.get('Password').hasError('required')
-      ? 'Password is required (at least eight characters, one uppercase letter and one number and one spacial character)'
-      : this.loginForm.get('Password').hasError('Password')
-        ? 'Password needs to be at least eight characters, one uppercase letter and one number and one spacial character'
-        : '';
-  }
 
   submit() {
+    this.loading = true;
     if (this.loginForm.valid) {
-      this.loading=true;
-      this.islogin=true;
       this.user = {
         Username: this.loginForm.value.Username,
         Password: this.loginForm.value.Password
       };
-      console.log(this.user);
-      this.loginSvc.login(this.user).subscribe({
-        next: (res) => {
+      this.loginSvc.login(this.user).subscribe(
+        (res: any) => {
           let data = JSON.stringify(res);
           let loggeduser = JSON.parse(data);
-          console.log('loggeduser', loggeduser);
+
           if (loggeduser.StatusCode === 0) {
-            this.toast.error(loggeduser.message, 'Login failed.', {
+            this.toast.error('Invalid userid/password', 'Login failed.', {
               timeOut: 3000
             });
-          
           } else {
-            console.log('token', loggeduser.Token);
             this.loginSvc.storeToken(loggeduser.Token);
             this.loginSvc.storeRefreshToken(loggeduser.RefreshToken);
             const tokenPayload = this.loginSvc.decodedToken();
@@ -137,12 +123,15 @@ export default class SignInComponent implements OnInit {
             this.toast.success('Logged in successfully.', 'Success', {
               timeOut: 3000
             });
-            this.islogin=false;
+            this.loading = false;
             this.router.navigateByUrl('analytics');
-            this.loading=false;
           }
+        },
+        (error) => {
+          console.error('Error in API calls', error);
+          this.loading = false;
         }
-      });
+      );
     }
   }
 }

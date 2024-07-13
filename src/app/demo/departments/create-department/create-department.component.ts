@@ -31,7 +31,7 @@ export default class CreateDepartmentComponent implements OnInit {
     this.departmentForm = this.fb.group({
       departmentname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
 
-      description: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(100)]]
+      description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]]
     });
   }
 

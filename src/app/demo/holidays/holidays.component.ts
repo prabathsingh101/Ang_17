@@ -9,12 +9,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import HolidayModalPopupComponent from './holiday-modal-popup/holiday-modal-popup.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-holidays',
   standalone: true,
   imports: [SharedModule],
-  providers: [HolidaysService, ToastrService, PromptService],
+  providers: [HolidaysService, ToastrService, PromptService, DatePipe],
   templateUrl: './holidays.component.html',
   styleUrl: './holidays.component.scss'
 })
@@ -23,7 +24,8 @@ export default class HolidaysComponent implements OnInit {
     private dialog: MatDialog,
     private toast: ToastrService,
     private holidaySvc: HolidaysService,
-    private promptSvc: PromptService
+    private promptSvc: PromptService,
+    private datePipe: DatePipe,
   ) {}
 
   displayedColumns: string[] = ['Id', 'Title', 'Description', 'HolidayDate', 'action'];
