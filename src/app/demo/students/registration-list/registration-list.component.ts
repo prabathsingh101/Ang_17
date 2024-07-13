@@ -12,6 +12,7 @@ import RegistrationModalPopupComponent from '../registration-modal-popup/registr
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { PromptService } from '../../shared/prompt.service';
+import AdmissionComponent from '../admission/admission.component';
 
 @Component({
   selector: 'app-registration-list',
@@ -32,7 +33,7 @@ export default class RegistrationListComponent implements OnInit, AfterViewInit 
 
   loading = false;
 
-  displayedColumns: string[] = ['id', 'registrationno', 'fullname', 'registrationdate', 'mobileno', 'isstatus', 'action'];
+  displayedColumns: string[] = ['id', 'registrationno', 'classname', 'fullname', 'registrationdate', 'mobileno', 'isstatus','islocked', 'action'];
 
   registrations: SPRegistrationDetails[] = [];
 
@@ -88,6 +89,10 @@ export default class RegistrationListComponent implements OnInit, AfterViewInit 
         }
       });
   }
+  filterchange(data: Event) {
+    const value = (data.target as HTMLInputElement).value;
+    this.dataSource.filter = value;
+  }
   ngAfterViewInit() {
     // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     // merge(this.sort.sortChange, this.paginator.page)
@@ -101,6 +106,24 @@ export default class RegistrationListComponent implements OnInit, AfterViewInit 
       exitAnimationDuration: '1000ms',
       data: {
         title: title,
+        id: id
+      }
+    });
+    _popup.afterClosed().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getAll();
+      }
+    });
+  }
+  title = 'Add Admission';
+  Admissionpoup(id: number) {
+    var _popup = this.dialog.open(AdmissionComponent, {
+      width: '740px',
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        title: this.title,
         id: id
       }
     });

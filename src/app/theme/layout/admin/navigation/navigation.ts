@@ -90,24 +90,24 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             url: '/students/reg-list'
           },
-          {
-            id: 'admission',
-            title: 'Admission',
-            type: 'item',
-            url: '/students/admission'
-          },
+          // {
+          //   id: 'admission',
+          //   title: 'Admission',
+          //   type: 'item',
+          //   url: '/students/admission'
+          // },
           {
             id: 'admission-list',
             title: 'Admission List',
             type: 'item',
             url: '/students/adm-list'
           },
-          {
-            id: 'stusent-attendance',
-            title: 'Attendance',
-            type: 'item',
-            url: '/students/student-attendance'
-          }
+          // {
+          //   id: 'stusent-attendance',
+          //   title: 'Attendance',
+          //   type: 'item',
+          //   url: '/students/student-attendance'
+          // }
           // {
           //   id: 'breadcrumb-pagination',
           //   title: 'Breadcrumb & Pagination',
@@ -163,13 +163,13 @@ export const NavigationItems: NavigationItem[] = [
             icon: 'feather icon-at-sign',
             url: '/list'
           },
-          {
-            id: 'teacher-attendance',
-            title: 'Attendance',
-            type: 'item',
-            icon: 'feather icon-at-sign',
-            url: '/attendance'
-          },
+          // {
+          //   id: 'teacher-attendance',
+          //   title: 'Attendance',
+          //   type: 'item',
+          //   icon: 'feather icon-at-sign',
+          //   url: '/attendance'
+          // },
           {
             id: 'payslip',
             title: 'Payslip',

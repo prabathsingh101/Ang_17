@@ -26,7 +26,9 @@ export class RegistrationService {
   PUT(id: number, registration: Registration) {
     return this.http.put(`${this.baseUrl}${id}`, registration);
   }
-
+  PATCH(id: number, registration: Registration) {
+    return this.http.patch(`${this.baseUrl}${id}`, registration);
+  }
   DELETE(id: number) {
     return this.http.delete(`${this.baseUrl}${id}`);
   }

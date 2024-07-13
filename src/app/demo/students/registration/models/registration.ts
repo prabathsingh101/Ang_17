@@ -18,6 +18,10 @@ export interface Registration {
   classid?: number;
 
   fathersname?: string;
+
+  isstatus?: boolean;
+
+  islocked?: boolean;
 }
 
 export interface SPRegistrationDetails {
@@ -30,5 +34,30 @@ export interface SPRegistrationDetails {
   address?: string;
   isdeleted: boolean;
   isstatus?: boolean;
+  islocked?: boolean;
   classname?: string;
+}
+
+export interface Admission {
+  id?: number;
+
+  registrationno?: number;
+
+  fname?: string;
+
+  lname?: string;
+
+  fullname?: string;
+
+  registrationfees?: number;
+
+  mobileno?: string;
+
+  address?: string;
+
+  classid?: number;
+
+  fathersname?: string;
+
+  registrationdate?: Date;
 }

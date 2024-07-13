@@ -69,6 +69,7 @@ import { provideToastr } from 'ngx-toastr';
     MatToolbarModule,
     MatSortModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   exports: [
     CommonModule,

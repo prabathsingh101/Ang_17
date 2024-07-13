@@ -126,6 +126,7 @@ export default class SignInComponent implements OnInit {
             this.toast.error(loggeduser.message, 'Login failed.', {
               timeOut: 3000
             });
+          
           } else {
             console.log('token', loggeduser.Token);
             this.loginSvc.storeToken(loggeduser.Token);

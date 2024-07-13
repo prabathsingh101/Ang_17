@@ -1,8 +1,146 @@
-<div class="row">
-  <div class="col-sm-12">
-    <app-card cardTitle="Admission Form" [options]="false">
-      <p>admission works!</p>
-    </app-card>
-  </div>
-</div>
+<form [formGroup]="forms" (ngSubmit)="onSubmit()">
+  <mat-toolbar color="primary">
+    <h1>{{inputdata.title}}</h1>
+  </mat-toolbar>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Registration No" #registration name="registrationno"
+            formControlName="registrationno" readonly [(ngModel)]="maxval">
+          <mat-hint align="end">
+            {{registration.value.length}} / 5
+          </mat-hint>
+          <mat-error *ngIf="getregistrationno.errors?.maxlength">
+            A maximum length of 5 characters is required.
+          </mat-error>
+          <mat-error
+            *ngIf="forms.controls['registrationno'].hasError('pattern') && forms.controls['registrationno'].touched">
+            Only Digits allowed
+          </mat-error>
+          <mat-error *ngIf="getregistrationno.errors?.required">
+            A registration no is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="First Name" #fname name="fname" formControlName="fname">
+          <mat-hint align="end">
+            {{fname.value.length}} / 30
+          </mat-hint>
+          <mat-error *ngIf="getfname.errors?.required">
+            First name is required.
+          </mat-error>
+          <mat-error *ngIf="getfname.errors?.maxlength">
+            A maximum length of 30 characters is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
 
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Last Name" #lname name="lname" formControlName="lname">
+          <mat-hint align="end">
+            {{lname.value.length}} / 30
+          </mat-hint>
+          <mat-error *ngIf="getlname.errors?.required">
+            Last name is required.
+          </mat-error>
+          <mat-error *ngIf="getlname.errors?.maxlength">
+            A maximum length of 30 characters is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Registration fees" #regfees name="registrationfees"
+            formControlName="registrationfees">
+          <mat-hint align="end">
+            {{regfees.value.length}} / 10
+          </mat-hint>
+          <mat-error *ngIf="getregistrationfees.errors?.maxlength">
+            A maximum length of 10 characters is required registration fees.
+          </mat-error>
+          <mat-error
+            *ngIf="forms.controls['registrationfees'].hasError('pattern') && forms.controls['registrationfees'].touched">
+            After decimal Only 2 Digit is allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Phone no" #phone name="mobileno" formControlName="mobileno">
+          <mat-hint align="end">
+            {{phone.value.length}} / 10
+          </mat-hint>
+          <mat-error *ngIf="getphone.errors?.required">
+            Phone no is required.
+          </mat-error>
+          <mat-error *ngIf="getphone.errors?.minlength">
+            A minimum length of 10 digits is required.
+          </mat-error>
+          <mat-error *ngIf="getphone.errors?.maxlength">
+            A maximum length of 10 digits is required.
+          </mat-error>
+          <mat-error *ngIf="forms.controls['mobileno'].hasError('pattern') && forms.controls['mobileno'].touched">
+            Only Digits allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <mat-select name="classid" #classid placeholder="Class Name" formControlName="classid">
+
+            @for (items of className; track items) {
+            <mat-option [value]="items.id">{{items.classname}}</mat-option>
+            }
+
+          </mat-select>
+          <mat-error *ngIf="getclassid.errors?.required">
+            Class name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Fathers Name" #fathers formControlName="fathersname" name="fathersname">
+          <mat-hint align="end">
+            {{fathers.value.length}} / 30
+          </mat-hint>
+          <mat-error *ngIf="getfathersname.errors?.maxlength">
+            A maximum length of 30 characters is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-8">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Address" #address formControlName="address" name="address">
+          <mat-hint align="end">
+            {{address.value.length}} / 200
+          </mat-hint>
+          <mat-error *ngIf="getaddress.errors?.maxlength">
+            A maximum length of 200 characters is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="accent" class="button" matDialogClose type="button">Cancel</button>
+      <button mat-raised-button color="primary">Save</button>
+    </mat-card-actions>
+  </mat-dialog-content>
+</form>
+<div class="spinner-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>

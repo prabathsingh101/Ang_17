@@ -101,6 +101,9 @@
                   }
 
                 </mat-select>
+                <mat-error *ngIf="getclassid.errors?.required">
+                  Class name is required.
+                </mat-error>
               </mat-form-field>
             </div>
           </div>

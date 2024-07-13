@@ -66,6 +66,7 @@ export default class CreateClassComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     if (this.forms.valid) {
       this.classes = {
         classname: this.forms.value.classname,
@@ -80,7 +81,6 @@ export default class CreateClassComponent implements OnInit {
           if (results.postData.StatusCode === 201) {
             this.classes = results.postData;
             this.classList = results.classData;
-            console.log('child',results.classData);
             this.parentFunction.emit(this.classList);
             this.toast.success(results.postData.Message, 'Saved.', { timeOut: 3000 });
             this.loading = false;
