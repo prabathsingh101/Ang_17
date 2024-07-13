@@ -136,9 +136,9 @@ export default class SignInComponent implements OnInit {
             this.toast.success('Logged in successfully.', 'Success', {
               timeOut: 3000
             });
-            this.loading=false;
             this.islogin=false;
             this.router.navigateByUrl('analytics');
+            this.loading=false;
           }
         }
       });

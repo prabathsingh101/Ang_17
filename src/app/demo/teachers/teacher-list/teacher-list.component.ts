@@ -23,7 +23,12 @@ import { PromptService } from '../../shared/prompt.service';
 })
 export default class TeacherListComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, public promptSvc: PromptService, private toast: ToastrService,) {}
+  constructor(
+   private dialog: MatDialog,
+    public promptSvc: PromptService,
+    private toast: ToastrService,
+
+  ) {}
 
   hidecolmn = false;
 
