@@ -21,8 +21,6 @@ export default class CreateClassComponent implements OnInit {
 
   classes!: Classes;
 
-  classList: ClassDetail[] = [];
-
   loading = false;
 
   constructor(
@@ -35,7 +33,6 @@ export default class CreateClassComponent implements OnInit {
   ngOnInit(): void {
     this.createform();
     this.getTeacherName();
-    //this.parentFunction.emit('page load  send data');
   }
 
   forms: any = FormGroup;
@@ -80,8 +77,7 @@ export default class CreateClassComponent implements OnInit {
         (results: any) => {
           if (results.postData.StatusCode === 201) {
             this.classes = results.postData;
-            this.classList = results.classData;
-            this.parentFunction.emit(this.classList);
+            this.parentFunction.emit(results.classData);
             this.toast.success(results.postData.Message, 'Saved.', { timeOut: 3000 });
             this.loading = false;
           } else {

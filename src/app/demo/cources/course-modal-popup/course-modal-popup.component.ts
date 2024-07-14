@@ -26,7 +26,7 @@ export class CourseModalPopupComponent implements OnInit {
   ) {}
 
   putCourse!: CourseModel;
-
+  loading = false;
   data: any = inject(MAT_DIALOG_DATA);
 
   inputdata: any;
@@ -36,7 +36,7 @@ export class CourseModalPopupComponent implements OnInit {
 
   closemessage: any = 'close message using directive';
 
-  loading = false;
+
 
   ngOnInit(): void {
     this.createForm();

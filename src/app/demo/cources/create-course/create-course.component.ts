@@ -89,23 +89,4 @@ export default class CreateCourseComponent implements OnInit {
       );
     }
   }
-
-  getAll() {
-    this.loading = true;
-    this.courseSvc
-      .GetAll()
-      .pipe(
-        catchError((err) => {
-          console.log('Error loading course', err);
-          return throwError(err);
-        }),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe((res: any) => {
-        this.courseList = res;
-        if (this.courseList.length > 0) {
-        } else {
-        }
-      });
-  }
 }

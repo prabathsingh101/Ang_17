@@ -36,19 +36,11 @@ export default class ClassesComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //this.getClasses();
+
   }
   parentFunction(data: any) {
-    console.log('parent',data)
-    if (this.classList.length > 0) {
-      this.dataSource = new MatTableDataSource<ClassDetail>(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    } else {
-      this.dataSource = new MatTableDataSource<ClassDetail>(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
+    this.classList = data;
+    this.getClasses();
   }
 
   filterchange(data: Event) {
@@ -63,7 +55,6 @@ export default class ClassesComponent implements OnInit, OnChanges {
       .pipe(
         catchError((err) => {
           console.log('Error loading users', err);
-          //alert('Error loading users.');
           return throwError(err);
         }),
         finalize(() => (this.loading = false))
