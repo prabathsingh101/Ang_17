@@ -1,5 +1,8 @@
-<app-card cardTitle="Course Form" [options]="false">
-  <form [formGroup]="forms" (ngSubmit)="onSubmit()">
+<form [formGroup]="forms" (ngSubmit)="onSubmit()">
+  <mat-toolbar color="primary">
+    <h1>{{inputdata.title}}</h1>
+  </mat-toolbar>
+  <mat-dialog-content>
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Title" #title formControlName="title" name="title">
       <mat-hint align="end">
@@ -33,16 +36,15 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <!-- <input matInput placeholder="Duration" #duration formControlName="duration" name="duration"
-        [ngxTimepicker]="picker">
-      <ngx-material-timepicker #picker></ngx-material-timepicker> -->
-      <input matInput placeholder="Duration" #duration formControlName="duration" name="duration">
-
+      <input matInput placeholder="Duration"  #duration formControlName="duration" name="duration">
       <mat-hint align="end">HH:MM</mat-hint>
       <mat-error *ngIf="forms.controls['duration'].hasError('pattern') && forms.controls['duration'].touched">
         Format(00:00)</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="accent" class="button">Cancel</button>
-    <button mat-raised-button color="primary">Save</button>
-  </form>
-</app-card>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="accent" class="button" matDialogClose>Cancel</button>
+      <button mat-raised-button color="primary">Save</button>
+    </mat-card-actions>
+  </mat-dialog-content>
+</form>

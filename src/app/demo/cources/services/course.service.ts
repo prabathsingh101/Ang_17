@@ -19,7 +19,7 @@ export class CourseService {
     return this.http.get<CourseModel[]>(`${this.baseUrl}GetAll`);
   }
 
-  getClassesById(id: number) {
+  getCourseById(id: number) {
     return this.http.get(`${this.baseUrl}${id}`);
   }
 

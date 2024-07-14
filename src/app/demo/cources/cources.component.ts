@@ -9,12 +9,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { PromptService } from '../shared/prompt.service';
 import CreateCourseComponent from './create-course/create-course.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CourseModalPopupComponent } from './course-modal-popup/course-modal-popup.component';
 
 @Component({
   selector: 'app-cources',
   standalone: true,
   imports: [SharedModule, CreateCourseComponent],
-  providers: [ToastrService, PromptService, CourseService,],
+  providers: [ToastrService, PromptService, CourseService],
   templateUrl: './cources.component.html',
   styleUrl: './cources.component.scss'
 })
@@ -22,10 +24,11 @@ export default class CourcesComponent implements OnInit {
   constructor(
     public toast: ToastrService,
     public courseSvc: CourseService,
-    public promptSvc: PromptService
+    public promptSvc: PromptService,
+    private dialog: MatDialog
   ) {}
 
-  displayedColumns: string[] = ['id', 'title', 'longdescription', 'action'];
+  displayedColumns: string[] = ['id', 'title', 'longdescription', 'duration', 'action'];
 
   courseList: CourseModel[] = [];
 
@@ -43,6 +46,7 @@ export default class CourcesComponent implements OnInit {
   ngOnInit(): void {
     this.getAll();
   }
+
   getAll() {
     this.loading = true;
     this.courseSvc
@@ -69,9 +73,25 @@ export default class CourcesComponent implements OnInit {
   }
 
   editCourse(id: number) {
-    
+    this.openpoup(id, 'Edit Course');
   }
-
+  openpoup(id: number, title: any) {
+    var _popup = this.dialog.open(CourseModalPopupComponent, {
+      width: '500px',
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        title: title,
+        id: id
+      }
+    });
+    _popup.afterClosed().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getAll();
+      }
+    });
+  }
   deletePromptPopup(id: number) {
     this.promptSvc.openPromptDialog(id).subscribe((res: any) => {
       if (res === true) {
@@ -81,5 +101,9 @@ export default class CourcesComponent implements OnInit {
         });
       }
     });
+  }
+  parentFunction(data: any) {
+    this.courseList = data;
+    this.getAll();
   }
 }

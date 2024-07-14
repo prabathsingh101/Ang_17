@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
@@ -8,18 +8,24 @@ import { CourseService } from '../services/course.service';
 import { CourseModel } from '../model/course.model';
 
 import { PromptService } from '../../shared/prompt.service';
-import { catchError, finalize, throwError } from 'rxjs';
+import { catchError, finalize, forkJoin, throwError } from 'rxjs';
+import { error } from 'console';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-course',
   standalone: true,
   imports: [SharedModule, NgxMaterialTimepickerModule],
-  providers: [],
+  providers: [DatePipe],
   templateUrl: './create-course.component.html',
   styleUrl: './create-course.component.scss'
 })
 export default class CreateCourseComponent implements OnInit {
+  @Output() parentFunction: EventEmitter<any> = new EventEmitter();
+
   postCourse!: CourseModel;
+
+  getCourse: CourseModel[] = [];
 
   loading = false;
   courseList: any;
@@ -28,7 +34,8 @@ export default class CreateCourseComponent implements OnInit {
     private fb: FormBuilder,
     public toast: ToastrService,
     public courseSvc: CourseService,
-    public promptSvc: PromptService
+    public promptSvc: PromptService,
+    public datepipe: DatePipe
   ) {}
 
   forms: any = FormGroup;
@@ -51,7 +58,7 @@ export default class CreateCourseComponent implements OnInit {
 
       longdescription: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
 
-      duration: ['', []]
+      duration: ['', [Validators.pattern('^([01][0-9]|2[0-3]):([0-5][0-9])$')]]
     });
   }
 
@@ -63,26 +70,26 @@ export default class CreateCourseComponent implements OnInit {
         longdescription: this.forms.value.longdescription,
         duration: this.forms.value.duration
       };
-      this.courseSvc.Post(this.postCourse).subscribe(
+      forkJoin({
+        postData: this.courseSvc.Post(this.postCourse),
+        getData: this.courseSvc.GetAll()
+      }).subscribe(
         (res: any) => {
-          if (res.StatusCode === 201) {
-            this.loading = false;
-            this.getAll();
-            this.toast.success(res.Message, 'Saved.', { timeOut: 3000 });
+          if (res.postData.StatusCode === 201) {
+            this.parentFunction.emit(res.getData);
+            this.toast.success(res.postData.Message, 'Saved.', { timeOut: 3000 });
           } else {
-            this.loading = false;
-            this.toast.error(res.Message, 'Error.', { timeOut: 3000 });
+            this.toast.error(res.postData.Message, 'Error.', { timeOut: 3000 });
           }
         },
         (error) => {
           this.loading = false;
-          this.toast.success('Eternal server error', 'Error.', { timeOut: 3000 });
+          this.toast.success(error, 'Error.', { timeOut: 3000 });
         }
       );
     }
   }
 
- 
   getAll() {
     this.loading = true;
     this.courseSvc
@@ -101,5 +108,4 @@ export default class CreateCourseComponent implements OnInit {
         }
       });
   }
-
 }
