@@ -225,35 +225,35 @@ export const NavigationItems: NavigationItem[] = [
         type: 'collapse',
         icon: 'feather icon-box',
         children: [
-          {
-            id: 'add-new-course',
-            title: 'Add New Course',
-            type: 'item',
-            icon: 'feather icon-at-sign',
-            url: '/courses/new-course'
-          },
-          {
-            id: 'add-new-lesson',
-            title: 'Add New Lesson',
-            type: 'item',
-            icon: 'feather icon-at-sign',
-            url: '/courses/new-lesson'
-          },
+          // {
+          //   id: 'add-new-course',
+          //   title: 'Add New Course',
+          //   type: 'item',
+          //   icon: 'feather icon-at-sign',
+          //   url: '/courses/new-course'
+          // },
+          // {
+          //   id: 'add-new-lesson',
+          //   title: 'Add New Lesson',
+          //   type: 'item',
+          //   icon: 'feather icon-at-sign',
+          //   url: '/courses/new-lesson'
+          // },
           {
             id: 'course-list',
-            title: 'Course List',
+            title: 'Course',
             type: 'item',
             icon: 'feather icon-at-sign',
             url: '/courses/course-list'
-          }
+          },
 
-          // {
-          //   id: 'add-new-lesson-list',
-          //   title: 'Add New Lesson',
-          //   type: 'item',
-          //   icon:'feather icon-at-sign',
-          //   url: '/courses/lesson-list'
-          // },
+          {
+            id: 'lesson-list',
+            title: 'Lesson',
+            type: 'item',
+            icon:'feather icon-at-sign',
+            url: '/courses/lesson-list'
+          },
         ]
       }
     ]

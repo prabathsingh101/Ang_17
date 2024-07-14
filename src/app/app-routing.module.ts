@@ -4,12 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 // project import
 import { AdminComponent } from './theme/layout/admin/admin.component';
-import { GuestComponent } from './theme/layout/guest/guest.component';
-import StudentsComponent from './demo/students/students.component';
+
 import SignInComponent from './demo/authentication/sign-in/sign-in.component';
 import { authGuard } from './demo/authentication/services/auth.guard';
 
-import {courseResolver} from "./demo/course-details/services/course.resolver";
+
 
 const routes: Routes = [
   {
@@ -77,18 +76,7 @@ const routes: Routes = [
         path: 'departments/list', canActivate:[authGuard],
         loadComponent: () => import('./demo/departments/departments.component')
       },
-      // {
-      //   path: 'course-details/course', canActivate:[authGuard],
-      //   loadComponent: () => import('./demo/course-details/course-details.component')
-      // },
-      // {
-      //   path: 'course-details/add-new-course', canActivate:[authGuard],
-      //   loadComponent: () => import('./demo/course-details/create-course/create-course.component')
-      // },
-      // {
-      //   path: 'course-details/course/:id', canActivate:[authGuard], resolve:{course: courseResolver},
-      //   loadComponent: () => import('./demo/course-details/course/course.component')
-      // },
+
       {
         path: 'classes/create-class', canActivate:[authGuard],
         loadComponent: () => import('./demo/classes/classes.component')
@@ -137,6 +125,7 @@ const routes: Routes = [
         path: 'students/reg-list', canActivate:[authGuard],
         loadComponent: () => import('./demo/students/registration-list/registration-list.component')
       },
+
       {
         path: 'students/admission', canActivate:[authGuard],
         loadComponent: () => import('./demo/students/admission/admission.component')

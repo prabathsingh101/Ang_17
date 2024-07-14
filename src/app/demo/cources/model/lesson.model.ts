@@ -1,4 +1,4 @@
-export interface Lessons {
+export interface LessonModel {
   id?: number;
   title?: string;
   courseid?: number;

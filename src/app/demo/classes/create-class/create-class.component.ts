@@ -85,7 +85,7 @@ export default class CreateClassComponent implements OnInit {
             this.toast.success(results.postData.Message, 'Saved.', { timeOut: 3000 });
             this.loading = false;
           } else {
-            this.toast.success(results.postData.Message, 'Saved.', { timeOut: 3000 });
+            this.toast.error(results.postData.Message, 'Error.', { timeOut: 3000 });
           }
         },
         (error) => {

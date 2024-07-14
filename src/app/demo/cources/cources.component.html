@@ -1,14 +1,48 @@
-
-
 <div class="row">
   <div class="col-sm-12">
-    <app-card cardTitle="Admission Form" [options]="false">
-      <p>cources works!</p>
-    </app-card>
+      <div class="row">
+        <div class="col-md-5">
+          <app-create-course></app-create-course>
+        </div>
+        <div class="col-md-7">
+          <table matSort mat-table [dataSource]="dataSource">
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+              <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+              <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
+            </ng-container>
+
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="longdescription">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+              <td mat-cell *matCellDef="let element"> {{ element.longdescription }} </td>
+            </ng-container>
+
+            <!-- action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" class="button"
+                  (click)="editCourse(element.id)"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button color="accent"
+                  (click)="deletePromptPopup(element.id)"><mat-icon>delete</mat-icon></button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[3,5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </div>
+      </div>
   </div>
 </div>
-
-
-
-
-

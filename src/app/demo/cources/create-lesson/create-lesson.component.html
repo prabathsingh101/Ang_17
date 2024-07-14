@@ -1,98 +1,40 @@
-<div class="row">
-  <div class="col-sm-12">
-    <app-card cardTitle="Lesson Form" [options]="false">
-      <form [formGroup]="forms" (ngSubmit)="onSubmit()">
-        <div class="row">
-          <div class="col-md-5">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Title" #title formControlName="title" name="title">
-              <mat-hint align="end">
-                {{title.value.length}} / 20
-              </mat-hint>
-              <mat-error *ngIf="gettitle.errors?.required">
-                Title is required.
-              </mat-error>
-              <mat-error *ngIf="gettitle.errors?.minlength">
-                A minimum length of 5 characters is required.
-              </mat-error>
-              <mat-error *ngIf="gettitle.errors?.maxlength">
-                A maximum length of 20 characters is required.
-              </mat-error>
-            </mat-form-field>
+<app-card cardTitle="Lesson Form" [options]="false">
+  <form [formGroup]="forms" (ngSubmit)="onSubmit()">
 
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Description" #description formControlName="description" name="description">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Title" #title formControlName="title" name="title">
+      <mat-hint align="end">
+        {{title.value.length}} / 20
+      </mat-hint>
+      <mat-error *ngIf="gettitle.errors?.required">
+        Title is required.
+      </mat-error>
+      <mat-error *ngIf="gettitle.errors?.minlength">
+        A minimum length of 5 characters is required.
+      </mat-error>
+      <mat-error *ngIf="gettitle.errors?.maxlength">
+        A maximum length of 20 characters is required.
+      </mat-error>
+    </mat-form-field>
 
-              <mat-hint align="end">
-                {{description.value.length}} / 100
-              </mat-hint>
-              <mat-error *ngIf="getdescription.errors?.required">
-                Description is required.
-              </mat-error>
-              <mat-error *ngIf="getdescription.errors?.minlength">
-                A minimum length of 2 characters is required.
-              </mat-error>
-              <mat-error *ngIf="getdescription.errors?.maxlength">
-                A maximum length of 100 characters is required.
-              </mat-error>
-            </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Description" #description formControlName="description" name="description">
 
-            <button mat-raised-button color="accent" class="button">Cancel</button>
-            <button mat-raised-button color="primary">Save</button>
-          </div>
+      <mat-hint align="end">
+        {{description.value.length}} / 100
+      </mat-hint>
+      <mat-error *ngIf="getdescription.errors?.required">
+        Description is required.
+      </mat-error>
+      <mat-error *ngIf="getdescription.errors?.minlength">
+        A minimum length of 2 characters is required.
+      </mat-error>
+      <mat-error *ngIf="getdescription.errors?.maxlength">
+        A maximum length of 100 characters is required.
+      </mat-error>
+    </mat-form-field>
 
-          <div class="col-md-7">
-            <table matSort mat-table [dataSource]="dataSource">
-              <!-- Position Column -->
-              <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-                <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
-              </ng-container>
-
-              <!-- Name Column -->
-              <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-                <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
-              </ng-container>
-
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="course">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Course </th>
-                <td mat-cell *matCellDef="let element"> {{ element.course }} </td>
-              </ng-container>
-
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="duration">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
-                <td mat-cell *matCellDef="let element"> {{ element.duration }} </td>
-              </ng-container>
-
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
-              </ng-container>
-
-              <!-- action Column -->
-              <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef> Action </th>
-                <td mat-cell *matCellDef="let element">
-                  <button mat-icon-button color="primary" class="button"
-                    (click)="editCourse(element.Id)"><mat-icon>edit</mat-icon></button>
-                  <button mat-icon-button color="accent"
-                    (click)="deletePromptPopup(element.Id)"><mat-icon>delete</mat-icon></button>
-                </td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="[3,5, 10, 20]" showFirstLastButtons
-              aria-label="Select page of periodic elements">
-            </mat-paginator>
-          </div>
-        </div>
-      </form>
-    </app-card>
-  </div>
-</div>
+    <button mat-raised-button color="accent" class="button">Cancel</button>
+    <button mat-raised-button color="primary">Save</button>
+  </form>
+</app-card>
