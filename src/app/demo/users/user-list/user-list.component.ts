@@ -46,7 +46,7 @@ export default class UserListComponent implements OnInit {
 
   userSvc = inject(UserService);
 
-  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'address', 'mobileno', 'email', 'role', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'address', 'mobileno', 'email', 'role', 'action'];
 
   usersList: UsersModel[] = [];
 
@@ -62,21 +62,7 @@ export default class UserListComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUsers();
   }
-  // getAllUsers() {
-  //   this.userSvc.GetAllUsers().subscribe((res: any) => {
-  //     this.usersList = res;
-  //     console.log(this.usersList);
-  //     if (this.usersList.length > 0) {
-  //       this.dataSource = new MatTableDataSource<UserRegistration>(this.usersList);
-  //       this.dataSource.paginator = this.paginator;
-  //       this.dataSource.sort = this.sort;
-  //     } else {
-  //       this.dataSource = new MatTableDataSource<UserRegistration>(this.usersList);
-  //       this.dataSource.paginator = this.paginator;
-  //       this.dataSource.sort = this.sort;
-  //     }
-  //   });
-  // }
+
   getAllUsers() {
     this.loading = true;
     this.userSvc

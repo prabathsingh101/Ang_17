@@ -8,19 +8,28 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClassDetail } from './model/classdetail.model';
+import { MatDialog } from '@angular/material/dialog';
+import { CourseModalPopupComponent } from '../cources/course-modal-popup/course-modal-popup.component';
+import { PromptService } from '../shared/prompt.service';
+import { ToastrService } from 'ngx-toastr';
+import { ClassModalPopupComponent } from './class-modal-popup/class-modal-popup.component';
 
 @Component({
   selector: 'app-classes',
   standalone: true,
   imports: [SharedModule, CreateClassComponent],
-  providers: [],
+  providers: [PromptService, ToastrService, ClassService],
   templateUrl: './classes.component.html',
   styleUrl: './classes.component.scss'
 })
 export default class ClassesComponent implements OnInit, OnChanges {
-  displayedColumns: string[] = ['id', 'classname', 'teachername', 'studentlimit', 'action'];
+  displayedColumns: string[] = ['id', 'classname','course', 'teachername', 'studentlimit', 'action'];
 
-  constructor(public classSvc: ClassService) {}
+  constructor(public classSvc: ClassService,
+    public promptSvc: PromptService,
+    private dialog: MatDialog,
+    public toast: ToastrService
+  ) {}
 
   dataSource: any;
 
@@ -38,10 +47,7 @@ export default class ClassesComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
 
   }
-  parentFunction(data: any) {
-    this.classList = data;
-    this.getClasses();
-  }
+
 
   filterchange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
@@ -51,7 +57,7 @@ export default class ClassesComponent implements OnInit, OnChanges {
   getClasses() {
     this.loading = true;
     this.classSvc
-      .getclassDetails()
+      .GetAll()
       .pipe(
         catchError((err) => {
           console.log('Error loading users', err);
@@ -61,6 +67,7 @@ export default class ClassesComponent implements OnInit, OnChanges {
       )
       .subscribe((res: any) => {
         this.classList = res;
+        console.log('myres',res)
         if (this.classList.length > 0) {
           this.dataSource = new MatTableDataSource<ClassDetail>(this.classList);
           this.dataSource.paginator = this.paginator;
@@ -71,5 +78,39 @@ export default class ClassesComponent implements OnInit, OnChanges {
           this.dataSource.sort = this.sort;
         }
       });
+  }
+  editClass(id: number) {
+    this.openpoup(id, 'Edit Class');
+  }
+  openpoup(id: number, title: any) {
+    var _popup = this.dialog.open(ClassModalPopupComponent, {
+      width: '500px',
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        title: title,
+        id: id
+      }
+    });
+    _popup.afterClosed().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getClasses();
+      }
+    });
+  }
+  deletePromptPopup(id: number) {
+    this.promptSvc.openPromptDialog(id).subscribe((res: any) => {
+      if (res === true) {
+        this.classSvc.DELETE(id).subscribe((res: any) => {
+          this.toast.success('Deleted successfully.', 'Deleted.', { timeOut: 3000 });
+          this.getClasses();
+        });
+      }
+    });
+  }
+  parentFunction(data: any) {
+    this.classList = data;
+    this.getClasses();
   }
 }

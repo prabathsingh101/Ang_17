@@ -7,6 +7,8 @@ import { ClassService } from '../services/class.service';
 import { ToastrService } from 'ngx-toastr';
 import { ClassDetail } from '../model/classdetail.model';
 import { forkJoin } from 'rxjs';
+import { CourseModel } from '../../cources/model/course.model';
+import { CourseService } from '../../cources/services/course.service';
 
 @Component({
   selector: 'app-create-class',
@@ -21,18 +23,22 @@ export default class CreateClassComponent implements OnInit {
 
   classes!: Classes;
 
+  courses: CourseModel[]=[];
+
   loading = false;
 
   constructor(
     private fb: FormBuilder,
     public teacherSvc: TeachersService,
     public classSvc: ClassService,
-    public toast: ToastrService
+    public toast: ToastrService,
+    public courseSvc: CourseService
   ) {}
 
   ngOnInit(): void {
     this.createform();
     this.getTeacherName();
+    this.bindCourseName();
   }
 
   forms: any = FormGroup;
@@ -43,12 +49,16 @@ export default class CreateClassComponent implements OnInit {
     this.forms = this.fb.group({
       classname: ['', [Validators.required, Validators.maxLength(20)]],
       teacherid: ['', [Validators.required]],
+      courseid: ['', [Validators.required]],
       studentlimit: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.maxLength(2)]]
     });
   }
 
   get getclassname() {
     return this.forms.controls['classname'];
+  }
+  get getcourse() {
+    return this.forms.controls['courseid'];
   }
   get getteacher() {
     return this.forms.controls['teacherid'];
@@ -61,13 +71,18 @@ export default class CreateClassComponent implements OnInit {
       this.teacherName = res;
     });
   }
-
+  bindCourseName() {
+    this.courseSvc.GetAll().subscribe((res: any) => {
+      this.courses = res;
+    });
+  }
   onSubmit() {
     this.loading = true;
     if (this.forms.valid) {
       this.classes = {
         classname: this.forms.value.classname,
         teacherid: this.forms.value.teacherid,
+        courseid: this.forms.value.courseid,
         studentlimit: this.forms.value.studentlimit
       };
       forkJoin({

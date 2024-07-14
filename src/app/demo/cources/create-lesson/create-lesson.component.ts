@@ -53,7 +53,7 @@ export default class CreateLessonComponent implements OnInit {
     this.forms = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]],
       courseid: ['', [Validators.required]],
-      description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]]
+      description: ['', [Validators.minLength(2), Validators.maxLength(100)]]
     });
   }
 

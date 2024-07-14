@@ -33,6 +33,18 @@
         </div>
         <div class="col-md-12">
           <mat-form-field class="example-full-width">
+            <mat-select name="courseid" #course placeholder="Select Course" formControlName="courseid">
+              @for (course of courses; track course) {
+                <mat-option [value]="course.id">{{course.title}}</mat-option>
+                }
+            </mat-select>
+            <mat-error *ngIf="getcourse.errors?.required">
+              Select course.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width">
             <input matInput placeholder="Student Limit" #limit formControlName="studentlimit" name="studentlimit">
             <mat-hint align="end">
               {{limit.value.length}} / 2

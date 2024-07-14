@@ -1,1 +1,62 @@
-<p>class-modal-popup works!</p>
+<form [formGroup]="forms" (ngSubmit)="onSubmit()">
+  <mat-toolbar color="primary">
+    <h1>{{inputdata.title}}</h1>
+  </mat-toolbar>
+  <mat-dialog-content>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Class Name" #class name="classname" formControlName="classname">
+      <mat-hint align="end">
+        {{class.value.length}} / 20
+      </mat-hint>
+      <mat-error *ngIf="getclassname.errors?.required">
+        Class name is required.
+      </mat-error>
+      <mat-error *ngIf="getclassname.errors?.maxlength">
+        A maximum length of 20 characters is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select name="teacherid" #teacher placeholder="Teacher" formControlName="teacherid">
+        @for (teacher of teacherName; track teacher) {
+          <mat-option [value]="teacher.id">{{teacher.name}}</mat-option>
+          }
+      </mat-select>
+      <mat-error *ngIf="getteacher.errors?.required">
+        Select teacher.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select name="courseid" #course placeholder="Select Course" formControlName="courseid">
+        @for (course of courses; track course) {
+          <mat-option [value]="course.id">{{course.title}}</mat-option>
+          }
+      </mat-select>
+      <mat-error *ngIf="getcourse.errors?.required">
+        Select course.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Student Limit" #limit formControlName="studentlimit" name="studentlimit">
+      <mat-hint align="end">
+        {{limit.value.length}} / 2
+      </mat-hint>
+      <mat-error *ngIf="getlimit.errors?.required">
+        Limit is required.
+      </mat-error>
+      <mat-error *ngIf="getlimit.errors?.maxlength">
+        A maximum length of 2 characters is required.
+      </mat-error>
+      <mat-error
+        *ngIf="forms.controls['studentlimit'].hasError('pattern') && forms.controls['studentlimit'].touched">
+        Only Digits allowed</mat-error>
+    </mat-form-field>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="accent" class="button" matDialogClose>Cancel</button>
+      <button mat-raised-button color="primary">Save</button>
+    </mat-card-actions>
+  </mat-dialog-content>
+</form>
