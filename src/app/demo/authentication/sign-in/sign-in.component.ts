@@ -120,15 +120,13 @@ export default class SignInComponent implements OnInit {
             const tokenPayload = this.loginSvc.decodedToken();
             this.userStore.setFullNameForStore(tokenPayload.name);
             this.userStore.setRoleForStore(tokenPayload.role);
-            this.toast.success('Logged in successfully.', 'Success', {
-              timeOut: 3000
-            });
+            this.toast.success('Logged in successfully.', 'Success', {timeOut: 3000});
             this.loading = false;
             this.router.navigateByUrl('analytics');
           }
         },
         (error) => {
-          console.error('Error in API calls', error);
+          this.toast.warning('Internal server error.', 'Error', {timeOut: 3000});
           this.loading = false;
         }
       );

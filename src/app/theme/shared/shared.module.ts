@@ -37,7 +37,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
-import { provideToastr } from 'ngx-toastr';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 @NgModule({
   imports: [
@@ -70,6 +71,7 @@ import { provideToastr } from 'ngx-toastr';
     MatSortModule,
     MatDialogModule,
     MatTooltipModule,
+    MatSlideToggleModule
   ],
   exports: [
     CommonModule,
@@ -102,7 +104,7 @@ import { provideToastr } from 'ngx-toastr';
     MatToolbarModule,
     MatSortModule,
     MatDialogModule,
-
+    MatSlideToggleModule
   ],
   declarations: [DataFilterPipe, SpinnerComponent],
   providers: [

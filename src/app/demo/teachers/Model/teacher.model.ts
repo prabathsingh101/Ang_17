@@ -14,6 +14,8 @@ export interface Teachers {
     pincode?:string;
     createdated?:Date;
     modfieddate?: Date;
+    fullname?: string;
+    classname?: string;
 }
 
 

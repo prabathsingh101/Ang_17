@@ -6,7 +6,7 @@ import { Teachers } from './Model/teacher.model';
   providedIn: 'root'
 })
 export class TeachersService {
-  
+
 private readonly baseUrl='https://localhost:7226/api/Teacher/'
 
 
@@ -34,5 +34,8 @@ private readonly baseUrl='https://localhost:7226/api/Teacher/'
   }
   GetTeacherName() {
     return this.http.get<Teachers[]>(`${this.baseUrl}teachername`)
+  }
+  getteacherByClassId(id:number) {
+    return this.http.get<Teachers[]>(`${this.baseUrl}teacherbyclassid/${id}`)
   }
 }
