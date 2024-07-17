@@ -13,6 +13,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { TeachersService } from '../../teachers/teachers.service';
 import { Teachers } from '../../teachers/Model/teacher.model';
+import { SelectionModel } from '@angular/cdk/collections';
+import { toggle } from '../model/toggle';
 
 @Component({
   selector: 'app-attendance-type',
@@ -24,23 +26,35 @@ import { Teachers } from '../../teachers/Model/teacher.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class AttendanceTypeComponent implements OnInit {
+  currentDate: any = new Date();
   constructor(
     private fb: FormBuilder,
     public classSvc: ClassService,
     public attnSvc: AttendanceService,
     public datepipe: DatePipe,
     public teacherSvc: TeachersService
-  ) {}
-  displayedColumns: string[] = ['id', 'fullname', 'admissiondate','classname', 'action'];
-  displayedColumns1: string[] = ['id', 'fullname', 'classname', 'action'];
+  ) {
+    this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
+  }
+  displayedColumns: string[] = ['select', 'id', 'fullname'];
+  displayedColumns1: string[] = ['select', 'id', 'fullname', 'classname', 'action'];
 
   studentList: Student[] = [];
 
-  teacherList: Teachers[]=[];
+  selection = new SelectionModel<Student>(true, []);
+
+  teacherList: Teachers[] = [];
+
+  selection1 = new SelectionModel<Teachers>(true, []);
+
+  result: any = [];
+  newobj = {};
 
   dataSource: any;
 
   dataSource1: any;
+
+  attendancetype: any = '';
 
   loading = false;
 
@@ -61,19 +75,68 @@ export default class AttendanceTypeComponent implements OnInit {
 
   student: Student[] = [];
 
+  toggle!: toggle;
+
+  mergeval: any = [];
+
+  resultArray: any;
+
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   };
 
+  onStudentToggled(student: Student, data: any) {
+    this.selection.toggle(student);
+
+    const selected = { isSelected: data };
+
+    const currentDate = { date: this.currentDate };
+
+    const attendancetype = { type: this.attendancetype };
+
+    this.selection.selected.map((selectedobject) => {
+      this.newobj = { ...selectedobject, ...selected, ...currentDate, ...attendancetype };
+    });
+
+    console.log('res', this.newobj);
+  }
+  isAllSelected() {
+    return this.selection.selected?.length == this.studentList?.length;
+  }
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+    this.selection.select(...this.studentList);
+  }
+
+  //////////////////////////////////////////////////////////////
+  onStudentToggled1(teacher: Teachers) {
+    this.selection1.toggle(teacher);
+    console.log(this.selection1.selected);
+  }
+  isAllSelected1() {
+    return this.selection1.selected?.length == this.teacherList?.length;
+  }
+  toggleAll1() {
+    if (this.isAllSelected1()) {
+      this.selection1.clear();
+    } else {
+      this.selection1.select(...this.teacherList);
+    }
+  }
+
   ngOnInit(): void {
-    this.createForms();
+    //this.createForms();
     this.getClassName();
   }
 
   getClassName() {
     this.classSvc.getclassName().subscribe((res: any) => {
+      console.log(res);
       this.className = res;
     });
   }
@@ -81,25 +144,21 @@ export default class AttendanceTypeComponent implements OnInit {
   createForms() {
     this.AttendanceForms = this.fb.group({
       classid: ['', [Validators.required]],
-      attendancetype: ['', [Validators.required]],
-      attendancedate: ['', [Validators.required]]
+      attendancetype: ['', [Validators.required]]
+      // attendancedate: ['', [Validators.required]]
     });
   }
-  get getclass() {
-    return this.AttendanceForms.controls['classid'];
-  }
-  get getattendancetype() {
-    return this.AttendanceForms.controls['attendancetype'];
-  }
-  get getattendancedate() {
-    return this.AttendanceForms.controls['attendancedate'];
-  }
+  // get getclass() {
+  //   return this.AttendanceForms.controls['classid'];
+  // }
+  // get getattendancetype() {
+  //   return this.AttendanceForms.controls['attendancetype'];
+  // }
+  // get getattendancedate() {
+  //   return this.AttendanceForms.controls['attendancedate'];
+  // }
   getClassid(id: number) {
     this.classids = id;
-    // this.attnSvc.getClassesById(id).subscribe((res: any) => {
-    //   this.student = res;
-    //   console.log(this.student);
-    // });
   }
 
   getStudent() {
@@ -116,7 +175,6 @@ export default class AttendanceTypeComponent implements OnInit {
       )
       .subscribe((res: any) => {
         this.studentList = res;
-        console.log(this.studentList);
         if (this.studentList.length > 0) {
           this.dataSource = new MatTableDataSource<Student>(this.studentList);
           this.dataSource.paginator = this.paginator;
@@ -142,7 +200,6 @@ export default class AttendanceTypeComponent implements OnInit {
       )
       .subscribe((res: any) => {
         this.teacherList = res;
-        console.log(this.teacherList);
         if (this.studentList.length > 0) {
           this.dataSource1 = new MatTableDataSource<Student>(this.teacherList);
           this.dataSource1.paginator = this.paginator;
@@ -154,21 +211,27 @@ export default class AttendanceTypeComponent implements OnInit {
         }
       });
   }
-  onSubmit() {
+  getData() {
     if (this.isCheck === false) {
       this.getStudent();
-    }else{
+    } else {
       this.getTeacher();
     }
   }
   selectType(data: any) {
-    if (data === '0') {
+    this.attendancetype = data;
+    if (data === 'student') {
       this.isCheck = false;
+      this.selection.clear();
+      this.selection1.clear();
     } else {
       this.isCheck = true;
     }
   }
   click(data: any) {
     console.log('data', data);
+  }
+  clickme() {
+    console.log('click', this.selection.selected);
   }
 }
