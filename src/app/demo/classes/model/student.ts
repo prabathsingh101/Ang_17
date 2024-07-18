@@ -1,6 +1,6 @@
 export interface Student {
   id?: number;
-  selected?:boolean;
+  isSelected?:boolean;
   registrationno?: number;
 
   fname?: string;

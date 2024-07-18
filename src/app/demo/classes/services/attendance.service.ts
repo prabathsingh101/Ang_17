@@ -17,5 +17,7 @@ export class AttendanceService {
   getClassesById(id:number) {
     return this.http.get<Student[]>(`${this.baseUrl}studentbyclassid/${id}`)
   }
-
+  POSTStudent(body:any) {
+    return this.http.post(`${this.baseUrl}create`, body)
+  }
 }

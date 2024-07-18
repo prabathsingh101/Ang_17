@@ -15,12 +15,14 @@ import { TeachersService } from '../../teachers/teachers.service';
 import { Teachers } from '../../teachers/Model/teacher.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { toggle } from '../model/toggle';
+import { ToastrService } from 'ngx-toastr';
+import { error } from 'console';
 
 @Component({
   selector: 'app-attendance-type',
   standalone: true,
   imports: [SharedModule],
-  providers: [provideNativeDateAdapter(), DatePipe],
+  providers: [provideNativeDateAdapter(), DatePipe, ToastrService],
   templateUrl: './attendance-type.component.html',
   styleUrl: './attendance-type.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -32,12 +34,13 @@ export default class AttendanceTypeComponent implements OnInit {
     public classSvc: ClassService,
     public attnSvc: AttendanceService,
     public datepipe: DatePipe,
-    public teacherSvc: TeachersService
+    public teacherSvc: TeachersService,
+    public toast: ToastrService
   ) {
     this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
-  displayedColumns: string[] = ['select', 'id', 'fullname'];
-  displayedColumns1: string[] = ['select', 'id', 'fullname', 'classname', 'action'];
+  displayedColumns: string[] = ['select', 'studentid', 'fullname'];
+  displayedColumns1: string[] = ['select', 'id', 'fullname'];
 
   studentList: Student[] = [];
 
@@ -45,10 +48,11 @@ export default class AttendanceTypeComponent implements OnInit {
 
   teacherList: Teachers[] = [];
 
-  selection1 = new SelectionModel<Teachers>(true, []);
+  teacherSelection = new SelectionModel<Teachers>(true, []);
 
-  result: any = [];
-  newobj = {};
+  result: any[] = [];
+
+  newobj: any = {};
 
   dataSource: any;
 
@@ -61,8 +65,11 @@ export default class AttendanceTypeComponent implements OnInit {
   isCheck = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   @ViewChild(MatSort) sort!: MatSort;
-  isChecked = true;
+
+  isChecked = false;
+
   cols = 3;
 
   rowHeight = '150px';
@@ -75,11 +82,7 @@ export default class AttendanceTypeComponent implements OnInit {
 
   student: Student[] = [];
 
-  toggle!: toggle;
-
-  mergeval: any = [];
-
-  resultArray: any;
+  uniqueArray: any = [];
 
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -88,7 +91,14 @@ export default class AttendanceTypeComponent implements OnInit {
   };
 
   onStudentToggled(student: Student, data: any) {
+    this.isChecked = false;
+
     this.selection.toggle(student);
+
+    console.log(this.selection.selected);
+
+    this.uniqueArray=this.selection.selected;
+    console.log(this.uniqueArray)
 
     const selected = { isSelected: data };
 
@@ -98,34 +108,56 @@ export default class AttendanceTypeComponent implements OnInit {
 
     this.selection.selected.map((selectedobject) => {
       this.newobj = { ...selectedobject, ...selected, ...currentDate, ...attendancetype };
+      this.result.push(this.newobj);
     });
 
-    console.log('res', this.newobj);
+
+    //this.uniqueArray = Array.from(new Set(this.result.map((obj: any) => JSON.stringify(obj)))).map((str: any) => JSON.parse(str));
+    //console.log(this.uniqueArray);
   }
   isAllSelected() {
+    this.isChecked = true;
     return this.selection.selected?.length == this.studentList?.length;
   }
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
+      this.isChecked = false;
       return;
     }
     this.selection.select(...this.studentList);
+    this.isChecked = true;
   }
 
   //////////////////////////////////////////////////////////////
-  onStudentToggled1(teacher: Teachers) {
-    this.selection1.toggle(teacher);
-    console.log(this.selection1.selected);
+  onTeacherToggled(teacher: Teachers, data: any) {
+    this.isChecked = false;
+
+    this.teacherSelection.toggle(teacher);
+
+    const selected = { isSelected: data };
+
+    const currentDate = { date: this.currentDate };
+
+    const attendancetype = { type: this.attendancetype };
+
+    this.teacherSelection.selected.map((selectedobject) => {
+      this.newobj = { ...selectedobject, ...selected, ...currentDate, ...attendancetype };
+    });
+
+    console.log('res', this.uniqueArray);
   }
-  isAllSelected1() {
-    return this.selection1.selected?.length == this.teacherList?.length;
+  isAllTeacherSelected() {
+    this.isChecked = true;
+    return this.teacherSelection.selected?.length == this.teacherList?.length;
   }
-  toggleAll1() {
-    if (this.isAllSelected1()) {
-      this.selection1.clear();
+  toggleTeacherAllRows() {
+    if (this.isAllTeacherSelected()) {
+      this.teacherSelection.clear();
+      this.isChecked = false;
     } else {
-      this.selection1.select(...this.teacherList);
+      this.teacherSelection.select(...this.teacherList);
+      this.isChecked = true;
     }
   }
 
@@ -222,16 +254,37 @@ export default class AttendanceTypeComponent implements OnInit {
     this.attendancetype = data;
     if (data === 'student') {
       this.isCheck = false;
+      this.isChecked = false;
       this.selection.clear();
-      this.selection1.clear();
+      this.teacherSelection.clear();
     } else {
+      this.selection.clear();
+      this.teacherSelection.clear();
       this.isCheck = true;
+      this.isChecked = false;
     }
   }
   click(data: any) {
     console.log('data', data);
   }
   clickme() {
-    console.log('click', this.selection.selected);
+    if (this.attendancetype === 'student') {
+      this.attnSvc.POSTStudent(this.uniqueArray).subscribe(
+        (res: any) => {
+          if (res.StatusCode === 201) {
+            this.selection.clear();
+            this.toast.success(res.Message, 'Saved.', { timeOut: 3000 });
+          } else {
+            this.selection.clear();
+            this.toast.error(res.Message, 'Error.', { timeOut: 3000 });
+          }
+        },
+        (error) => {
+          this.toast.error(error, 'Error.', { timeOut: 3000 });
+        }
+      );
+    } else {
+      this.toast.error('Internal server error', 'Error.', { timeOut: 3000 });
+    }
   }
 }
