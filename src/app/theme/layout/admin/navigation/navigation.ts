@@ -56,10 +56,17 @@ export const NavigationItems: NavigationItem[] = [
           },
           {
             id: 'create-attendance',
-            title: 'Atendance Type',
+            title: 'Atendance',
             type: 'item',
             icon: 'feather icon-at-sign',
             url: '/classes/create-attendance'
+          },
+          {
+            id: 'attendance-list',
+            title: 'Atendance List',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/classes/list-attendance'
           }
         ]
       }

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { ClassService } from '../services/class.service';
-import { ClassDetail } from '../model/classdetail.model';
+
 import { AttendanceService } from '../services/attendance.service';
 import { Student } from '../model/student';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
 import { TeachersService } from '../../teachers/teachers.service';
 import { Teachers } from '../../teachers/Model/teacher.model';
 import { SelectionModel } from '@angular/cdk/collections';
-import { toggle } from '../model/toggle';
+
 import { ToastrService } from 'ngx-toastr';
 import { error } from 'console';
 
@@ -39,8 +39,8 @@ export default class AttendanceTypeComponent implements OnInit {
   ) {
     this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
-  displayedColumns: string[] = ['select', 'studentid', 'fullname'];
-  displayedColumns1: string[] = ['select', 'id', 'fullname'];
+  studentColumns: string[] = ['select', 'studentid', 'fullname'];
+  teacherColumns: string[] = ['select', 'teacherid', 'fullname'];
 
   studentList: Student[] = [];
 
@@ -95,22 +95,27 @@ export default class AttendanceTypeComponent implements OnInit {
 
     this.selection.toggle(student);
 
-    console.log(this.selection.selected);
+    // this.uniqueArray=this.selection.selected;
+    // console.log(this.uniqueArray)
 
-    this.uniqueArray=this.selection.selected;
-    console.log(this.uniqueArray)
+    //const selected = { isSelected: data };
 
-    const selected = { isSelected: data };
+    //const currentDate = { date: this.currentDate };
 
-    const currentDate = { date: this.currentDate };
+    //const attendancetype = { type: this.attendancetype };
 
-    const attendancetype = { type: this.attendancetype };
-
-    this.selection.selected.map((selectedobject) => {
-      this.newobj = { ...selectedobject, ...selected, ...currentDate, ...attendancetype };
-      this.result.push(this.newobj);
+    this.selection.selected.forEach((a) => {
+      (a.isSelected = data), (a.type = this.attendancetype), (a.date = this.currentDate);
     });
 
+    //console.log(this.selection.selected);
+    this.newobj = this.selection.selected;
+    console.log(this.newobj);
+
+    // this.selection.selected.map((selectedobject) => {
+    //   this.newobj = { ...selectedobject, ...selected, ...currentDate, ...attendancetype };
+    //   this.result.push(this.newobj);
+    // });
 
     //this.uniqueArray = Array.from(new Set(this.result.map((obj: any) => JSON.stringify(obj)))).map((str: any) => JSON.parse(str));
     //console.log(this.uniqueArray);
@@ -135,17 +140,16 @@ export default class AttendanceTypeComponent implements OnInit {
 
     this.teacherSelection.toggle(teacher);
 
-    const selected = { isSelected: data };
+    //const selected = { isSelected: data };
 
-    const currentDate = { date: this.currentDate };
+    //const currentDate = { date: this.currentDate };
 
-    const attendancetype = { type: this.attendancetype };
-
-    this.teacherSelection.selected.map((selectedobject) => {
-      this.newobj = { ...selectedobject, ...selected, ...currentDate, ...attendancetype };
+    //const attendancetype = { type: this.attendancetype };
+    this.teacherSelection.selected.forEach((a) => {
+      (a.isSelected = data), (a.type = this.attendancetype), (a.date = this.currentDate);
     });
-
-    console.log('res', this.uniqueArray);
+    this.newobj = this.teacherSelection.selected;
+    console.log(this.newobj);
   }
   isAllTeacherSelected() {
     this.isChecked = true;
@@ -164,6 +168,7 @@ export default class AttendanceTypeComponent implements OnInit {
   ngOnInit(): void {
     //this.createForms();
     this.getClassName();
+    this.isChecked = false;
   }
 
   getClassName() {
@@ -232,12 +237,12 @@ export default class AttendanceTypeComponent implements OnInit {
       )
       .subscribe((res: any) => {
         this.teacherList = res;
-        if (this.studentList.length > 0) {
-          this.dataSource1 = new MatTableDataSource<Student>(this.teacherList);
+        if (this.teacherList.length > 0) {
+          this.dataSource1 = new MatTableDataSource<Teachers>(this.teacherList);
           this.dataSource1.paginator = this.paginator;
           this.dataSource1.sort = this.sort;
         } else {
-          this.dataSource1 = new MatTableDataSource<Student>(this.teacherList);
+          this.dataSource1 = new MatTableDataSource<Teachers>(this.teacherList);
           this.dataSource1.paginator = this.paginator;
           this.dataSource1.sort = this.sort;
         }
@@ -254,8 +259,8 @@ export default class AttendanceTypeComponent implements OnInit {
     this.attendancetype = data;
     if (data === 'student') {
       this.isCheck = false;
-      this.isChecked = false;
       this.selection.clear();
+      this.isChecked = false;
       this.teacherSelection.clear();
     } else {
       this.selection.clear();
@@ -269,11 +274,14 @@ export default class AttendanceTypeComponent implements OnInit {
   }
   clickme() {
     if (this.attendancetype === 'student') {
-      this.attnSvc.POSTStudent(this.uniqueArray).subscribe(
+      this.attnSvc.POSTStudent(this.newobj).subscribe(
         (res: any) => {
           if (res.StatusCode === 201) {
             this.selection.clear();
+            this.isChecked = false;
             this.toast.success(res.Message, 'Saved.', { timeOut: 3000 });
+          } else if (res.StatusCode === 203) {
+            this.toast.warning(res.Message, 'Exists.', { timeOut: 3000 });
           } else {
             this.selection.clear();
             this.toast.error(res.Message, 'Error.', { timeOut: 3000 });
@@ -284,7 +292,23 @@ export default class AttendanceTypeComponent implements OnInit {
         }
       );
     } else {
-      this.toast.error('Internal server error', 'Error.', { timeOut: 3000 });
+      this.attnSvc.POSTTeacher(this.newobj).subscribe(
+        (res: any) => {
+          if (res.StatusCode === 201) {
+            this.teacherSelection.clear();
+            this.isChecked = false;
+            this.toast.success(res.Message, 'Saved.', { timeOut: 3000 });
+          } else if (res.StatusCode === 203) {
+            this.toast.warning(res.Message, 'Exists.', { timeOut: 3000 });
+          } else {
+            this.teacherSelection.clear();
+            this.toast.error(res.Message, 'Error.', { timeOut: 3000 });
+          }
+        },
+        (error: any) => {
+          this.toast.error(error, 'Error.', { timeOut: 3000 });
+        }
+      );
     }
   }
 }

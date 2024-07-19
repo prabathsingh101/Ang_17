@@ -1,6 +1,12 @@
 export interface Student {
   id?: number;
-  isSelected?:boolean;
+
+  isSelected?: boolean;
+
+  type?: string;
+
+  date?: Date;
+
   registrationno?: number;
 
   fname?: string;

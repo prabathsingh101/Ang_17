@@ -16,6 +16,9 @@ export interface Teachers {
     modfieddate?: Date;
     fullname?: string;
     classname?: string;
+    isSelected?: boolean;
+    type?: string;
+    date?: Date;
 }
 
 
