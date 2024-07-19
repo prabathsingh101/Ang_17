@@ -60,10 +60,7 @@ const routes: Routes = [
         path: 'list', canActivate:[authGuard],
         loadComponent: () => import('./demo/teachers/teacher-list/teacher-list.component')
       },
-      {
-        path: 'attendance', canActivate:[authGuard],
-        loadComponent: () => import('./demo/teachers/teacher-attendance/teacher-attendance.component')
-      },
+     
       {
         path: 'payslip', canActivate:[authGuard],
         loadComponent: () => import('./demo/teachers/teacher-payslip/teacher-payslip.component')
@@ -138,10 +135,7 @@ const routes: Routes = [
         path: 'students/adm-list', canActivate:[authGuard],
         loadComponent: () => import('./demo/students/admission-list/admission-list.component')
       },
-      {
-        path: 'students/student-attendance', canActivate:[authGuard],
-        loadComponent: () => import('./demo/students/student-attendance/student-attendance.component')
-      },
+
       {
         path: 'holidays/create-holiday', canActivate:[authGuard],
         loadComponent: () => import('./demo/holidays/create-holiday/create-holiday.component')
