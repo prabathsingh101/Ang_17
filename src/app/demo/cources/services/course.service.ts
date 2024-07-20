@@ -30,4 +30,7 @@ export class CourseService {
   DELETE(id: number) {
     return this.http.delete(`${this.baseUrl}${id}`);
   }
+  GetTotalCourse() {
+    return this.http.get(`${this.baseUrl}totalcourse`);
+  }
 }

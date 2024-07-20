@@ -38,4 +38,7 @@ private readonly baseUrl='https://localhost:7226/api/Teacher/'
   getteacherByClassId(id:number) {
     return this.http.get<Teachers[]>(`${this.baseUrl}teacherbyclassid/${id}`)
   }
+  GetTotalTeacher() {
+    return this.http.get(`${this.baseUrl}totalteacher`);
+  }
 }

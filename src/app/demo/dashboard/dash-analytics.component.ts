@@ -1,5 +1,5 @@
 // angular import
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 // project import
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -22,6 +22,9 @@ import {
   ApexTooltip,
   ApexMarkers
 } from 'ng-apexcharts';
+import { TeachersService } from '../teachers/teachers.service';
+import { AdmissionService } from '../students/registration/services/admission.service';
+import { CourseService } from '../cources/services/course.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -48,7 +51,7 @@ export type ChartOptions = {
   templateUrl: './dash-analytics.component.html',
   styleUrls: ['./dash-analytics.component.scss']
 })
-export default class DashAnalyticsComponent {
+export default class DashAnalyticsComponent implements OnInit {
   // public props
   @ViewChild('chart') chart!: ChartComponent;
   @ViewChild('customerChart') customerChart!: ChartComponent;
@@ -57,8 +60,17 @@ export default class DashAnalyticsComponent {
   chartOptions_2!: Partial<ChartOptions>;
   chartOptions_3!: Partial<ChartOptions>;
 
+  totalStudent: number=0;
+  totalTeacher: number=0;
+  totalCourse: number=0;
+
   // constructor
-  constructor() {
+  constructor(
+    public teacherSvc: TeachersService,
+    public studentSvc: AdmissionService,
+    public courseSvc: CourseService
+  ) {
+
     this.chartOptions = {
       chart: {
         height: 205,
@@ -244,34 +256,36 @@ export default class DashAnalyticsComponent {
       }
     };
   }
+  std: number = 20;
+
   cards = [
     {
       background: 'bg-c-blue',
-      title: 'Orders Received',
-      icon: 'icon-shopping-cart',
-      text: 'Completed Orders',
-      number: '486',
-      no: '351'
+      title: 'New Students',
+      icon: 'icon-Profile',
+      text: 'This Month',
+      number: this.totalStudent,
+      no: '3'
     },
     {
       background: 'bg-c-green',
-      title: 'Total Sales',
+      title: 'Total Courses',
       icon: 'icon-tag',
       text: 'This Month',
-      number: '1641',
-      no: '213'
+      number: this.totalCourse,
+      no: '10'
     },
     {
       background: 'bg-c-yellow',
-      title: 'Revenue',
+      title: 'Total Teachers',
       icon: 'icon-repeat',
       text: 'This Month',
-      number: '$42,56',
-      no: '$5,032'
+      number: this.totalTeacher,
+      no: '1'
     },
     {
       background: 'bg-c-red',
-      title: 'Total Profit',
+      title: 'Fees Collection',
       icon: 'icon-shopping-cart',
       text: 'This Month',
       number: '$9,562',
@@ -296,4 +310,20 @@ export default class DashAnalyticsComponent {
       size: 'PNG-150KB'
     }
   ];
+  ngOnInit(): void {
+    this.teacherSvc.GetTotalTeacher().subscribe((res:any) => {
+      this.totalTeacher = parseInt(res[0].totalteacher);
+      console.log(this.totalTeacher);
+    });
+
+    this.studentSvc.GetTotalStudent().subscribe((res: any) => {
+      this.totalStudent = parseInt(res[0].totalstudent);
+      console.log(this.totalStudent);
+    });
+
+    this.courseSvc.GetTotalCourse().subscribe((res: any) => {
+      this.totalCourse = parseInt(res[0].totalcourse);
+      console.log(this.totalCourse);
+    });
+  }
 }

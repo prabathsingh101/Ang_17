@@ -24,7 +24,13 @@ export default class TeacherAttendanceComponent implements OnInit {
 
   teacherattendanceList: Attendancelist[] = [];
 
+  teacherattendance!: Attendancelist;
+
   teacherdataSource: any;
+
+  attnDate!: any;
+
+  checkboxval: boolean = false;
 
   constructor(
     public datepipe: DatePipe,
@@ -33,11 +39,14 @@ export default class TeacherAttendanceComponent implements OnInit {
     this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
 
-  displayColumns: string[] = ['isselected', 'attnid', 'fullname', 'classname', 'date','edit'];
+  displayColumns: string[] = ['isselected', 'attnid', 'fullname', 'classname', 'isstatus','edit'];
 
   getTeacherAttendance() {
     this.attnsvc.TeacherAttendanceList().subscribe((res: any) => {
       this.teacherattendanceList = res;
+      this.teacherattendanceList.forEach((element) => {
+        this.attnDate=element.date
+       });
       if (this.teacherattendanceList.length > 0) {
         this.teacherdataSource = new MatTableDataSource<Attendancelist>(this.teacherattendanceList);
         this.teacherdataSource.paginator = this.paginator;
@@ -55,5 +64,17 @@ export default class TeacherAttendanceComponent implements OnInit {
   filterchange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
     this.teacherdataSource.filter = value;
+  }
+  checkboxChange(checkboxchange: any) {
+    this.checkboxval = checkboxchange;
+  }
+  edit(id: number) {
+    if (id > 0) {
+      this.teacherattendance = { isSelected: this.checkboxval };
+      this.attnsvc.PUTTeacherAttn(id, this.teacherattendance).subscribe((res: any) => {
+        console.log(res.Message);
+        this.getTeacherAttendance();
+      });
+    }
   }
 }

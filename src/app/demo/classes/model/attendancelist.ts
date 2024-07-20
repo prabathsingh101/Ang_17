@@ -5,4 +5,5 @@ export interface Attendancelist {
   date?: Date;
   type?: string;
   isSelected?: boolean;
+  isstatus?:any;
 }

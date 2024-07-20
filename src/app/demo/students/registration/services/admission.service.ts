@@ -30,4 +30,8 @@ export class AdmissionService {
   DELETE(id: number) {
     return this.http.delete(`${this.baseUrl}${id}`);
   }
+
+  GetTotalStudent() {
+    return this.http.get(`${this.baseUrl}totalstudent`);
+  }
 }

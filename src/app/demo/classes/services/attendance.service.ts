@@ -8,26 +8,29 @@ import { Attendancelist } from '../model/attendancelist';
   providedIn: 'root'
 })
 export class AttendanceService {
+  private readonly baseUrl = 'https://localhost:7226/api/Attendance/';
 
-  private readonly baseUrl='https://localhost:7226/api/Attendance/'
+  constructor(private http: HttpClient) {}
 
-
-  constructor(private http: HttpClient) { }
-
-
-  getClassesById(id:number) {
-    return this.http.get<Student[]>(`${this.baseUrl}studentbyclassid/${id}`)
+  getClassesById(id: number) {
+    return this.http.get<Student[]>(`${this.baseUrl}studentbyclassid/${id}`);
   }
-  POSTStudent(body:any) {
-    return this.http.post(`${this.baseUrl}create`, body)
+  POSTStudent(body: any) {
+    return this.http.post(`${this.baseUrl}create`, body);
   }
-  POSTTeacher(body:any){
-    return this.http.post(`${this.baseUrl}teacherattendance`, body)
+  POSTTeacher(body: any) {
+    return this.http.post(`${this.baseUrl}teacherattendance`, body);
   }
   StudentAttendanceList() {
-    return this.http.get<Attendancelist>(`${this.baseUrl}studentattendancelist`)
+    return this.http.get<Attendancelist>(`${this.baseUrl}studentattendancelist`);
   }
   TeacherAttendanceList() {
-    return this.http.get<Attendancelist>(`${this.baseUrl}teacherattendancelist`)
+    return this.http.get<Attendancelist>(`${this.baseUrl}teacherattendancelist`);
+  }
+  PUTStudentAttn(id: number, body: any) {
+    return this.http.patch(`${this.baseUrl}updatestudentattn/${id}`, body);
+  }
+  PUTTeacherAttn(id: number, body: any) {
+    return this.http.patch(`${this.baseUrl}updateteacherattn/${id}`, body);
   }
 }
