@@ -1,9 +1,12 @@
 <form [formGroup]="forms" (ngSubmit)="onSubmit()">
-  <mat-toolbar color="primary">
-    <h1>{{inputdata.title}}</h1>
-  </mat-toolbar>
-  <mat-dialog-content>
 
+  <button mat-icon-button style="float: right; margin: 5px;" matDialogClose>
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-dialog-content>
+    <header>
+      <h1>{{inputdata.title}}</h1>
+    </header>
     <mat-form-field class="example-full-width">
       <mat-select name="courseid" #course placeholder="Select Course" formControlName="courseid">
         @for (course of courses; track course) {
@@ -46,10 +49,9 @@
         A maximum length of 100 characters is required.
       </mat-error>
     </mat-form-field>
-
-    <mat-card-actions align="end">
-      <button mat-raised-button color="accent" class="button" matDialogClose>Cancel</button>
-      <button mat-raised-button color="primary">Save</button>
-    </mat-card-actions>
   </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" class="button" matDialogClose>Cancel</button>
+    <button mat-raised-button color="primary">Save</button>
+  </mat-dialog-actions>
 </form>

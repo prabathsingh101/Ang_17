@@ -1,8 +1,12 @@
 <form [formGroup]="forms" (ngSubmit)="onSubmit()">
-  <mat-toolbar color="primary">
-    <h1>{{inputdata.title}}</h1>
-  </mat-toolbar>
+
+  <button mat-icon-button style="float: right; margin: 5px;" matDialogClose>
+    <mat-icon>close</mat-icon>
+  </button>
   <mat-dialog-content>
+    <header>
+      <h1>{{inputdata.title}}</h1>
+    </header>
     <div class="row">
       <div class="col-md-4">
         <mat-form-field class="example-full-width">
@@ -133,11 +137,10 @@
         </mat-form-field>
       </div>
     </div>
-
-
-    <mat-card-actions align="end">
-      <button mat-raised-button color="accent" class="button" matDialogClose type="button">Cancel</button>
-      <button mat-raised-button color="primary">Save</button>
-    </mat-card-actions>
   </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" class="button" matDialogClose type="button">Cancel</button>
+    <button mat-raised-button color="primary">Save</button>
+  </mat-dialog-actions>
+
 </form>

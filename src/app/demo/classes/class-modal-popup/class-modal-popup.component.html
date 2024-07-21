@@ -1,8 +1,11 @@
 <form [formGroup]="forms" (ngSubmit)="onSubmit()">
-  <mat-toolbar color="primary">
-    <h1>{{inputdata.title}}</h1>
-  </mat-toolbar>
+  <button mat-icon-button style="float: right; margin: 5px;" matDialogClose>
+    <mat-icon>close</mat-icon>
+  </button>
   <mat-dialog-content>
+    <header>
+      <h1>{{inputdata.title}}</h1>
+    </header>
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Class Name" #class name="classname" formControlName="classname">
       <mat-hint align="end">
@@ -53,10 +56,9 @@
         *ngIf="forms.controls['studentlimit'].hasError('pattern') && forms.controls['studentlimit'].touched">
         Only Digits allowed</mat-error>
     </mat-form-field>
-
-    <mat-card-actions align="end">
-      <button mat-raised-button color="accent" class="button" matDialogClose>Cancel</button>
-      <button mat-raised-button color="primary">Save</button>
-    </mat-card-actions>
   </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" class="button" matDialogClose>Cancel</button>
+    <button mat-raised-button color="primary">Save</button>
+  </mat-dialog-actions>
 </form>

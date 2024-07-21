@@ -73,8 +73,8 @@ export default class LessonListComponent implements OnInit {
       });
   }
 
-  editCourse(id: number) {
-    this.openpoup(id, 'Edit Course');
+  editLesson(id: number) {
+    this.openpoup(id, 'Edit Lesson');
   }
   openpoup(id: number, title: any) {
     var _popup = this.dialog.open(LessonModalPopupComponent, {
