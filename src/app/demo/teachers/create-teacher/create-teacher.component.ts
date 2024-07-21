@@ -18,9 +18,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './create-teacher.component.scss'
 })
 export default class CreateTeacherComponent implements OnInit, OnDestroy {
-
   createdate: any = new Date();
   modifieddate: any = new Date();
+
+  selectedFile = null;
 
   constructor(
     private fb: FormBuilder,
@@ -69,7 +70,8 @@ export default class CreateTeacherComponent implements OnInit, OnDestroy {
 
       pincode: ['', [Validators.pattern(/^[0-9]*$/), Validators.minLength(6), Validators.maxLength(6)]],
 
-      dateofjoining: ['', []]
+      dateofjoining: ['', []],
+      gender: ['', []]
     });
   }
 
@@ -119,9 +121,10 @@ export default class CreateTeacherComponent implements OnInit, OnDestroy {
         dateofjoining: this.teacherForms.value.dateofjoining,
         pincode: this.teacherForms.value.pincode,
         createdated: this.createdate,
-        modfieddate: this.modifieddate
+        modfieddate: this.modifieddate,
+        gender: this.teacherForms.gender
       };
-      this.teacherSubscription=this.teacherSvc.Post(this.teachers).subscribe((res: any) => {
+      this.teacherSubscription = this.teacherSvc.Post(this.teachers).subscribe((res: any) => {
         if (res.StatusCode === 201) {
           this.router.navigateByUrl('list');
           {
@@ -132,5 +135,10 @@ export default class CreateTeacherComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+  onFileSelected(data: any) {
+    const file = data.target.files[0] ?? null;
+    console.log('file', file.name);
+    //this.selectedFile = file.name;
   }
 }

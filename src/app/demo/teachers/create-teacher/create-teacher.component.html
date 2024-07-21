@@ -163,7 +163,26 @@
 
             </div>
           </div>
-          <mat-card-actions align="start">
+
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <mat-select placeholder="Select" formControlName="gender">
+                  <mat-option value="male">Male</mat-option>
+                  <mat-option value="female">Female</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-8">
+              <input type="file" (change)="onFileSelected($event)" #fileInput style="float: right;">
+              <mat-card class="example-card" appearance="outlined">
+                <img alt="">
+              </mat-card>
+            </div>
+          </div>
+
+          <mat-card-actions align="end">
             <button mat-raised-button color="accent" class="button" type="button"
               (click)="reset($event)">Cancel</button>
             <button mat-raised-button color="primary">Save</button>
