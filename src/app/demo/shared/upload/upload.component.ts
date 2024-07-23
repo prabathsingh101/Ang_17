@@ -16,34 +16,27 @@ export class UploadComponent implements OnInit {
   @Output() public onUploadFinished = new EventEmitter();
 
   file: any;
-
+  url: any = '';
   constructor(private fileService: FileService ) { }
 
   ngOnInit() {
   }
 
-  uploadFile = (files:any) => {
-    if (files.length === 0) {
-      return;
+  uploadFile = (event:any) => {
+
+    if (event.target.files && event.target.files[0]) {
+
+      this.file = event.target.files[0];
+
+      console.log(this.file);
+
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+      };
     }
-
-    let fileToUpload = <File>files[0];
-    const formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
-
-    console.log('formdata', formData)
-
-    this.fileService.upload(formData)
-      .subscribe({
-        next: (event:any) => {
-          if (event.type === HttpEventType.UploadProgress)
-            this.progress = Math.round(100 * event.loaded / event.total);
-          else if (event.type === HttpEventType.Response) {
-            this.message = 'Upload success.';
-            this.onUploadFinished.emit(event.body);
-          }
-        },
-        error: (err: HttpErrorResponse) => console.log(err)
-      });
   }
 }

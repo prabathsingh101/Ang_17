@@ -1,14 +1,18 @@
-<div class="row" style="margin-bottom:15px;">
-  <div class="col-md-3">
-    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" multiple>
-    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
-  </div>
-  <div class="col-md-4">
-    <span class="upload" *ngIf="progress > 0">
-      {{progress}}%
-    </span>
-    <span class="upload" *ngIf="message">
-      {{message}}
-    </span>
-  </div>
-</div>
+
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-subtitle>Employee Image</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="url? url : 'https://www.w3schools.com/howto/img_avatar.png'" alt="Photo">
+
+  <mat-card-actions>
+      <div class="row" style="margin-bottom:15px;">
+        <div class="col-md-12">
+          <input type="file" #file placeholder="Choose file" (change)="uploadFile($event)" style="display:none;">
+          <button style="margin: 4px;" type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+          <!-- <button mat-raised-button color="primary">Save</button> -->
+        </div>
+
+      </div>
+  </mat-card-actions>
+</mat-card>
