@@ -8,11 +8,13 @@ import { TeachersService } from '../teachers.service';
 import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { UploadComponent } from '../../shared/upload/upload.component';
+
 
 @Component({
   selector: 'app-create-teacher',
   standalone: true,
-  imports: [SharedModule, RouterModule],
+  imports: [SharedModule, RouterModule, UploadComponent],
   providers: [provideNativeDateAdapter(), TeachersService, DatePipe, ToastrService],
   templateUrl: './create-teacher.component.html',
   styleUrl: './create-teacher.component.scss'

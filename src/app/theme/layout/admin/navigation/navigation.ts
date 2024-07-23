@@ -221,6 +221,37 @@ export const NavigationItems: NavigationItem[] = [
   },
 
   {
+    id: 'employees',
+    title: 'Employees',
+    type: 'group',
+    icon: 'icon-group',
+    children: [
+      {
+        id: 'employees',
+        title: 'Employees',
+        type: 'collapse',
+        icon: 'feather icon-box',
+        children: [
+          {
+            id: 'create',
+            title: 'Create',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/employees/create-employee'
+          },
+          {
+            id: 'list',
+            title: 'Lists',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/employees/employees-list'
+          }
+        ]
+      }
+    ]
+  },
+
+  {
     id: 'courses',
     title: 'Courses',
     type: 'group',
