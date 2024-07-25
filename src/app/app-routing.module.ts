@@ -155,6 +155,14 @@ const routes: Routes = [
       {
         path: 'employees/employees-list', canActivate:[authGuard],
         loadComponent: () => import('./demo/employees/employees.component')
+      },
+      {
+        path: 'feesconfiguration/feesconfig', canActivate:[authGuard],
+        loadComponent: () => import('./demo/feesconfiguration/feesconfiguration.component')
+      },
+      {
+        path: 'feesconfiguration/feestype', canActivate:[authGuard],
+        loadComponent: () => import('./demo/feesconfiguration/feestypes/feestypes.component')
       }
     ]
   },
