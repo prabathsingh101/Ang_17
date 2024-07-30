@@ -266,4 +266,9 @@ export default class CollectAdmissionFeesComponent implements OnInit {
       }
     });
   }
+  filterchange(data: Event) {
+    debugger
+    const value = (data.target as HTMLInputElement).value;
+    this.dataSource.filter = value.trim().toLowerCase();
+  }
 }

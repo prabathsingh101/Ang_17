@@ -6,7 +6,7 @@
       </button>
       <form [formGroup]="paymentForms" (ngSubmit)="onSubmit()">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <mat-form-field class="example-full-width">
               <mat-select name="classid" (selectionChange)="getFeeNameByClassid($event.value)" [value]="classid"
                 placeholder="Select Class" formControlName="classid">
@@ -18,16 +18,13 @@
                 Class name is required.
               </mat-error>
             </mat-form-field>
-          </div>
-          <div class="col-md-6">
+
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Student Id" [(ngModel)]="studentid" readonly formControlName="studentid">
               <mat-error *ngIf="getstudentid.errors?.required">
                 Student id is required.
               </mat-error>
             </mat-form-field>
-          </div>
-          <div class="col-md-6">
             <mat-form-field class="example-full-width">
               <mat-select placeholder="Payment Type" formControlName="paymenttype">
                 <mat-option value="Cash">Cash</mat-option>
@@ -40,8 +37,7 @@
                 Payment type is required.
               </mat-error>
             </mat-form-field>
-          </div>
-          <div class="col-md-6">
+
             <mat-form-field class="example-full-width">
               <input placeholder="Choose Collection Date" matInput [matDatepicker]="picker"
                 formControlName="collectiondate">
@@ -53,16 +49,14 @@
                 Collection date is required.
               </mat-error>
             </mat-form-field>
-          </div>
-          <div class="col-md-6">
+
             <mat-form-field class="example-full-width">
-              <input placeholder="Invoice no" readonly [(ngModel)]="maxval" matInput formControlName="invoiceno" name="invoiceno">
+              <input placeholder="Invoice no" readonly [(ngModel)]="maxval" matInput formControlName="invoiceno"
+                name="invoiceno">
               <mat-error *ngIf="getinvoiceno.errors?.required">
                 Invoice no is required.
               </mat-error>
             </mat-form-field>
-          </div>
-          <div class="col-md-6">
             <mat-form-field class="example-full-width">
               <mat-select placeholder="Payment Status" formControlName="paymentstatus" name="status">
                 <mat-option value="Paid">Paid</mat-option>
@@ -74,7 +68,10 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-7">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Enter text search" (keyup)="filterchange($event)" />
+            </mat-form-field>
             <table matSort mat-table [dataSource]="dataSource">
               <ng-container matColumnDef="isselected">
                 <th mat-header-cell *matHeaderCellDef>
@@ -119,29 +116,30 @@
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
               aria-label="Select page of periodic elements">
             </mat-paginator>
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Total Amount" readonly [(ngModel)]="totalval"
+                    formControlName="totalamount" name="totalamount">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Discount Amount" [(ngModel)]="discountAmt" formControlName="discount"
+                    name="discount" (blur)="calculateDiscount($event.target)">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Final Amount" [(ngModel)]="finalAmtval" readonly
+                    formControlName="finalamount" name="finalamount">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <button class="button" mat-raised-button color="primary">Save</button>
+              </div>
+            </div>
           </div>
-          <div class="col-md-4">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Total Amount" readonly [(ngModel)]="totalval" formControlName="totalamount"
-                name="totalamount">
-            </mat-form-field>
-          </div>
-          <div class="col-md-4">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Discount Amount" [(ngModel)]="discountAmt" formControlName="discount"
-                name="discount" (blur)="calculateDiscount($event.target)">
-            </mat-form-field>
-          </div>
-          <div class="col-md-4">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Final Amount" [(ngModel)]="finalAmtval" readonly
-                formControlName="finalamount" name="finalamount">
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <button class="button" mat-raised-button color="primary">Save</button>
-          <button mat-raised-button color="accent">Cancel</button>
         </div>
       </form>
     </app-card>
