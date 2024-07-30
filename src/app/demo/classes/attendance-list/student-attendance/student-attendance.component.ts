@@ -52,6 +52,7 @@ export default class StudentAttendanceComponent implements OnInit {
   getStudentAttendance() {
     this.attnsvc.StudentAttendanceList().subscribe((res: any) => {
       this.studentattendanceList = res;
+      console.log(this.studentattendanceList)
       this.studentattendanceList.forEach((element) => {
         this.attnDate = element.date;
       });

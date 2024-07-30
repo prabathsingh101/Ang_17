@@ -1,0 +1,169 @@
+<form [formGroup]="paymentForms" (ngSubmit)="onSubmit()">
+  <button mat-icon-button style="float: right; margin: 5px;" matDialogClose>
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-dialog-content>
+    <header>
+      <h1>{{inputdata.title}}</h1>
+    </header>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Select class</mat-label>
+            <mat-select name="classid" (selectionChange)="getFeeNameByClassid($event.value)" #classid
+              formControlName="classid">
+              @for (items of className; track items) {
+              <mat-option [disabled]="items.id" [value]="items.id">{{items.classname}}</mat-option>
+              }
+            </mat-select>
+            <mat-error *ngIf="getclass.errors?.required">
+              Class name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Student Id</mat-label>
+            <input matInput placeholder="Student id" readonly formControlName="studentid" name="studentid">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Fees Type</mat-label>
+            <mat-select name="feestype" placeholder="Fees Type" multiple formControlName="feestype">
+              @for (items of mapfeename; track items) {
+              <mat-option [value]="items?.id">{{items?.feename}}</mat-option>
+              }
+            </mat-select>
+            <mat-error *ngIf="feestype.errors?.required">
+              Fees type is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Payment</mat-label>
+            <mat-select name="paymenttype" #paymenttype formControlName="paymenttype" placeholder="Payment type">
+              <mat-option value="Cash">Cash</mat-option>
+              <mat-option value="Cheque">Cheque</mat-option>
+              <mat-option value="Online Transfer">Online Transfer</mat-option>
+              <mat-option value="Draft">Draft</mat-option>
+              <mat-option value="Other">Other</mat-option>
+            </mat-select>
+            <mat-error *ngIf="getpaymenttype.errors?.required">
+              Payment type is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Invoice No</mat-label>
+            <input matInput placeholder="Invoice no" formControlName="invoiceno" name="invoiceno">
+            <mat-error *ngIf="getinvoiceno.errors?.required">
+              Invoice no is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Pay Status</mat-label>
+            <mat-select name="status" #status placeholder="Status" formControlName="status">
+              <mat-option value="Paid">Paid</mat-option>
+              <mat-option value="Unpaid">Unpaid</mat-option>
+              <mat-option value="Pending">Pending</mat-option>
+            </mat-select>
+            <mat-error *ngIf="paymentstatus.errors?.required">
+              Payment status is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Collection date</mat-label>
+            <input matInput [matDatepicker]="dobdatepicker" formControlName="collectiondate" name="collectiondate" />
+            <mat-datepicker-toggle matIconSuffix [for]="dobdatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #dobdatepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+            <mat-error *ngIf="collectiondate.errors?.required">
+              Fees type is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Tuition Fees</mat-label>
+            <input matInput readonly name="tuitionfees">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Computer Fees</mat-label>
+            <input matInput readonly #comp name="computerfees" [value]="computerfees"
+              (focus)="setComputerfees(comp.value)">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Sports Fees</mat-label>
+            <input matInput readonly name="sportsfees">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Annual Fees</mat-label>
+            <input matInput readonly name="annualfees">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Admission Fees</mat-label>
+            <input matInput placeholder="Amount" readonly [(ngModel)]="feetypeAmount" formControlName="amount"
+              name="admissionfees">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Discount</mat-label>
+            <input matInput placeholder="Discount" type="number" formControlName="discount" name="discount"
+              (change)="calculateDiscount($event.target)">
+            <mat-error
+              *ngIf="paymentForms.controls['discount'].hasError('pattern') && paymentForms.controls['discount'].touched">
+              Only Digits allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Final Amount</mat-label>
+            <input matInput placeholder="final amount" readonly [(ngModel)]="discountamt" formControlName="finalamount"
+              name="finalamount">
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+          <mat-checkbox>
+
+          </mat-checkbox>
+        </div>
+      </div>
+
+
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" class="button" matDialogClose>Cancel</button>
+    <button mat-raised-button color="primary">Save</button>
+  </mat-dialog-actions>
+</form>

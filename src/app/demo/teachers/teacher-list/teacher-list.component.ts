@@ -36,7 +36,7 @@ export default class TeacherListComponent implements OnInit {
 
   teacherSvc = inject(TeachersService);
 
-  displayedColumns: string[] = ['id', 'fname', 'lname', 'email', 'phone', 'degree', 'proficiency', 'address', 'action'];
+  displayedColumns: string[] = ['id', 'fname', 'lname','gender', 'email', 'phone', 'degree', 'proficiency', 'address', 'action'];
 
   teacherList: Teachers[] = [];
 

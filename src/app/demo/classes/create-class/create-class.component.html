@@ -23,7 +23,7 @@
           <mat-form-field class="example-full-width">
             <mat-select name="teacherid" #teacher placeholder="Teacher" formControlName="teacherid">
               @for (teacher of teacherName; track teacher) {
-                <mat-option [value]="teacher.id">{{teacher.name}}</mat-option>
+                <mat-option [value]="teacher?.id">{{teacher?.fname}}</mat-option>
                 }
             </mat-select>
             <mat-error *ngIf="getteacher.errors?.required">

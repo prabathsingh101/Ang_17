@@ -10,4 +10,5 @@ export interface Classes {
 export interface TeacherName{
   id?: number;
   name?: string;
+  fname?: string;
 }

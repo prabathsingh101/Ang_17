@@ -172,7 +172,7 @@ export default class AttendanceTypeComponent implements OnInit {
   }
 
   getClassName() {
-    this.classSvc.getclassName().subscribe((res: any) => {
+    this.classSvc.GetAll().subscribe((res: any) => {
       console.log(res);
       this.className = res;
     });
@@ -295,9 +295,9 @@ export default class AttendanceTypeComponent implements OnInit {
       this.attnSvc.POSTTeacher(this.newobj).subscribe(
         (res: any) => {
           if (res.StatusCode === 201) {
-            this.teacherSelection.clear();
             this.isChecked = false;
             this.toast.success(res.Message, 'Saved.', { timeOut: 3000 });
+            this.teacherSelection.clear();
           } else if (res.StatusCode === 203) {
             this.toast.warning(res.Message, 'Exists.', { timeOut: 3000 });
           } else {

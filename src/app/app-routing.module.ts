@@ -163,6 +163,10 @@ const routes: Routes = [
       {
         path: 'feesconfiguration/feestype', canActivate:[authGuard],
         loadComponent: () => import('./demo/feesconfiguration/feestypes/feestypes.component')
+      },
+      {
+        path: 'feesconfiguration/adm-fees/:id', canActivate:[authGuard],
+        loadComponent: () => import('./demo/feesconfiguration/collect-admission-fees/collect-admission-fees.component')
       }
     ]
   },

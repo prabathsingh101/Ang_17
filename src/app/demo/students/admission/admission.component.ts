@@ -59,7 +59,7 @@ export default class AdmissionComponent implements OnInit, OnDestroy {
   }
 
   getClassName() {
-    this.classSvc.getclassName().subscribe((res: any) => {
+    this.classSvc.GetAll().subscribe((res: any) => {
       this.className = res;
     });
   }

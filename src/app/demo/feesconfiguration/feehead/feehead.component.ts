@@ -39,7 +39,7 @@ export default class FeeheadComponent implements OnInit {
     this.createForm();
   }
   getClassName() {
-    this.classSvc.getclassName().subscribe((res: any) => {
+    this.classSvc.GetAll().subscribe((res: any) => {
       this.className = res;
     });
   }

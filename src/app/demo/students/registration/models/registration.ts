@@ -60,4 +60,6 @@ export interface Admission {
   fathersname?: string;
 
   registrationdate?: Date;
+  isStatus?: boolean;
+  updateddate?: Date;
 }

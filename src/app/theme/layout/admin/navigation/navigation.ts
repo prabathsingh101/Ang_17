@@ -303,6 +303,7 @@ export const NavigationItems: NavigationItem[] = [
             icon: 'feather icon-at-sign',
             url: '/feesconfiguration/feestype'
           },
+          
         ]
       }
     ]

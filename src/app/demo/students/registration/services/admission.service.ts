@@ -27,6 +27,14 @@ export class AdmissionService {
     return this.http.put(`${this.baseUrl}${id}`, admission);
   }
 
+  PATCH(id: number, body: any) {
+    return this.http.patch(`${this.baseUrl}partialupdate/${id}`, body);
+  }
+
+  // PUTTeacherAttn(id: number, body: any) {
+  //   return this.http.patch(`${this.baseUrl}updateteacherattn/${id}`, body);
+  // }
+
   DELETE(id: number) {
     return this.http.delete(`${this.baseUrl}${id}`);
   }

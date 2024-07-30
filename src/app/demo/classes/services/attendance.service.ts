@@ -33,4 +33,7 @@ export class AttendanceService {
   PUTTeacherAttn(id: number, body: any) {
     return this.http.patch(`${this.baseUrl}updateteacherattn/${id}`, body);
   }
+  // getAttendanceList(){
+  //   return this.http.get<Attendancelist>(`${this.baseUrl}getallattendance`);
+  // }
 }

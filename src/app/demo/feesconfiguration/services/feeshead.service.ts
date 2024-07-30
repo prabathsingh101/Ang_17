@@ -31,4 +31,12 @@ export class FeesheadService {
   DELETE(id: number) {
     return this.http.delete(`${this.baseUrl}deletefeeshead/${id}`);
   }
+
+  getfeenamebyclassid(id: number) {
+    return this.http.get(`${this.baseUrl}getfeenamelistbyclass/${id}`);
+  }
+
+  getfeeamountbyfeetypeid(id: number) {
+    return this.http.get(`${this.baseUrl}getfeeamountbyfeetype/${id}`);
+  }
 }

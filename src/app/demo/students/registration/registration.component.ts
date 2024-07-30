@@ -44,7 +44,7 @@ export default class RegistrationComponent implements OnInit {
     this.getMaxRegNo();
   }
   getClassName() {
-    this.classSvc.getclassName().subscribe((res: any) => {
+    this.classSvc.GetAll().subscribe((res: any) => {
       this.className = res;
     });
   }

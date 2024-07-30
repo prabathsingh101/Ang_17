@@ -67,7 +67,7 @@ export default class CreateClassComponent implements OnInit {
     return this.forms.controls['studentlimit'];
   }
   getTeacherName() {
-    this.teacherSvc.GetTeacherName().subscribe((res: any) => {
+    this.teacherSvc.GetAll().subscribe((res: any) => {
       this.teacherName = res;
     });
   }
@@ -97,6 +97,7 @@ export default class CreateClassComponent implements OnInit {
             this.loading = false;
           } else {
             this.toast.error(results.postData.Message, 'Error.', { timeOut: 3000 });
+            this.loading = false;
           }
         },
         (error) => {

@@ -11,11 +11,13 @@ import { MatSort } from '@angular/material/sort';
 import { AdmissionService } from '../registration/services/admission.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, throwError, finalize } from 'rxjs';
+import PaymentModalPopupComponent from '../../feesconfiguration/payment-modal-popup/payment-modal-popup.component';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admission-list',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, RouterLink,],
   providers: [DatePipe],
   templateUrl: './admission-list.component.html',
   styleUrl: './admission-list.component.scss'
@@ -36,6 +38,7 @@ export default class AdmissionListComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'registrationno',
+    'isStatus',
     'classname',
     'fullname',
     'registrationdate',
@@ -63,6 +66,27 @@ export default class AdmissionListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+  }
+
+  openpaymentPopup(id: number) {
+    this.openpoup(id, 'Payment');
+  }
+  openpoup(id: number, title: any) {
+    var _popup = this.dialog.open(PaymentModalPopupComponent, {
+      width: '800px',
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        title: title,
+        id: id
+      }
+    });
+    _popup.afterClosed().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getAll();
+      }
+    });
   }
 
   getAll() {
