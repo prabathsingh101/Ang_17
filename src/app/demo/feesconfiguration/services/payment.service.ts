@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Payment } from '../models/payment';
+import { Mapfeename } from '../models/mapfeename';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,7 @@ export class PaymentService {
     return this.http.delete(`${this.baseUrl}deletefeeshead/${id}`);
   }
 
-
+  getmaxinvoiceno() {
+    return this.http.get<Mapfeename[]>(`${this.baseUrl}getmaxinvoice`);
+  }
 }

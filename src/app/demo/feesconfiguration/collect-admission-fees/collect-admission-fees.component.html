@@ -56,7 +56,7 @@
           </div>
           <div class="col-md-6">
             <mat-form-field class="example-full-width">
-              <input placeholder="Invoice no" matInput formControlName="invoiceno" name="invoiceno">
+              <input placeholder="Invoice no" readonly [(ngModel)]="maxval" matInput formControlName="invoiceno" name="invoiceno">
               <mat-error *ngIf="getinvoiceno.errors?.required">
                 Invoice no is required.
               </mat-error>
@@ -141,7 +141,7 @@
         </div>
         <div class="col-md-6">
           <button class="button" mat-raised-button color="primary">Save</button>
-          <button mat-raised-button color="accent">Cancl</button>
+          <button mat-raised-button color="accent">Cancel</button>
         </div>
       </form>
     </app-card>

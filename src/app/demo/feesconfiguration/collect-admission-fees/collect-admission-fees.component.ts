@@ -48,6 +48,8 @@ export default class CollectAdmissionFeesComponent implements OnInit {
 
   selection = new SelectionModel<Mapfeename>(true, []);
 
+  maxval: any;
+
   newobj: any = {};
   totalval: any = 0;
   finalAmtval: any = 0;
@@ -124,6 +126,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.fillClassName();
+    this.getMaxInvoiceNo();
     this.stdids = this.route.snapshot.paramMap.get('id');
     this.getStudentById(this.stdids);
   }
@@ -239,7 +242,6 @@ export default class CollectAdmissionFeesComponent implements OnInit {
           console.error('Error in API calls', error);
         }
       );
-      // console.log('selected', this.newobj);
     }
   }
   getStudentById(id: any) {
@@ -247,6 +249,21 @@ export default class CollectAdmissionFeesComponent implements OnInit {
       this.studentid = res.id;
       this.classid = res.classid;
       this.getFeeNameByClassid(this.classid);
+    });
+  }
+  getMaxInvoiceNo() {
+    this.paymentSvc.getmaxinvoiceno().subscribe((res: any) => {
+      debugger;
+      console.log('res', res);
+      if (res.length === 1) {
+        if (res[0].invoiceno === '0') {
+          this.maxval = 1;
+        } else if (res[0].invoiceno > 0) {
+          this.maxval =parseInt(res[0].invoiceno)+1;
+        }
+      } else {
+        this.maxval = 100;
+      }
     });
   }
 }

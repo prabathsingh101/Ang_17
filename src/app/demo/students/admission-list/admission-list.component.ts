@@ -44,7 +44,6 @@ export default class AdmissionListComponent implements OnInit {
     'registrationdate',
     'admissiondate',
     'mobileno',
-    'address',
     'action'
   ];
 
