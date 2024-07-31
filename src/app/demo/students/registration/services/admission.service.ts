@@ -20,7 +20,11 @@ export class AdmissionService {
   }
 
   getAdmissionById(id: number) {
-    return this.http.get(`${this.baseUrl}${id}`);
+    return this.http.get<Admission[]>(`${this.baseUrl}${id}`);
+  }
+
+  getAllStudentByClassId(id: number) {
+    return this.http.get<Admission[]>(`${this.baseUrl}getstudentbyclass/${id}`);
   }
 
   PUT(id: number, admission: Admission) {

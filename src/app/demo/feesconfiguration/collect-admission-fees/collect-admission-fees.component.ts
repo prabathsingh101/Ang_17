@@ -55,6 +55,8 @@ export default class CollectAdmissionFeesComponent implements OnInit {
   finalAmtval: any = 0;
   discountAmt: any = 0;
 
+  isChecked = false;
+
   studentid!: number;
   classid!: number;
 
@@ -128,6 +130,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.isChecked = false;
     this.createForm();
     this.fillClassName();
     this.getMaxInvoiceNo();
@@ -159,6 +162,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
   }
   onfeesHeadToggled(mapfeename: Mapfeename, data: any) {
     this.isVal = data;
+    this.isChecked = false;
     this.selection.toggle(mapfeename);
     // this.selection.selected.forEach((a) => {
     //   (a.isselected = data),
@@ -188,16 +192,19 @@ export default class CollectAdmissionFeesComponent implements OnInit {
   }
 
   isAllSelected() {
+    this.isChecked = true;
     return this.selection.selected?.length == this.mapfeenameList?.length;
   }
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
+      this.isChecked = false;
       this.totalval = 0;
       this.finalAmtval = 0;
       this.discountAmt = 0;
     } else {
       this.selection.select(...this.mapfeenameList);
+      this.isChecked = true;
       this.getTotal();
     }
   }
@@ -242,6 +249,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
             this.router.navigateByUrl('/students/adm-list');
             this.paymentForms.reset();
             this.selection.clear();
+            this.isChecked = false;
           }
         },
         (error) => {

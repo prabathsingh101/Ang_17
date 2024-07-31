@@ -1,49 +1,167 @@
 <div class="row">
   <div class="col-sm-12">
     <app-card cardTitle="Update Fees" [options]="false">
-      <div class="row">
-        <div class="col-md-3">
-           <mat-form-field>
-            <mat-select>
-              <mat-option>1</mat-option>
-            </mat-select>
-           </mat-form-field>
-        </div>
-        <div class="col-md-3">
-          <mat-form-field>
-            <mat-select>
-              <mat-option>1</mat-option>
-            </mat-select>
-           </mat-form-field>
-        </div>
-        <div class="col-md-3">
-          <mat-form-field>
-            <mat-select placeholder="Fee Session">
-              <mat-option value="April">April</mat-option>
-                <mat-option value="May">may</mat-option>
-                <mat-option value="June">June</mat-option>
-                <mat-option value="July">July</mat-option>
-                <mat-option value="August">August</mat-option>
-                <mat-option value="September">September</mat-option>
-                <mat-option value="October">October</mat-option>
-                <mat-option value="November">November</mat-option>
-                <mat-option value="December">December</mat-option>
-                <mat-option value="January">January</mat-option>
-                <mat-option value="Februrary">Februrary</mat-option>
-                <mat-option value="March">March</mat-option>
-            </mat-select>
-           </mat-form-field>
-        </div>
-        <div class="col-md-3">
-          <mat-form-field class="example-full-width">
-            <input placeholder="Date" matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matIconSuffix [for]="picker">
-              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-            </mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
+      <button mat-icon-button [routerLink]="['/fees-paid/fee-history']"><mat-icon>keyboard_return</mat-icon></button>
+      <form [formGroup]="paymentForms">
+        <form [formGroup]="paymentForms" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-5">
+              <mat-form-field class="example-full-width">
+                <mat-select name="classid" (selectionChange)="getFeeNameByClassid($event.value)" [value]="classid"
+                  placeholder="Select Class" formControlName="classid">
+                  @for (items of className; track items) {
+                  <mat-option disabled [value]="items.id">{{items.classname}}</mat-option>
+                  }
+                </mat-select>
+                <mat-error *ngIf="getclass.errors?.required">
+                  Class name is required.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Student Id" [(ngModel)]="studentid" readonly formControlName="studentid">
+                <mat-error *ngIf="getstudentid.errors?.required">
+                  Student id is required.
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-select placeholder="Payment Type" formControlName="paymenttype">
+                  <mat-option value="Cash">Cash</mat-option>
+                  <mat-option value="Cheque">Cheque</mat-option>
+                  <mat-option value="Online Transfer">Online Transfer</mat-option>
+                  <mat-option value="Draft">Draft</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
+                <mat-error *ngIf="getpaymenttype.errors?.required">
+                  Payment type is required.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <input placeholder="Choose Collection Date" matInput [matDatepicker]="picker"
+                  formControlName="collectiondate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="getcollectiondate.errors?.required">
+                  Collection date is required.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <input placeholder="Invoice no" readonly [(ngModel)]="maxval" matInput formControlName="invoiceno"
+                  name="invoiceno">
+                <mat-error *ngIf="getinvoiceno.errors?.required">
+                  Invoice no is required.
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-select placeholder="Payment Status" formControlName="paymentstatus" name="paymentstatus">
+                  <mat-option value="Paid">Paid</mat-option>
+                  <mat-option value="Unpaid">Unpaid</mat-option>
+                  <mat-option value="Pending">Pending</mat-option>
+                </mat-select>
+                <mat-error *ngIf="getpaymentstatus.errors?.required">
+                  Payment status is required.
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-select placeholder="Payment Session" formControlName="paymentsession" name="paymentsession">
+                  <mat-option value="April">April</mat-option>
+                  <mat-option value="May">may</mat-option>
+                  <mat-option value="June">June</mat-option>
+                  <mat-option value="July">July</mat-option>
+                  <mat-option value="August">August</mat-option>
+                  <mat-option value="September">September</mat-option>
+                  <mat-option value="October">October</mat-option>
+                  <mat-option value="November">November</mat-option>
+                  <mat-option value="December">December</mat-option>
+                  <mat-option value="January">January</mat-option>
+                  <mat-option value="Februrary">Februrary</mat-option>
+                  <mat-option value="March">March</mat-option>
+                </mat-select>
+                <mat-error *ngIf="getpaymentsession.errors?.required">
+                  Payment session is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-7">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Enter text search" (keyup)="filterchange($event)" />
+              </mat-form-field>
+              <table matSort mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="isselected">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" (change)="toggleAllRows()">
+                    </mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+                    <mat-checkbox (change)="onfeesHeadToggled(element, $event.checked)"
+                      [checked]="selection.isSelected(element)">
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> #. </th>
+                  <td mat-cell *matCellDef="let element"> {{ element?.id }} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="classid">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Class </th>
+                  <td mat-cell *matCellDef="let element"> {{ element?.classname }} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="feename">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Fee Head </th>
+                  <td mat-cell *matCellDef="let element"> {{ element?.feename }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="feeamount">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                  <td mat-cell *matCellDef="let element">{{element?.feeamount}}</td>
+                  <!-- <td mat-footer-cell *matFooterCellDef>{{getTotal()}}</td> -->
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="DisplayColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: DisplayColumns"></tr>
+                <!-- <tr mat-footer-row *matFooterRowDef="DisplayColumns"></tr> -->
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+              </mat-paginator>
+              <div class="row">
+                <div class="col-md-3">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Total Amount" readonly [(ngModel)]="totalval"
+                      formControlName="totalamount" name="totalamount">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Discount Amount" [(ngModel)]="discountAmt" formControlName="discount"
+                      name="discount" (blur)="calculateDiscount($event.target)">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Final Amount" [(ngModel)]="finalAmtval" readonly
+                      formControlName="finalamount" name="finalamount">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <button class="button" mat-raised-button color="primary" *ngIf="isChecked">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </form>
     </app-card>
   </div>
 </div>

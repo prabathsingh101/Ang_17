@@ -1,7 +1,109 @@
 <div class="row">
   <div class="col-sm-12">
-    <app-card cardTitle="Fees History" [options]="false">
-        <h5>History</h5>
+    <app-card cardTitle="Fee History" [options]="false">
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width">
+            <mat-select name="classid" (selectionChange)="geStudentByClassid($event.value)" placeholder="Select Class">
+              @for (items of className; track items) {
+              <mat-option [value]="items.id">{{items.classname}}</mat-option>
+              }
+            </mat-select>
+            <!-- <mat-error *ngIf="getclass.errors?.required">
+              Class name is required.
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-select name="studentid" placeholder="Student">
+              @for (names of studentName; track names) {
+              <mat-option [value]="names.id">{{names.fullname}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-select placeholder="Fee Session" name="paymentsession">
+              <mat-option value="April">April</mat-option>
+              <mat-option value="May">may</mat-option>
+              <mat-option value="June">June</mat-option>
+              <mat-option value="July">July</mat-option>
+              <mat-option value="August">August</mat-option>
+              <mat-option value="September">September</mat-option>
+              <mat-option value="October">October</mat-option>
+              <mat-option value="November">November</mat-option>
+              <mat-option value="December">December</mat-option>
+              <mat-option value="January">January</mat-option>
+              <mat-option value="Februrary">Februrary</mat-option>
+              <mat-option value="March">March</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <button mat-icon-button><mat-icon>search</mat-icon></button>
+        </div>
+      </div>
+      <form>
+        <div class="row">
+          <table matSort mat-table [dataSource]="dataSource">
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> #. </th>
+              <td mat-cell *matCellDef="let element"> {{ element?.id }} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="classid">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Class </th>
+              <td mat-cell *matCellDef="let element"> {{ element?.Class?.classname }} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="studentid">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Student </th>
+              <td mat-cell *matCellDef="let element"> {{ element?.Student?.fullname }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="paymenttype">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Pay Type </th>
+              <td mat-cell *matCellDef="let element">{{element?.paymenttype}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="invoiceno">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Invoice </th>
+              <td mat-cell *matCellDef="let element">{{element?.invoiceno}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
+              <td mat-cell *matCellDef="let element">{{element?.status}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="collectiondate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Fee Date </th>
+              <td mat-cell *matCellDef="let element">{{element?.collectiondate | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="feename">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Fee Head </th>
+              <td mat-cell *matCellDef="let element">{{element?.feename}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" [routerLink]="['/fees-paid/fee-paid',element.id]" class="button"><mat-icon>edit</mat-icon></button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="DisplayColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: DisplayColumns"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </div>
+      </form>
     </app-card>
   </div>
 </div>

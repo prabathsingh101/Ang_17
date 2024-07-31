@@ -1,7 +1,9 @@
 export interface Payment {
+
   id?: number;
 
   classid?: number;
+
   studentid?: number;
 
   feestype?: string;

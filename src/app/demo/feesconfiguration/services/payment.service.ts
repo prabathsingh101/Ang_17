@@ -20,6 +20,10 @@ export class PaymentService {
     return this.http.get<Payment[]>(`${this.baseUrl}getfeeshead`);
   }
 
+  GetAllPayment() {
+    return this.http.get<Payment[]>(`${this.baseUrl}getallpayment`);
+  }
+
   getFeesHeadById(id: number) {
     return this.http.get(`${this.baseUrl}getbyidfeeshead/${id}`);
   }

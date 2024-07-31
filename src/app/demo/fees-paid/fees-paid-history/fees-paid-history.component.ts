@@ -1,13 +1,112 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { ClassService } from '../../classes/services/class.service';
+import { Admission } from '../../students/registration/models/registration';
+import { AdmissionService } from '../../students/registration/services/admission.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { PaymentService } from '../../feesconfiguration/services/payment.service';
+import { Payment } from '../../feesconfiguration/models/payment';
+import { catchError, finalize, throwError } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { Teachers } from '../../teachers/Model/teacher.model';
+import { DatePipe } from '@angular/common';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-fees-paid-history',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, RouterLink],
+  providers:[DatePipe],
   templateUrl: './fees-paid-history.component.html',
   styleUrl: './fees-paid-history.component.scss'
 })
-export default class FeesPaidHistoryComponent {
+export default class FeesPaidHistoryComponent implements OnInit {
+  DisplayColumns: string[] = ['id','classid', 'studentid','paymenttype', 'invoiceno','status', 'collectiondate','feename', 'action'];
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  @ViewChild(MatSort) sort!: MatSort;
+
+  className: any = [];
+
+  studentName: Admission[] = [];
+
+  dataSource: any;
+
+  loading = false;
+
+  paymentList: Payment[] = [];
+
+  payIds:any;
+
+  constructor(
+    public classSvc: ClassService,
+    public fb: FormBuilder,
+    public studentSvc: AdmissionService,
+    public paymentSvc: PaymentService,
+    public datepipe: DatePipe,
+    public activatedRoute: ActivatedRoute,
+  ) {}
+
+  paymentForms: any = FormGroup;
+
+  get getclass() {
+    return this.paymentForms.controls['classid'];
+  }
+
+  createForm() {
+    this.paymentForms = this.fb.group({
+      classid: ['', [Validators.required]],
+      studentid: ['', [Validators.required]],
+      paymentsession: ['', [Validators.required]],
+      collectiondate: ['', [Validators.required]]
+    });
+  }
+
+  ngOnInit(): void {
+    this.payIds = this.activatedRoute.snapshot.paramMap.get('id');
+    //this.createForm();
+    this.fillClassName();
+    this.getAllpayment();
+  }
+
+  geStudentByClassid(id: number) {
+    this.studentSvc.getAllStudentByClassId(id).subscribe((res: any) => {
+      this.studentName = res;
+      console.log(this.studentName);
+    });
+  }
+
+  fillClassName() {
+    this.classSvc.GetAll().subscribe((res: any) => {
+      this.className = res;
+    });
+  }
+  getAllpayment() {
+    this.loading = true;
+    this.paymentSvc
+      .GetAllPayment()
+      .pipe(
+        catchError((err) => {
+          console.log('Error loading users', err);
+          alert('Error loading users.');
+          return throwError(err);
+        }),
+        finalize(() => (this.loading = false))
+      )
+      .subscribe((res: any) => {
+        this.paymentList = res;
+        if (this.paymentList.length > 0) {
+          this.dataSource = new MatTableDataSource<Teachers>(this.paymentList);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          this.dataSource = new MatTableDataSource<Teachers>(this.paymentList);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      });
+  }
 }

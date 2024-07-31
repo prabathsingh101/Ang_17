@@ -169,7 +169,7 @@ const routes: Routes = [
         loadComponent: () => import('./demo/feesconfiguration/collect-admission-fees/collect-admission-fees.component')
       },
       {
-        path: 'fees-paid/fee-paid', canActivate:[authGuard],
+        path: 'fees-paid/fee-paid/:id', canActivate:[authGuard],
         loadComponent: () => import('./demo/fees-paid/fees-paid.component')
       },
       {
