@@ -110,6 +110,9 @@ export default class CollectAdmissionFeesComponent implements OnInit {
   get getpaymentstatus() {
     return this.paymentForms.controls['paymentstatus'];
   }
+  get getpaymentsession() {
+    return this.paymentForms.controls['paymentsession'];
+  }
   createForm() {
     this.paymentForms = this.fb.group({
       classid: ['', [Validators.required]],
@@ -120,7 +123,8 @@ export default class CollectAdmissionFeesComponent implements OnInit {
       paymentstatus: ['', [Validators.required]],
       totalamount: ['', []],
       discount: ['', [Validators.pattern(/^(?![.].*$)+\d*(?:\.\d{0,2})?\s*$/), Validators.maxLength(10)]],
-      finalamount: ['', []]
+      finalamount: ['', []],
+      paymentsession: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {
@@ -156,17 +160,18 @@ export default class CollectAdmissionFeesComponent implements OnInit {
   onfeesHeadToggled(mapfeename: Mapfeename, data: any) {
     this.isVal = data;
     this.selection.toggle(mapfeename);
-    this.selection.selected.forEach((a) => {
-      (a.isselected = data),
-        (a.studentid = this.paymentForms.value.studentid),
-        (a.paymenttype = this.paymentForms.value.paymenttype),
-        (a.collectiondate = this.paymentForms.value.collectiondate),
-        (a.invoiceno = this.paymentForms.value.invoiceno),
-        (a.paymentstatus = this.paymentForms.value.paymentstatus),
-        (a.totalamount = this.paymentForms.value.totalamount),
-        (a.discount = this.paymentForms.value.discount),
-        (a.finalamount = this.paymentForms.value.finalamount);
-    });
+    // this.selection.selected.forEach((a) => {
+    //   (a.isselected = data),
+    //     (a.studentid = this.paymentForms.value.studentid),
+    //     (a.paymenttype = this.paymentForms.value.paymenttype),
+    //     (a.collectiondate = this.paymentForms.value.collectiondate),
+    //     (a.invoiceno = this.paymentForms.value.invoiceno),
+    //     (a.paymentstatus = this.paymentForms.value.paymentstatus),
+    //     (a.totalamount = this.paymentForms.value.totalamount),
+    //     (a.discount = this.paymentForms.value.discount),
+    //     (a.finalamount = this.paymentForms.value.finalamount);
+    //     (a.duration = this.paymentForms.value.paymentsession);
+    // });
 
     if (data) {
       this.totalval += mapfeename?.feeamount;
@@ -220,10 +225,11 @@ export default class CollectAdmissionFeesComponent implements OnInit {
           (a.paymenttype = this.paymentForms.value.paymenttype),
           (a.collectiondate = this.paymentForms.value.collectiondate),
           (a.invoiceno = this.paymentForms.value.invoiceno),
-          (a.paymentstatus = this.paymentForms.value.paymentstatus),
+          (a.status = this.paymentForms.value.paymentstatus),
           (a.totalamount = this.paymentForms.value.totalamount),
           (a.discount = this.paymentForms.value.discount),
           (a.finalamount = this.paymentForms.value.finalamount);
+          (a.duration = this.paymentForms.value.paymentsession);
       });
       this.newobj = this.selection.selected;
       forkJoin({
@@ -242,6 +248,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
           console.error('Error in API calls', error);
         }
       );
+      console.log('newjob',this.newobj)
     }
   }
   getStudentById(id: any) {
@@ -253,13 +260,13 @@ export default class CollectAdmissionFeesComponent implements OnInit {
   }
   getMaxInvoiceNo() {
     this.paymentSvc.getmaxinvoiceno().subscribe((res: any) => {
-      debugger;
+      //debugger;
       console.log('res', res);
       if (res.length === 1) {
         if (res[0].invoiceno === '0') {
-          this.maxval = 1;
+          this.maxval = 100;
         } else if (res[0].invoiceno > 0) {
-          this.maxval =parseInt(res[0].invoiceno)+1;
+          this.maxval = parseInt(res[0].invoiceno) + 1;
         }
       } else {
         this.maxval = 100;
@@ -267,7 +274,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
     });
   }
   filterchange(data: Event) {
-    debugger
+    //debugger;
     const value = (data.target as HTMLInputElement).value;
     this.dataSource.filter = value.trim().toLowerCase();
   }

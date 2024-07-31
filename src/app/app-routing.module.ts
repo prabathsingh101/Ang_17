@@ -167,6 +167,14 @@ const routes: Routes = [
       {
         path: 'feesconfiguration/adm-fees/:id', canActivate:[authGuard],
         loadComponent: () => import('./demo/feesconfiguration/collect-admission-fees/collect-admission-fees.component')
+      },
+      {
+        path: 'fees-paid/fee-paid', canActivate:[authGuard],
+        loadComponent: () => import('./demo/fees-paid/fees-paid.component')
+      },
+      {
+        path: 'fees-paid/fee-history', canActivate:[authGuard],
+        loadComponent: () => import('./demo/fees-paid/fees-paid-history/fees-paid-history.component')
       }
     ]
   },

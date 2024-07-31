@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Update Fees" [options]="false">
+      <div class="row">
+        <div class="col-md-3">
+           <mat-form-field>
+            <mat-select>
+              <mat-option>1</mat-option>
+            </mat-select>
+           </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-select>
+              <mat-option>1</mat-option>
+            </mat-select>
+           </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-select placeholder="Fee Session">
+              <mat-option value="April">April</mat-option>
+                <mat-option value="May">may</mat-option>
+                <mat-option value="June">June</mat-option>
+                <mat-option value="July">July</mat-option>
+                <mat-option value="August">August</mat-option>
+                <mat-option value="September">September</mat-option>
+                <mat-option value="October">October</mat-option>
+                <mat-option value="November">November</mat-option>
+                <mat-option value="December">December</mat-option>
+                <mat-option value="January">January</mat-option>
+                <mat-option value="Februrary">Februrary</mat-option>
+                <mat-option value="March">March</mat-option>
+            </mat-select>
+           </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width">
+            <input placeholder="Date" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

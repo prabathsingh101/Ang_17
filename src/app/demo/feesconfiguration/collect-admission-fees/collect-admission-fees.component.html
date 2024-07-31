@@ -58,13 +58,32 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
-              <mat-select placeholder="Payment Status" formControlName="paymentstatus" name="status">
+              <mat-select placeholder="Payment Status" formControlName="paymentstatus" name="paymentstatus">
                 <mat-option value="Paid">Paid</mat-option>
                 <mat-option value="Unpaid">Unpaid</mat-option>
                 <mat-option value="Pending">Pending</mat-option>
               </mat-select>
               <mat-error *ngIf="getpaymentstatus.errors?.required">
                 Payment status is required.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="Payment Session" formControlName="paymentsession" name="paymentsession">
+                <mat-option value="April">April</mat-option>
+                <mat-option value="May">may</mat-option>
+                <mat-option value="June">June</mat-option>
+                <mat-option value="July">July</mat-option>
+                <mat-option value="August">August</mat-option>
+                <mat-option value="September">September</mat-option>
+                <mat-option value="October">October</mat-option>
+                <mat-option value="November">November</mat-option>
+                <mat-option value="December">December</mat-option>
+                <mat-option value="January">January</mat-option>
+                <mat-option value="Februrary">Februrary</mat-option>
+                <mat-option value="March">March</mat-option>
+              </mat-select>
+              <mat-error *ngIf="getpaymentsession.errors?.required">
+                Payment session is required.
               </mat-error>
             </mat-form-field>
           </div>

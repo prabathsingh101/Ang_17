@@ -9,8 +9,9 @@ export interface Mapfeename {
   paymenttype?: string;
   collectiondate?: Date;
   invoiceno?: string;
-  paymentstatus?:string;
+  status?:string;
   totalamount?:any;
   discount?: any;
   finalamount?: any;
+  duration?: any;
 }

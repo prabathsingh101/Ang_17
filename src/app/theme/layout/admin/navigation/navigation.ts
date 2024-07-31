@@ -303,7 +303,39 @@ export const NavigationItems: NavigationItem[] = [
             icon: 'feather icon-at-sign',
             url: '/feesconfiguration/feestype'
           },
-          
+
+        ]
+      }
+    ]
+  },
+
+  {
+    id: 'payments',
+    title: 'Fees Paid',
+    type: 'group',
+    icon: 'icon-group',
+    children: [
+      {
+        id: 'payment',
+        title: 'Payments',
+        type: 'collapse',
+        icon: 'feather icon-box',
+        children: [
+          {
+            id: 'feepaid',
+            title: 'Update Fees',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/fees-paid/fee-paid'
+          },
+          {
+            id: 'history',
+            title: 'Fee History',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/fees-paid/fee-history'
+          },
+
         ]
       }
     ]
