@@ -1,5 +1,8 @@
 <div class="row">
   <div class="col-sm-12">
+    <div class="spinner-container" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
     <app-card cardTitle="Update Fees" [options]="false">
       <button mat-icon-button [routerLink]="['/fees-paid/fee-history']"><mat-icon>keyboard_return</mat-icon></button>
       <form [formGroup]="paymentForms">
@@ -7,8 +10,8 @@
           <div class="row">
             <div class="col-md-5">
               <mat-form-field class="example-full-width">
-                <mat-select name="classid" (selectionChange)="getFeeNameByClassid($event.value)" [value]="classid"
-                  placeholder="Select Class" formControlName="classid">
+                <mat-select name="classid"
+                  placeholder="Select Class" formControlName="classid" name="classid">
                   @for (items of className; track items) {
                   <mat-option disabled [value]="items.id">{{items.classname}}</mat-option>
                   }
@@ -19,13 +22,14 @@
               </mat-form-field>
 
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Student Id" [(ngModel)]="studentid" readonly formControlName="studentid">
+                <input matInput placeholder="Student Id" name="studentid" [(ngModel)]="studentid" readonly
+                  formControlName="studentid">
                 <mat-error *ngIf="getstudentid.errors?.required">
                   Student id is required.
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <mat-select placeholder="Payment Type" formControlName="paymenttype">
+                <mat-select placeholder="Payment Type" formControlName="paymenttype" name="paymenttype">
                   <mat-option value="Cash">Cash</mat-option>
                   <mat-option value="Cheque">Cheque</mat-option>
                   <mat-option value="Online Transfer">Online Transfer</mat-option>
@@ -39,7 +43,7 @@
 
               <mat-form-field class="example-full-width">
                 <input placeholder="Choose Collection Date" matInput [matDatepicker]="picker"
-                  formControlName="collectiondate">
+                  formControlName="collectiondate" name="collectiondate">
                 <mat-datepicker-toggle matIconSuffix [for]="picker">
                   <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                 </mat-datepicker-toggle>
@@ -91,18 +95,6 @@
                 <input matInput placeholder="Enter text search" (keyup)="filterchange($event)" />
               </mat-form-field>
               <table matSort mat-table [dataSource]="dataSource">
-                <ng-container matColumnDef="isselected">
-                  <th mat-header-cell *matHeaderCellDef>
-                    <mat-checkbox [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()" (change)="toggleAllRows()">
-                    </mat-checkbox>
-                  </th>
-                  <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
-                    <mat-checkbox (change)="onfeesHeadToggled(element, $event.checked)"
-                      [checked]="selection.isSelected(element)">
-                    </mat-checkbox>
-                  </td>
-                </ng-container>
                 <!-- Position Column -->
                 <ng-container matColumnDef="id">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> #. </th>
@@ -112,7 +104,7 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="classid">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Class </th>
-                  <td mat-cell *matCellDef="let element"> {{ element?.classname }} </td>
+                  <td mat-cell *matCellDef="let element"> {{ element?.Class?.classname }} </td>
                 </ng-container>
 
                 <!-- Name Column -->

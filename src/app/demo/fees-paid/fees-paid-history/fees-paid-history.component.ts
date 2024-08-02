@@ -18,12 +18,24 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   selector: 'app-fees-paid-history',
   standalone: true,
   imports: [SharedModule, RouterLink],
-  providers:[DatePipe],
+  providers: [DatePipe],
   templateUrl: './fees-paid-history.component.html',
   styleUrl: './fees-paid-history.component.scss'
 })
 export default class FeesPaidHistoryComponent implements OnInit {
-  DisplayColumns: string[] = ['id','classid', 'studentid','paymenttype', 'invoiceno','status', 'collectiondate','feename', 'action'];
+  DisplayColumns: string[] = [
+    'id',
+    'classid',
+    'studentid',
+    'paymenttype',
+    'invoiceno',
+    'status',
+    'collectiondate',
+    'duration',
+    'feename',
+    'feeamount',
+    'action'
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,7 +51,9 @@ export default class FeesPaidHistoryComponent implements OnInit {
 
   paymentList: Payment[] = [];
 
-  payIds:any;
+  payments!: Payment;
+
+  payIds: any;
 
   constructor(
     public classSvc: ClassService,
@@ -47,7 +61,7 @@ export default class FeesPaidHistoryComponent implements OnInit {
     public studentSvc: AdmissionService,
     public paymentSvc: PaymentService,
     public datepipe: DatePipe,
-    public activatedRoute: ActivatedRoute,
+    public activatedRoute: ActivatedRoute
   ) {}
 
   paymentForms: any = FormGroup;
@@ -108,5 +122,38 @@ export default class FeesPaidHistoryComponent implements OnInit {
           this.dataSource.sort = this.sort;
         }
       });
+  }
+
+  fectchData(classnames: any, studentid: any, session: any) {
+    console.log('classid', classnames);
+    console.log('studentid', studentid);
+    console.log('session', session);
+    this.payments = {
+      classid: classnames,
+      studentid: studentid,
+      duration: session
+    };
+    
+    this.paymentSvc.GetPaymentByFilter(this.payments)
+    .pipe(
+      catchError((err) => {
+        console.log('Error loading users', err);
+        alert('Error loading users.');
+        return throwError(err);
+      }),
+      finalize(() => (this.loading = false))
+    )
+    .subscribe((res: any) => {
+      this.paymentList = res;
+      if (this.paymentList.length > 0) {
+        this.dataSource = new MatTableDataSource<Teachers>(this.paymentList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      } else {
+        this.dataSource = new MatTableDataSource<Teachers>(this.paymentList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    });
   }
 }

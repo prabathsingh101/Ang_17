@@ -103,10 +103,10 @@ export default class PaymentModalPopupComponent implements OnInit {
         paymenttype: this.paymentForms.value.paymenttype,
         invoiceno: this.paymentForms.value.invoiceno,
         status: this.paymentForms.value.status,
-        amount: this.paymentForms.value.amount,
+
         discount: this.paymentForms.value.discount ? this.paymentForms.value.discount : 0,
         finalamount: this.paymentForms.value.finalamount,
-        admissionfees: this.paymentForms.value.finalamount
+        
       };
       this.admission = {
         isStatus: true
@@ -155,7 +155,7 @@ export default class PaymentModalPopupComponent implements OnInit {
     });
   }
   getcheckeditems(){
-    
+
   }
   createForm() {
     this.paymentForms = this.fb.group({

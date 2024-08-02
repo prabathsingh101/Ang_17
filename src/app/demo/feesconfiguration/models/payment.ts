@@ -2,6 +2,8 @@ export interface Payment {
 
   id?: number;
 
+  isselected?: boolean;
+
   classid?: number;
 
   studentid?: number;
@@ -18,13 +20,13 @@ export interface Payment {
 
   status?: string;
 
-  amount?: number;
+  feeamount?: any;
 
-  admissionfees?: number;
+  feename?: any;
+
+  totalamount?: number;
 
   discount?: number;
-
-  discountamount?: number;
 
   finalamount?: number;
 }

@@ -44,7 +44,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
 
   checkboxval: boolean = false;
 
-  isVal: boolean = false;
+  isCheckedVal: boolean = false;
 
   selection = new SelectionModel<Mapfeename>(true, []);
 
@@ -161,7 +161,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
     console.log(this.checkboxval);
   }
   onfeesHeadToggled(mapfeename: Mapfeename, data: any) {
-    this.isVal = data;
+    this.isCheckedVal = data;
     this.isChecked = false;
     this.selection.toggle(mapfeename);
     // this.selection.selected.forEach((a) => {
@@ -193,18 +193,21 @@ export default class CollectAdmissionFeesComponent implements OnInit {
 
   isAllSelected() {
     this.isChecked = true;
+    this.isCheckedVal=true;
     return this.selection.selected?.length == this.mapfeenameList?.length;
   }
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
       this.isChecked = false;
+      this.isCheckedVal=false
       this.totalval = 0;
       this.finalAmtval = 0;
       this.discountAmt = 0;
     } else {
       this.selection.select(...this.mapfeenameList);
       this.isChecked = true;
+      this.isCheckedVal=true
       this.getTotal();
     }
   }
@@ -227,7 +230,7 @@ export default class CollectAdmissionFeesComponent implements OnInit {
         isStatus: true
       };
       this.selection.selected.forEach((a) => {
-        (a.isselected = this.isVal),
+        (a.isselected = this.isCheckedVal),
           (a.studentid = this.paymentForms.value.studentid),
           (a.paymenttype = this.paymentForms.value.paymenttype),
           (a.collectiondate = this.paymentForms.value.collectiondate),

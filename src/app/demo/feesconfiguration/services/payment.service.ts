@@ -24,6 +24,10 @@ export class PaymentService {
     return this.http.get<Payment[]>(`${this.baseUrl}getallpayment`);
   }
 
+  GetPaymentByFilter(body:any) {
+    return this.http.post(`${this.baseUrl}getpaymentbyfilter`, body);
+  }
+
   getFeesHeadById(id: number) {
     return this.http.get(`${this.baseUrl}getbyidfeeshead/${id}`);
   }
