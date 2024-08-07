@@ -38,6 +38,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSortModule,
     MatDialogModule,
     MatTooltipModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+MatRadioModule
   ],
   exports: [
     CommonModule,
@@ -104,7 +106,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatToolbarModule,
     MatSortModule,
     MatDialogModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatRadioModule
   ],
   declarations: [DataFilterPipe, SpinnerComponent],
   providers: [

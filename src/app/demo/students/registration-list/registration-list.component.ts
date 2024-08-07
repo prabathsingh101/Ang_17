@@ -33,7 +33,7 @@ export default class RegistrationListComponent implements OnInit, AfterViewInit 
 
   loading = false;
 
-  displayedColumns: string[] = ['id', 'registrationno', 'classname', 'fullname', 'registrationdate', 'mobileno', 'isstatus','islocked', 'action'];
+  displayedColumns: string[] = ['id', 'registrationno', 'classname', 'fullname','gender', 'registrationdate', 'mobileno', 'isstatus','islocked', 'action'];
 
   registrations: SPRegistrationDetails[] = [];
 

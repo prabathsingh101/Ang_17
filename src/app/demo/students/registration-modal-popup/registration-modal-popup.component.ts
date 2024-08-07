@@ -17,6 +17,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './registration-modal-popup.component.scss'
 })
 export default class RegistrationModalPopupComponent implements OnInit, OnDestroy {
+
   data: any = inject(MAT_DIALOG_DATA);
 
   inputdata: any;
@@ -86,7 +87,8 @@ export default class RegistrationModalPopupComponent implements OnInit, OnDestro
         mobileno: this.forms.value.mobileno,
         classid: this.forms.value.classid,
         fathersname: this.forms.value.fathersname,
-        address: this.forms.value.address
+        address: this.forms.value.address,
+        gender: this.forms.value.gender,
       };
       console.log(this.registration);
       this.registrationSubscription = this.registrationSvc.PUT(this.inputdata.id, this.registration).subscribe((res: any) => {
@@ -117,7 +119,8 @@ export default class RegistrationModalPopupComponent implements OnInit, OnDestro
       ],
       classid: ['', [Validators.required]],
       fathersname: ['', [Validators.maxLength(30)]],
-      address: ['', [Validators.maxLength(200)]]
+      address: ['', [Validators.maxLength(200)]],
+      gender: ['', []],
     });
   }
   setPopupData(id: number) {
@@ -132,7 +135,8 @@ export default class RegistrationModalPopupComponent implements OnInit, OnDestro
         mobileno: this.editdata.mobileno,
         classid: this.editdata.classid,
         fathersname: this.editdata.fathersname,
-        address: this.editdata.address
+        address: this.editdata.address,
+        gender: this.editdata.gender,
       });
     });
   }

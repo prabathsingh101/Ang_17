@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { ClassService } from '../../classes/services/class.service';
@@ -13,6 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Teachers } from '../../teachers/Model/teacher.model';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'app-fees-paid-history',
@@ -22,7 +23,10 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   templateUrl: './fees-paid-history.component.html',
   styleUrl: './fees-paid-history.component.scss'
 })
-export default class FeesPaidHistoryComponent implements OnInit {
+export default class FeesPaidHistoryComponent implements OnInit, AfterViewInit {
+  @Input()
+  noDataMessage: string = 'Total';
+
   DisplayColumns: string[] = [
     'id',
     'classid',
@@ -33,6 +37,7 @@ export default class FeesPaidHistoryComponent implements OnInit {
     'collectiondate',
     'duration',
     'feename',
+
     'feeamount',
     'action'
   ];
@@ -54,6 +59,8 @@ export default class FeesPaidHistoryComponent implements OnInit {
   payments!: Payment;
 
   payIds: any;
+
+  totalAmount: any;
 
   constructor(
     public classSvc: ClassService,
@@ -83,7 +90,7 @@ export default class FeesPaidHistoryComponent implements OnInit {
     this.payIds = this.activatedRoute.snapshot.paramMap.get('id');
     //this.createForm();
     this.fillClassName();
-    this.getAllpayment();
+    //this.getAllpayment();
   }
 
   geStudentByClassid(id: number) {
@@ -133,27 +140,41 @@ export default class FeesPaidHistoryComponent implements OnInit {
       studentid: studentid,
       duration: session
     };
-    
-    this.paymentSvc.GetPaymentByFilter(this.payments)
-    .pipe(
-      catchError((err) => {
-        console.log('Error loading users', err);
-        alert('Error loading users.');
-        return throwError(err);
-      }),
-      finalize(() => (this.loading = false))
-    )
-    .subscribe((res: any) => {
-      this.paymentList = res;
-      if (this.paymentList.length > 0) {
-        this.dataSource = new MatTableDataSource<Teachers>(this.paymentList);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      } else {
-        this.dataSource = new MatTableDataSource<Teachers>(this.paymentList);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
-    });
+
+    this.paymentSvc
+      .GetPaymentByFilter(this.payments)
+      .pipe(
+        catchError((err) => {
+          console.log('Error loading users', err);
+          alert('Error loading users.');
+          return throwError(err);
+        }),
+        finalize(() => (this.loading = false))
+      )
+      .subscribe((res: any) => {
+        this.paymentList = res;
+        console.log('yes', this.paymentList);
+        if (this.paymentList.length > 0) {
+          this.totalAmount = this.paymentList[0].totalamount ? this.paymentList[0].totalamount : 0;
+          this.dataSource = new MatTableDataSource<Payment>(this.paymentList);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          console.log('no', this.paymentList);
+          this.totalAmount = 0;
+          this.dataSource = new MatTableDataSource<Payment>(this.paymentList);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      });
+    //this.getTotal();
+  }
+  getTotal() {
+    this.totalAmount = this.paymentList.map((t) => t.feeamount).reduce((acc, value: any) => acc + value, 0);
+  }
+
+  ngAfterViewInit() {
+    //this.getTotal();
+    console.log('THE NO DATA MESSAGE IS: ', this.noDataMessage);
   }
 }

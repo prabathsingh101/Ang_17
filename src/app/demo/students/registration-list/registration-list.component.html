@@ -32,6 +32,11 @@
           <td mat-cell *matCellDef="let element"> {{ element.fullname }} </td>
         </ng-container>
 
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+          <td mat-cell *matCellDef="let element"> {{ element?.gender }} </td>
+        </ng-container>
+
         <!-- Name Column -->
         <ng-container matColumnDef="registrationdate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Reg.Date </th>

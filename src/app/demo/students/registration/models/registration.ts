@@ -9,6 +9,8 @@ export interface Registration {
 
   fullname?: string;
 
+  gender?: string;
+
   registrationfees?: number;
 
   mobileno?: string;
@@ -28,6 +30,7 @@ export interface SPRegistrationDetails {
   id?: number;
   registrationno?: number;
   fullname?: string;
+  gender?: string;
   registrationdate?: Date;
   registrationfees?: number;
   mobileno?: string;

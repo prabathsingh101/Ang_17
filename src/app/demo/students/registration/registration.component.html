@@ -121,7 +121,14 @@
               </mat-form-field>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-3">
+              <mat-radio-group aria-label="Select an option" name="gender" formControlName="gender">
+                <mat-radio-button value="Male">Male</mat-radio-button>
+                <mat-radio-button value="Female">Female</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <div class="col-md-5">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Address" #address formControlName="address" name="address">
                 <mat-hint align="end">

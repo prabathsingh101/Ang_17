@@ -60,9 +60,9 @@ export default class DashAnalyticsComponent implements OnInit {
   chartOptions_2!: Partial<ChartOptions>;
   chartOptions_3!: Partial<ChartOptions>;
 
-  totalStudent: number=0;
-  totalTeacher: number=0;
-  totalCourse: number=0;
+  totalStudent: any=0;
+  totalTeacher: any=0;
+  totalCourse: any=0;
 
   // constructor
   constructor(
@@ -256,7 +256,7 @@ export default class DashAnalyticsComponent implements OnInit {
       }
     };
   }
-  std: number = 20;
+  std: any = 20;
 
   cards = [
     {
@@ -264,8 +264,8 @@ export default class DashAnalyticsComponent implements OnInit {
       title: 'New Students',
       icon: 'icon-Profile',
       text: 'This Month',
-      number: this.totalStudent,
-      no: '3'
+      number: this.std,
+      no: this.std
     },
     {
       background: 'bg-c-green',
@@ -312,18 +312,19 @@ export default class DashAnalyticsComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.teacherSvc.GetTotalTeacher().subscribe((res:any) => {
+      console.log('res',res);
       this.totalTeacher = parseInt(res[0].totalteacher);
-      console.log(this.totalTeacher);
+      console.log('totalTeacher', this.totalTeacher);
     });
 
     this.studentSvc.GetTotalStudent().subscribe((res: any) => {
       this.totalStudent = parseInt(res[0].totalstudent);
-      console.log(this.totalStudent);
+      console.log('totalStudent',this.totalStudent);
     });
 
     this.courseSvc.GetTotalCourse().subscribe((res: any) => {
       this.totalCourse = parseInt(res[0].totalcourse);
-      console.log(this.totalCourse);
+      console.log('totalCourse',this.totalCourse);
     });
   }
 }
