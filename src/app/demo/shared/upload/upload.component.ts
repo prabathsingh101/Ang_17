@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { FileService } from '../file.service';
@@ -15,28 +15,39 @@ export class UploadComponent implements OnInit {
   message!: string;
   @Output() public onUploadFinished = new EventEmitter();
 
-  file: any;
+  file!: File; // Variable to store file to Upload
+
   url: any = '';
-  constructor(private fileService: FileService ) { }
 
-  ngOnInit() {
-  }
 
-  uploadFile = (event:any) => {
+  constructor(private fileService: FileService) {}
 
-    if (event.target.files && event.target.files[0]) {
+  ngOnInit() {}
 
-      this.file = event.target.files[0];
+  uploadFile = (files: any) => {
 
-      console.log(this.file);
+    if (files.target.files && files.target.files[0]) {
+
+      this.file = files.target.files[0];
+
+      console.log('file',this.file);
+      console.log('name',this.file.name);
 
       var reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(files.target.files[0]);
 
       reader.onload = (event: any) => {
         this.url = event.target.result;
       };
+      this.fileService.upload(this.file).subscribe((res: any) => {
+        console.log(res);
+      });
     }
+  };
+  onupload(){
+    this.fileService.upload(this.file).subscribe((res: any) => {
+      console.log(res);
+    });
   }
 }

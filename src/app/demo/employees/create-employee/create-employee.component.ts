@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { EmployeesService } from '../services/employees.service';
 import { Employee } from '../models/employee';
+import { Status } from '../models/status';
 
 @Component({
   selector: 'app-create-employee',
@@ -18,6 +19,9 @@ export default class CreateEmployeeComponent implements OnInit {
     public fb: FormBuilder,
     public employeeSvc: EmployeesService
   ) {}
+
+  imagefile?: File;
+
   progress!: number;
   message!: string;
   @Output() public onUploadFinished = new EventEmitter();
@@ -26,16 +30,17 @@ export default class CreateEmployeeComponent implements OnInit {
 
   employees!: Employee;
 
+  status!: Status;
+
   public file: any;
 
   url: any = '';
 
   uploadFile(event: any) {
     if (event.target.files && event.target.files[0]) {
+      this.imagefile = event.target.files[0];
 
-      this.file = event.target.files[0];
-
-      console.log(this.file);
+      console.log('imagefile', this.imagefile);
 
       var reader = new FileReader();
 
@@ -46,11 +51,33 @@ export default class CreateEmployeeComponent implements OnInit {
       };
     }
   }
-  onSubmit() {}
+  onSubmit() {
+    if (this.employeForms.valid) {
+      this.employees = { fname: this.employeForms.value.fname, lname: this.employeForms.value.lname };
+      console.log(this.employees);
+
+
+      //const frmData= Object.assign(this.employees);
+      const frmData= this.employees;
+
+      frmData.imagefile = this.imagefile;
+
+      this.employeeSvc.add(frmData).subscribe({
+        next: (res) => {
+          this.status = res;
+        },
+        error: (err) => {
+          this.status = { statusCode: 0, message: 'Error on server side' };
+          console.log(err);
+        }
+      });
+    }
+  }
   createForm() {
     this.employeForms = this.fb.group({
-      fname: [''],
-      lname: ['']
+      fname: ['', [Validators.required]],
+      lname: ['', [Validators.required]],
+      imagefile: []
     });
   }
   ngOnInit(): void {

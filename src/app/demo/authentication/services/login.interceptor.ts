@@ -6,9 +6,6 @@ import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { TokenApiModel } from '../models/token-api.model';
 
 export const loginInterceptor: HttpInterceptorFn = (req, next) => {
-
-  //debugger;
-
   var loginSvc = inject(LoginService);
 
   var toast = inject(ToastrService);
@@ -17,19 +14,13 @@ export const loginInterceptor: HttpInterceptorFn = (req, next) => {
 
   let cloneRequest: any;
 
-  //alert(myToken)
-  //if (myToken!=null) {
-    //alert(myToken)
-    cloneRequest = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${myToken}`,
-        'Accept':'application/json',
-        'Content-Type':'application/json'
-      }
-    });
-  // } else{
-  //   cloneRequest = null;
-  // }
+  cloneRequest = req.clone({
+    setHeaders: {
+      Authorization: `Bearer ${myToken}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
 
   return next(cloneRequest).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -41,8 +32,11 @@ export const loginInterceptor: HttpInterceptorFn = (req, next) => {
   );
 
   function handleUnAuthorizedError(req: HttpRequest<any>, next: HttpHandlerFn) {
+
     let tokeApiModel = new TokenApiModel();
+
     tokeApiModel.accessToken = loginSvc.getToken();
+    
     tokeApiModel.refreshToken = loginSvc.getRefreshToken();
 
     return loginSvc.renewToken(tokeApiModel).pipe(

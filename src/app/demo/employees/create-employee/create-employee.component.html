@@ -3,7 +3,7 @@
     <app-card cardTitle="Create Employee" [options]="false">
       <div class="row">
         <div class="col-md-9">
-          <form [formGroup]="employeForms" (ngSubmit)="onSubmit()">
+          <form [formGroup]="employeForms">
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
@@ -68,22 +68,15 @@
             <img mat-card-image [src]="url? url : 'https://www.w3schools.com/howto/img_avatar.png'" alt="Photo">
 
             <mat-card-actions>
-
                 <div class="row" style="margin-bottom:15px;">
                   <div class="col-md-12">
                     <input type="file" #file placeholder="Choose file" (change)="uploadFile($event)" style="display:none;" multiple>
                     <button style="margin: 4px;" type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
-                    <button mat-raised-button color="primary">Save</button>
+                    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!employeForms.valid">Save</button>
                   </div>
-                  <!-- <div class="col-md-12">
-                    <span class="upload" *ngIf="progress > 0">
-                      {{progress}}%
-                    </span>
-                    <span class="upload" *ngIf="message">
-                      {{message}}
-                    </span>
-                  </div> -->
+
                 </div>
+
             </mat-card-actions>
           </mat-card>
         </div>
