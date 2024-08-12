@@ -54,10 +54,7 @@ export default class CreateEmployeeComponent implements OnInit {
   onSubmit() {
     if (this.employeForms.valid) {
       this.employees = { fname: this.employeForms.value.fname, lname: this.employeForms.value.lname };
-      console.log(this.employees);
-
-
-      //const frmData= Object.assign(this.employees);
+   
       const frmData= this.employees;
 
       frmData.imagefile = this.imagefile;
