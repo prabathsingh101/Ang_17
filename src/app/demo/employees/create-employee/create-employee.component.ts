@@ -54,12 +54,12 @@ export default class CreateEmployeeComponent implements OnInit {
   onSubmit() {
     if (this.employeForms.valid) {
       this.employees = { fname: this.employeForms.value.fname, lname: this.employeForms.value.lname };
-   
-      const frmData= this.employees;
 
-      frmData.imagefile = this.imagefile;
+      const employeedata = this.employees;
 
-      this.employeeSvc.add(frmData).subscribe({
+      employeedata.imagefile = this.imagefile;
+
+      this.employeeSvc.add(employeedata).subscribe({
         next: (res) => {
           this.status = res;
         },
