@@ -52,7 +52,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ReactiveFormsModule, BrowserAnimationsModule, CommonModule],
   providers: [
     provideToastr(),
-    provideHttpClient(withInterceptors([loginInterceptor])),
+    //provideHttpClient(withInterceptors([loginInterceptor])),
     provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]

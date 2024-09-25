@@ -24,12 +24,13 @@ export class EmployeesService {
     return this.http.post(`${this.baseUrl}upload`, formData);
   }
   add(data: Employee) {
-    debugger
-    let formData = new FormData();
-    formData.append('fname', data.fname?? '');
-    formData.append('lname', data.lname?? '');
-    formData.append('imagefile', data.imagefile ?? '');
-    console.log('formdata', formData)
-    return this.http.post<Status>(`${this.baseUrl}create`, formData);
+    debugger;
+    let formdata = new FormData();
+    formdata.append('fname', data.fname);
+    formdata.append('lname', data.lname);
+    formdata.append('imagefile', data.imagefile ?? '');
+
+    console.log('formdata', formdata);
+    return this.http.post<Status>(`${this.baseUrl}create`, formdata);
   }
 }

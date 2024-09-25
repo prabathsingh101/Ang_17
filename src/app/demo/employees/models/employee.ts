@@ -1,13 +1,13 @@
 export interface Employee {
   id?: number;
-  fname?: string;
-  lname?: string;
-  fullname?: string;
-  email?: string;
-  phone?: string;
-  address?: string;
+  fname?: any;
+  lname?: any;
+  fullname?: any;
+  email?: any;
+  phone?: any;
+  address?: any;
   gender?: string;
-  employeeimage?: string;
+  employeeimage?: any;
   dob?: Date;
   doj?: Date;
   createddate?: Date;
