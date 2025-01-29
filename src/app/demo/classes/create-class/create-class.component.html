@@ -23,8 +23,8 @@
           <mat-form-field class="example-full-width">
             <mat-select name="teacherid" #teacher placeholder="Teacher" formControlName="teacherid">
               @for (teacher of teacherName; track teacher) {
-                <mat-option [value]="teacher?.id">{{teacher?.fname}}</mat-option>
-                }
+              <mat-option [value]="teacher?.id">{{teacher?.fname}}</mat-option>
+              }
             </mat-select>
             <mat-error *ngIf="getteacher.errors?.required">
               Select teacher.
@@ -35,8 +35,8 @@
           <mat-form-field class="example-full-width">
             <mat-select name="courseid" #course placeholder="Select Course" formControlName="courseid">
               @for (course of courses; track course) {
-                <mat-option [value]="course.id">{{course.title}}</mat-option>
-                }
+              <mat-option [value]="course.id">{{course.title}}</mat-option>
+              }
             </mat-select>
             <mat-error *ngIf="getcourse.errors?.required">
               Select course.
@@ -63,8 +63,8 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <button mat-raised-button color="accent" class="mat-button">Cancel </button>
-          <button mat-raised-button color="primary">Save </button>
+          <button mat-flat-button class="accent">Cancel </button>
+          <button mat-flat-button class="rose">Save </button>
         </div>
       </div>
     </form>

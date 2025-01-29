@@ -3,7 +3,6 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogTitle,
   MatDialogActions,
   MatDialogClose,
@@ -43,11 +42,13 @@ export class UserPopupComponent implements OnInit {
 
   constructor(
     private ref: MatDialogRef<UserPopupComponent>,
-    private fb: FormBuilder,
+
     private svc: UserService
   ) {}
 
   usersForms: any = FormGroup;
+
+  fb:any=inject(FormBuilder);
 
   roles: Roles[] = [];
 

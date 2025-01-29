@@ -1,4 +1,6 @@
 
+@use "@angular/material" as mat;
+
 
 // Theme Font
 @import 'scss/themes/font/theme-font';
@@ -45,5 +47,89 @@
   background: red;
 }
 
-html, body { height: 100%; }
+html {
+  @include mat.theme(
+    (
+      color: mat.$azure-palette,
+      typography: Roboto,
+    )
+  );
+}
+
+.accent {
+  @include mat.theme(
+    (
+      color: mat.$magenta-palette,
+    )
+  );
+}
+
+.warn {
+  @include mat.theme(
+    (
+      color: mat.$red-palette,
+    )
+  );
+}
+.green {
+  @include mat.theme(
+    (
+      color: mat.$green-palette,
+    )
+  );
+}
+
+.yellow {
+  @include mat.theme(
+    (
+      color: mat.$yellow-palette,
+    )
+  );
+}
+
+.cyan {
+  @include mat.theme(
+    (
+      color: mat.$cyan-palette,
+    )
+  );
+}
+
+.orange {
+  @include mat.theme(
+    (
+      color: mat.$orange-palette,
+    )
+  );
+}
+
+.spring-green {
+  @include mat.theme(
+    (
+      color: mat.$spring-green-palette,
+    )
+  );
+}
+
+.violet {
+  @include mat.theme(
+    (
+      color: mat.$violet-palette,
+    )
+  );
+}
+
+.rose {
+  @include mat.theme(
+    (
+      color: mat.$rose-palette,
+    )
+  );
+}
+
+html,
+body
+{
+  height: 100%;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
