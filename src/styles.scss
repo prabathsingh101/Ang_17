@@ -67,14 +67,14 @@ html {
 .warn {
   @include mat.theme(
     (
-      color: mat.$m2-red-palette,
+      color: mat.$red-palette,
     )
   );
 }
 .green {
   @include mat.theme(
     (
-      color: mat.$m2-green-palette,
+      color: mat.$green-palette,
     )
   );
 }
@@ -82,7 +82,15 @@ html {
 .yellow {
   @include mat.theme(
     (
-      color: mat.$m2-yellow-palette,
+      color: mat.$yellow-palette,
+    )
+  );
+}
+
+.blue {
+  @include mat.theme(
+    (
+      color: mat.$blue-palette,
     )
   );
 }
@@ -90,7 +98,7 @@ html {
 .cyan {
   @include mat.theme(
     (
-      color: mat.$m2-cyan-palette,
+      color: mat.$cyan-palette,
     )
   );
 }
@@ -98,7 +106,7 @@ html {
 .orange {
   @include mat.theme(
     (
-      color: mat.$m2-orange-palette,
+      color: mat.$orange-palette,
     )
   );
 }
