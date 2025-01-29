@@ -10,12 +10,11 @@ import { ToastrService } from 'ngx-toastr';
 import { LessonService } from '../services/lesson.service';
 
 @Component({
-  selector: 'app-create-lesson',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [ToastrService],
-  templateUrl: './create-lesson.component.html',
-  styleUrl: './create-lesson.component.scss'
+    selector: 'app-create-lesson',
+    imports: [SharedModule],
+    providers: [ToastrService],
+    templateUrl: './create-lesson.component.html',
+    styleUrl: './create-lesson.component.scss'
 })
 export default class CreateLessonComponent implements OnInit {
   @Output() parentFunction: EventEmitter<any> = new EventEmitter();

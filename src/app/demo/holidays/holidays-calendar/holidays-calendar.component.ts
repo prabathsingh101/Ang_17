@@ -9,11 +9,10 @@ import { HolidaysService } from '../holidays.service';
 import { title } from 'process';
 
 @Component({
-  selector: 'app-holidays-calendar',
-  standalone: true,
-  imports: [SharedModule, FullCalendarModule],
-  templateUrl: './holidays-calendar.component.html',
-  styleUrl: './holidays-calendar.component.scss'
+    selector: 'app-holidays-calendar',
+    imports: [SharedModule, FullCalendarModule],
+    templateUrl: './holidays-calendar.component.html',
+    styleUrl: './holidays-calendar.component.scss'
 })
 export default class HolidaysCalendarComponent implements OnInit {
   constructor(private svc: HolidaysService) {}

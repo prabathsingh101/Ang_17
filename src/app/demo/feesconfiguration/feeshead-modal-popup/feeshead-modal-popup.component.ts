@@ -8,11 +8,10 @@ import { Feeshead } from '../models/feeshead';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-feeshead-modal-popup',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './feeshead-modal-popup.component.html',
-  styleUrl: './feeshead-modal-popup.component.scss'
+    selector: 'app-feeshead-modal-popup',
+    imports: [SharedModule],
+    templateUrl: './feeshead-modal-popup.component.html',
+    styleUrl: './feeshead-modal-popup.component.scss'
 })
 export default class FeesheadModalPopupComponent implements OnInit {
   constructor(

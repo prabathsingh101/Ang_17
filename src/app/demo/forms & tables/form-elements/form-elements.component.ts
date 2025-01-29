@@ -11,10 +11,9 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 @Component({
-  selector: 'app-form-elements',
-  standalone: true,
-  imports: [SharedModule, NgbDropdownModule, ColorPickerModule],
-  templateUrl: './form-elements.component.html',
-  styleUrls: ['./form-elements.component.scss']
+    selector: 'app-form-elements',
+    imports: [SharedModule, NgbDropdownModule, ColorPickerModule],
+    templateUrl: './form-elements.component.html',
+    styleUrls: ['./form-elements.component.scss']
 })
 export default class FormElementsComponent {}

@@ -13,12 +13,11 @@ import { error } from 'console';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-create-course',
-  standalone: true,
-  imports: [SharedModule, NgxMaterialTimepickerModule],
-  providers: [DatePipe],
-  templateUrl: './create-course.component.html',
-  styleUrl: './create-course.component.scss'
+    selector: 'app-create-course',
+    imports: [SharedModule, NgxMaterialTimepickerModule],
+    providers: [DatePipe],
+    templateUrl: './create-course.component.html',
+    styleUrl: './create-course.component.scss'
 })
 export default class CreateCourseComponent implements OnInit {
   @Output() parentFunction: EventEmitter<any> = new EventEmitter();

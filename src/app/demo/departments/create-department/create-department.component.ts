@@ -8,12 +8,11 @@ import { Router } from '@angular/router';
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 @Component({
-  selector: 'app-create-department',
-  standalone: true,
-  imports: [SharedModule,],
-  providers: [DepartmentService,ToastrService],
-  templateUrl: './create-department.component.html',
-  styleUrl: './create-department.component.scss'
+    selector: 'app-create-department',
+    imports: [SharedModule,],
+    providers: [DepartmentService, ToastrService],
+    templateUrl: './create-department.component.html',
+    styleUrl: './create-department.component.scss'
 })
 export default class CreateDepartmentComponent implements OnInit {
   departmentForm: any = FormGroup;

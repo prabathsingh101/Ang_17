@@ -6,9 +6,10 @@ import { FriendsList } from 'src/app/fack-db/friends-list';
 import { UserChat } from 'src/app/fack-db/user-chat';
 
 @Component({
-  selector: 'app-chat-msg',
-  templateUrl: './chat-msg.component.html',
-  styleUrls: ['./chat-msg.component.scss']
+    selector: 'app-chat-msg',
+    templateUrl: './chat-msg.component.html',
+    styleUrls: ['./chat-msg.component.scss'],
+    standalone: false
 })
 export class ChatMsgComponent implements OnInit {
   @Input() friendId!: number;

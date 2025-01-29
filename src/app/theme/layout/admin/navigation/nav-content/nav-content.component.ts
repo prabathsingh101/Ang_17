@@ -7,9 +7,10 @@ import { environment } from 'src/environments/environment';
 import { NavigationItem, NavigationItems } from '../navigation';
 
 @Component({
-  selector: 'app-nav-content',
-  templateUrl: './nav-content.component.html',
-  styleUrls: ['./nav-content.component.scss']
+    selector: 'app-nav-content',
+    templateUrl: './nav-content.component.html',
+    styleUrls: ['./nav-content.component.scss'],
+    standalone: false
 })
 export class NavContentComponent implements OnInit {
   // version

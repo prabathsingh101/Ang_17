@@ -22,12 +22,11 @@ import { Admission } from '../../students/registration/models/registration';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-collect-admission-fees',
-  standalone: true,
-  imports: [SharedModule, RouterLink],
-  providers: [DatePipe, provideNativeDateAdapter()],
-  templateUrl: './collect-admission-fees.component.html',
-  styleUrl: './collect-admission-fees.component.scss'
+    selector: 'app-collect-admission-fees',
+    imports: [SharedModule, RouterLink],
+    providers: [DatePipe, provideNativeDateAdapter()],
+    templateUrl: './collect-admission-fees.component.html',
+    styleUrl: './collect-admission-fees.component.scss'
 })
 export default class CollectAdmissionFeesComponent implements OnInit {
   createdate: any = new Date();

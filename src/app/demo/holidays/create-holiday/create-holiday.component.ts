@@ -7,12 +7,11 @@ import { Router } from '@angular/router';
 import { Holidays } from '../holiday.model';
 import { HolidaysService } from '../holidays.service';
 @Component({
-  selector: 'app-create-holiday',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [provideNativeDateAdapter(), ToastrService],
-  templateUrl: './create-holiday.component.html',
-  styleUrl: './create-holiday.component.scss'
+    selector: 'app-create-holiday',
+    imports: [SharedModule],
+    providers: [provideNativeDateAdapter(), ToastrService],
+    templateUrl: './create-holiday.component.html',
+    styleUrl: './create-holiday.component.scss'
 })
 export default class CreateHolidayComponent implements OnInit {
   constructor(

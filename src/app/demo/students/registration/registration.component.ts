@@ -9,12 +9,11 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-registration',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [ClassService, RegistrationService, ToastrService],
-  templateUrl: './registration.component.html',
-  styleUrl: './registration.component.scss'
+    selector: 'app-registration',
+    imports: [SharedModule],
+    providers: [ClassService, RegistrationService, ToastrService],
+    templateUrl: './registration.component.html',
+    styleUrl: './registration.component.scss'
 })
 export default class RegistrationComponent implements OnInit {
   constructor(

@@ -10,12 +10,11 @@ import { Holidays } from '../holiday.model';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
-  selector: 'app-holiday-modal-popup',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [HolidaysService, ToastrService, provideNativeDateAdapter()],
-  templateUrl: './holiday-modal-popup.component.html',
-  styleUrl: './holiday-modal-popup.component.scss'
+    selector: 'app-holiday-modal-popup',
+    imports: [SharedModule],
+    providers: [HolidaysService, ToastrService, provideNativeDateAdapter()],
+    templateUrl: './holiday-modal-popup.component.html',
+    styleUrl: './holiday-modal-popup.component.scss'
 })
 export default class HolidayModalPopupComponent implements OnInit {
   constructor(

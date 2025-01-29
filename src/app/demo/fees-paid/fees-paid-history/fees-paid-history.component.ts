@@ -16,12 +16,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ReturnStatement } from '@angular/compiler';
 
 @Component({
-  selector: 'app-fees-paid-history',
-  standalone: true,
-  imports: [SharedModule, RouterLink],
-  providers: [DatePipe],
-  templateUrl: './fees-paid-history.component.html',
-  styleUrl: './fees-paid-history.component.scss'
+    selector: 'app-fees-paid-history',
+    imports: [SharedModule, RouterLink],
+    providers: [DatePipe],
+    templateUrl: './fees-paid-history.component.html',
+    styleUrl: './fees-paid-history.component.scss'
 })
 export default class FeesPaidHistoryComponent implements OnInit, AfterViewInit {
   @Input()

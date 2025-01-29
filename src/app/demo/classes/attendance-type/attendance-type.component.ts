@@ -19,13 +19,12 @@ import { ToastrService } from 'ngx-toastr';
 import { error } from 'console';
 
 @Component({
-  selector: 'app-attendance-type',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [provideNativeDateAdapter(), DatePipe, ToastrService],
-  templateUrl: './attendance-type.component.html',
-  styleUrl: './attendance-type.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-attendance-type',
+    imports: [SharedModule],
+    providers: [provideNativeDateAdapter(), DatePipe, ToastrService],
+    templateUrl: './attendance-type.component.html',
+    styleUrl: './attendance-type.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class AttendanceTypeComponent implements OnInit {
   currentDate: any = new Date();

@@ -12,12 +12,11 @@ import { UploadComponent } from '../../shared/upload/upload.component';
 
 
 @Component({
-  selector: 'app-create-teacher',
-  standalone: true,
-  imports: [SharedModule, RouterModule, UploadComponent],
-  providers: [provideNativeDateAdapter(), TeachersService, DatePipe, ToastrService],
-  templateUrl: './create-teacher.component.html',
-  styleUrl: './create-teacher.component.scss'
+    selector: 'app-create-teacher',
+    imports: [SharedModule, RouterModule, UploadComponent],
+    providers: [provideNativeDateAdapter(), TeachersService, DatePipe, ToastrService],
+    templateUrl: './create-teacher.component.html',
+    styleUrl: './create-teacher.component.scss'
 })
 export default class CreateTeacherComponent implements OnInit, OnDestroy {
   createdate: any = new Date();

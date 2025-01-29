@@ -5,9 +5,10 @@ import { Component, EventEmitter, NgIterable, Output } from '@angular/core';
 import { FriendsList } from 'src/app/fack-db/friends-list';
 
 @Component({
-  selector: 'app-chat-user-list',
-  templateUrl: './chat-user-list.component.html',
-  styleUrls: ['./chat-user-list.component.scss']
+    selector: 'app-chat-user-list',
+    templateUrl: './chat-user-list.component.html',
+    styleUrls: ['./chat-user-list.component.scss'],
+    standalone: false
 })
 export class ChatUserListComponent {
   // public props

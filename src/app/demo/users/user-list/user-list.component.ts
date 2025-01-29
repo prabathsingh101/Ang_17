@@ -20,24 +20,23 @@ import { catchError, finalize, throwError } from 'rxjs';
 import { auto } from '@popperjs/core';
 
 @Component({
-  selector: 'app-user-list',
-  standalone: true,
-  imports: [
-    SharedModule,
-    MatTableModule,
-    MatPaginatorModule,
-    HttpClientModule,
-    MatSortModule,
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule
-  ],
-  providers: [UserService],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+    selector: 'app-user-list',
+    imports: [
+        SharedModule,
+        MatTableModule,
+        MatPaginatorModule,
+        HttpClientModule,
+        MatSortModule,
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule
+    ],
+    providers: [UserService],
+    templateUrl: './user-list.component.html',
+    styleUrl: './user-list.component.scss'
 })
 export default class UserListComponent implements OnInit {
   constructor(private dialog: MatDialog) {}

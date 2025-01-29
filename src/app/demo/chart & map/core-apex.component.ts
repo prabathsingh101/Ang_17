@@ -50,11 +50,10 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-core-apex',
-  standalone: true,
-  imports: [SharedModule, NgApexchartsModule],
-  templateUrl: './core-apex.component.html',
-  styleUrls: ['./core-apex.component.scss']
+    selector: 'app-core-apex',
+    imports: [SharedModule, NgApexchartsModule],
+    templateUrl: './core-apex.component.html',
+    styleUrls: ['./core-apex.component.scss']
 })
 export default class CoreApexComponent implements OnInit {
   // public props

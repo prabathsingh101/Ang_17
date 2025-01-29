@@ -16,12 +16,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FilterPipe } from '../../shared/filter.pipe';
 
 @Component({
-  selector: 'app-admission-list',
-  standalone: true,
-  imports: [SharedModule, RouterLink, FilterPipe],
-  providers: [DatePipe],
-  templateUrl: './admission-list.component.html',
-  styleUrl: './admission-list.component.scss'
+    selector: 'app-admission-list',
+    imports: [SharedModule, RouterLink, FilterPipe],
+    providers: [DatePipe],
+    templateUrl: './admission-list.component.html',
+    styleUrl: './admission-list.component.scss'
 })
 export default class AdmissionListComponent implements OnInit {
   constructor(

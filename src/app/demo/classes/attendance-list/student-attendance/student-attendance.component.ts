@@ -10,11 +10,10 @@ import { forEach } from 'lodash';
 import { parse } from 'path';
 
 @Component({
-  selector: 'app-student-attendance',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './student-attendance.component.html',
-  styleUrl: './student-attendance.component.scss'
+    selector: 'app-student-attendance',
+    imports: [SharedModule],
+    templateUrl: './student-attendance.component.html',
+    styleUrl: './student-attendance.component.scss'
 })
 export default class StudentAttendanceComponent implements OnInit {
   DisplayColumns: string[] = ['isselected', 'attnid', 'fullname', 'classname', 'isstatus', 'edit'];

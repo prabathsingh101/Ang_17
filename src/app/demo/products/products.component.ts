@@ -8,12 +8,11 @@ import { Products } from './product.model';
 import { RedisCacheClusterService } from './redis-cache-cluster.service';
 
 @Component({
-  selector: 'app-products',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [RedisCacheClusterService],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+    selector: 'app-products',
+    imports: [SharedModule],
+    providers: [RedisCacheClusterService],
+    templateUrl: './products.component.html',
+    styleUrl: './products.component.scss'
 })
 export default class ProductsComponent implements OnInit {
   dataSource: any;

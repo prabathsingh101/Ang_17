@@ -15,12 +15,11 @@ import { PromptService } from '../../shared/prompt.service';
 import AdmissionComponent from '../admission/admission.component';
 
 @Component({
-  selector: 'app-registration-list',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [DatePipe, RegistrationService, PromptService, ToastrService],
-  templateUrl: './registration-list.component.html',
-  styleUrl: './registration-list.component.scss'
+    selector: 'app-registration-list',
+    imports: [SharedModule],
+    providers: [DatePipe, RegistrationService, PromptService, ToastrService],
+    templateUrl: './registration-list.component.html',
+    styleUrl: './registration-list.component.scss'
 })
 export default class RegistrationListComponent implements OnInit, AfterViewInit {
   constructor(

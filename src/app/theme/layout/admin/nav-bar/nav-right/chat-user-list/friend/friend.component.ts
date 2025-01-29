@@ -11,9 +11,10 @@ interface friendsList {
 }
 
 @Component({
-  selector: 'app-friend',
-  templateUrl: './friend.component.html',
-  styleUrls: ['./friend.component.scss']
+    selector: 'app-friend',
+    templateUrl: './friend.component.html',
+    styleUrls: ['./friend.component.scss'],
+    standalone: false
 })
 export class FriendComponent {
   // public props

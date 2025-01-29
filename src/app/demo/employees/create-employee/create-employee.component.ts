@@ -6,11 +6,10 @@ import { Employee } from '../models/employee';
 import { Status } from '../models/status';
 
 @Component({
-  selector: 'app-create-employee',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './create-employee.component.html',
-  styleUrl: './create-employee.component.scss'
+    selector: 'app-create-employee',
+    imports: [SharedModule],
+    templateUrl: './create-employee.component.html',
+    styleUrl: './create-employee.component.scss'
 })
 export default class CreateEmployeeComponent implements OnInit {
   @ViewChild('form', { static: false }) imageUploadForm?: NgForm;

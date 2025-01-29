@@ -8,12 +8,11 @@ import TeacherAttendanceComponent from './teacher-attendance/teacher-attendance.
 import { Attendancelist } from '../model/attendancelist';
 
 @Component({
-  selector: 'app-attendance-list',
-  standalone: true,
-  providers: [DatePipe, AttendanceService],
-  imports: [SharedModule, StudentAttendanceComponent, TeacherAttendanceComponent],
-  templateUrl: './attendance-list.component.html',
-  styleUrl: './attendance-list.component.scss'
+    selector: 'app-attendance-list',
+    providers: [DatePipe, AttendanceService],
+    imports: [SharedModule, StudentAttendanceComponent, TeacherAttendanceComponent],
+    templateUrl: './attendance-list.component.html',
+    styleUrl: './attendance-list.component.scss'
 })
 export default class AttendanceListComponent implements OnInit {
   constructor() {}

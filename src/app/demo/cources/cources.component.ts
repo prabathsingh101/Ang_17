@@ -13,12 +13,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { CourseModalPopupComponent } from './course-modal-popup/course-modal-popup.component';
 
 @Component({
-  selector: 'app-cources',
-  standalone: true,
-  imports: [SharedModule, CreateCourseComponent],
-  providers: [ToastrService, PromptService, CourseService],
-  templateUrl: './cources.component.html',
-  styleUrl: './cources.component.scss'
+    selector: 'app-cources',
+    imports: [SharedModule, CreateCourseComponent],
+    providers: [ToastrService, PromptService, CourseService],
+    templateUrl: './cources.component.html',
+    styleUrl: './cources.component.scss'
 })
 export default class CourcesComponent implements OnInit {
   constructor(

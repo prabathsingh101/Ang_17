@@ -14,12 +14,11 @@ import { ToastrService } from 'ngx-toastr';
 import { PromptService } from '../../shared/prompt.service';
 
 @Component({
-  selector: 'app-teacher-list',
-  standalone: true,
-  imports: [SharedModule],
-  providers:[provideNativeDateAdapter(), TeachersService, DatePipe, ToastrService],
-  templateUrl: './teacher-list.component.html',
-  styleUrl: './teacher-list.component.scss'
+    selector: 'app-teacher-list',
+    imports: [SharedModule],
+    providers: [provideNativeDateAdapter(), TeachersService, DatePipe, ToastrService],
+    templateUrl: './teacher-list.component.html',
+    styleUrl: './teacher-list.component.scss'
 })
 export default class TeacherListComponent implements OnInit {
 

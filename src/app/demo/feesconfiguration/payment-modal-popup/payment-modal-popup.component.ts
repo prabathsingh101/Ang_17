@@ -20,12 +20,11 @@ import { forkJoin } from 'rxjs';
 import { forEach } from 'lodash';
 
 @Component({
-  selector: 'app-payment-modal-popup',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [provideNativeDateAdapter(), DatePipe],
-  templateUrl: './payment-modal-popup.component.html',
-  styleUrl: './payment-modal-popup.component.scss'
+    selector: 'app-payment-modal-popup',
+    imports: [SharedModule],
+    providers: [provideNativeDateAdapter(), DatePipe],
+    templateUrl: './payment-modal-popup.component.html',
+    styleUrl: './payment-modal-popup.component.scss'
 })
 export default class PaymentModalPopupComponent implements OnInit {
   createdate: any = new Date();

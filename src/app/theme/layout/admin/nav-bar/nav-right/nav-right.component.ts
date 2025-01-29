@@ -7,20 +7,21 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from 'src/app/demo/authentication/services/login.service';
 
 @Component({
-  selector: 'app-nav-right',
-  templateUrl: './nav-right.component.html',
-  styleUrls: ['./nav-right.component.scss'],
-  providers: [NgbDropdownConfig, LoginService],
-  animations: [
-    trigger('slideInOutLeft', [
-      transition(':enter', [style({ transform: 'translateX(100%)' }), animate('300ms ease-in', style({ transform: 'translateX(0%)' }))]),
-      transition(':leave', [animate('300ms ease-in', style({ transform: 'translateX(100%)' }))])
-    ]),
-    trigger('slideInOutRight', [
-      transition(':enter', [style({ transform: 'translateX(-100%)' }), animate('300ms ease-in', style({ transform: 'translateX(0%)' }))]),
-      transition(':leave', [animate('300ms ease-in', style({ transform: 'translateX(-100%)' }))])
-    ])
-  ]
+    selector: 'app-nav-right',
+    templateUrl: './nav-right.component.html',
+    styleUrls: ['./nav-right.component.scss'],
+    providers: [NgbDropdownConfig, LoginService],
+    animations: [
+        trigger('slideInOutLeft', [
+            transition(':enter', [style({ transform: 'translateX(100%)' }), animate('300ms ease-in', style({ transform: 'translateX(0%)' }))]),
+            transition(':leave', [animate('300ms ease-in', style({ transform: 'translateX(100%)' }))])
+        ]),
+        trigger('slideInOutRight', [
+            transition(':enter', [style({ transform: 'translateX(-100%)' }), animate('300ms ease-in', style({ transform: 'translateX(0%)' }))]),
+            transition(':leave', [animate('300ms ease-in', style({ transform: 'translateX(-100%)' }))])
+        ])
+    ],
+    standalone: false
 })
 export class NavRightComponent implements OnInit {
   // public props

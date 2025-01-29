@@ -13,12 +13,11 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-user',
-  standalone: true,
-  imports: [SharedModule, MatInputModule, MatSelectModule, MatFormFieldModule, MatIconModule, MatListModule, MatButtonModule],
-  providers: [UserService],
-  templateUrl: './create-user.component.html',
-  styleUrl: './create-user.component.scss'
+    selector: 'app-create-user',
+    imports: [SharedModule, MatInputModule, MatSelectModule, MatFormFieldModule, MatIconModule, MatListModule, MatButtonModule],
+    providers: [UserService],
+    templateUrl: './create-user.component.html',
+    styleUrl: './create-user.component.scss'
 })
 export default class CreateUserComponent implements OnInit {
   constructor(

@@ -11,12 +11,11 @@ import { CourseModel } from '../../cources/model/course.model';
 import { CourseService } from '../../cources/services/course.service';
 
 @Component({
-  selector: 'app-create-class',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [TeachersService, ToastrService],
-  templateUrl: './create-class.component.html',
-  styleUrl: './create-class.component.scss'
+    selector: 'app-create-class',
+    imports: [SharedModule],
+    providers: [TeachersService, ToastrService],
+    templateUrl: './create-class.component.html',
+    styleUrl: './create-class.component.scss'
 })
 export default class CreateClassComponent implements OnInit {
   @Output() parentFunction: EventEmitter<any> = new EventEmitter();

@@ -10,12 +10,11 @@ import { CourseService } from '../services/course.service';
 import { CourseModel } from '../model/course.model';
 
 @Component({
-  selector: 'app-lesson-modal-popup',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [DatePipe],
-  templateUrl: './lesson-modal-popup.component.html',
-  styleUrl: './lesson-modal-popup.component.scss'
+    selector: 'app-lesson-modal-popup',
+    imports: [SharedModule],
+    providers: [DatePipe],
+    templateUrl: './lesson-modal-popup.component.html',
+    styleUrl: './lesson-modal-popup.component.scss'
 })
 export class LessonModalPopupComponent implements OnInit {
   constructor(

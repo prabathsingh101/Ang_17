@@ -9,12 +9,11 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-course-modal-popup',
-  standalone: true,
-  imports: [SharedModule, NgxMaterialTimepickerModule],
-  providers: [ToastrService, DatePipe],
-  templateUrl: './course-modal-popup.component.html',
-  styleUrl: './course-modal-popup.component.scss'
+    selector: 'app-course-modal-popup',
+    imports: [SharedModule, NgxMaterialTimepickerModule],
+    providers: [ToastrService, DatePipe],
+    templateUrl: './course-modal-popup.component.html',
+    styleUrl: './course-modal-popup.component.scss'
 })
 export class CourseModalPopupComponent implements OnInit {
   constructor(

@@ -17,12 +17,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { catchError, finalize, throwError } from 'rxjs';
 
 @Component({
-  selector: 'app-fees-paid',
-  standalone: true,
-  imports: [SharedModule, RouterLink],
-  providers: [provideNativeDateAdapter()],
-  templateUrl: './fees-paid.component.html',
-  styleUrl: './fees-paid.component.scss'
+    selector: 'app-fees-paid',
+    imports: [SharedModule, RouterLink],
+    providers: [provideNativeDateAdapter()],
+    templateUrl: './fees-paid.component.html',
+    styleUrl: './fees-paid.component.scss'
 })
 export default class FeesPaidComponent implements OnInit {
   loading = false;

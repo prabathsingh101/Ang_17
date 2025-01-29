@@ -5,10 +5,9 @@ import { Component } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
-  selector: 'app-tabs-pills',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './tabs-pills.component.html',
-  styleUrls: ['./tabs-pills.component.scss']
+    selector: 'app-tabs-pills',
+    imports: [SharedModule],
+    templateUrl: './tabs-pills.component.html',
+    styleUrls: ['./tabs-pills.component.scss']
 })
 export default class TabsPillsComponent {}

@@ -4,11 +4,10 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { FileService } from '../file.service';
 
 @Component({
-  selector: 'app-upload',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './upload.component.html',
-  styleUrl: './upload.component.scss'
+    selector: 'app-upload',
+    imports: [SharedModule],
+    templateUrl: './upload.component.html',
+    styleUrl: './upload.component.scss'
 })
 export class UploadComponent implements OnInit {
   progress!: number;

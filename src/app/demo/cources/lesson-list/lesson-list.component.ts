@@ -14,12 +14,11 @@ import { LessonModalPopupComponent } from '../lesson-modal-popup/lesson-modal-po
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-lesson-list',
-  standalone: true,
-  imports: [SharedModule, CreateLessonComponent],
-  providers: [PromptService, ToastrService, LessonService, DatePipe],
-  templateUrl: './lesson-list.component.html',
-  styleUrl: './lesson-list.component.scss'
+    selector: 'app-lesson-list',
+    imports: [SharedModule, CreateLessonComponent],
+    providers: [PromptService, ToastrService, LessonService, DatePipe],
+    templateUrl: './lesson-list.component.html',
+    styleUrl: './lesson-list.component.scss'
 })
 export default class LessonListComponent implements OnInit {
   constructor(

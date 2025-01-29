@@ -5,11 +5,10 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 
 @Component({
-  selector: 'app-prompt-dialog',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './prompt-dialog.component.html',
-  styleUrl: './prompt-dialog.component.scss'
+    selector: 'app-prompt-dialog',
+    imports: [SharedModule],
+    templateUrl: './prompt-dialog.component.html',
+    styleUrl: './prompt-dialog.component.scss'
 })
 export default class PromptDialogComponent implements OnInit {
 

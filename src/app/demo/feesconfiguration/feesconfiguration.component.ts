@@ -15,12 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 import { PromptService } from '../shared/prompt.service';
 
 @Component({
-  selector: 'app-feesconfiguration',
-  standalone: true,
-  imports: [SharedModule, FeeheadComponent],
-  providers: [PromptService],
-  templateUrl: './feesconfiguration.component.html',
-  styleUrl: './feesconfiguration.component.scss'
+    selector: 'app-feesconfiguration',
+    imports: [SharedModule, FeeheadComponent],
+    providers: [PromptService],
+    templateUrl: './feesconfiguration.component.html',
+    styleUrl: './feesconfiguration.component.scss'
 })
 export default class FeesconfigurationComponent implements OnInit {
   constructor(

@@ -12,12 +12,11 @@ import { PromptService } from '../shared/prompt.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-departments',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [DepartmentService, ToastrService],
-  templateUrl: './departments.component.html',
-  styleUrl: './departments.component.scss'
+    selector: 'app-departments',
+    imports: [SharedModule],
+    providers: [DepartmentService, ToastrService],
+    templateUrl: './departments.component.html',
+    styleUrl: './departments.component.scss'
 })
 export default class DepartmentsComponent implements OnInit {
   constructor(

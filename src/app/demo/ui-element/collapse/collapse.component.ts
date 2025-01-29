@@ -5,11 +5,10 @@ import { Component } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
-  selector: 'app-collapse',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './collapse.component.html',
-  styleUrls: ['./collapse.component.scss']
+    selector: 'app-collapse',
+    imports: [SharedModule],
+    templateUrl: './collapse.component.html',
+    styleUrls: ['./collapse.component.scss']
 })
 export default class CollapseComponent {
   // Public props

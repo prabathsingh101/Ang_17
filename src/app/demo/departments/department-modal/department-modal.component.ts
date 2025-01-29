@@ -6,12 +6,11 @@ import { DepartmentService } from '../department.service';
 import { Department } from '../department.model';
 
 @Component({
-  selector: 'app-department-modal',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [DepartmentService],
-  templateUrl: './department-modal.component.html',
-  styleUrl: './department-modal.component.scss'
+    selector: 'app-department-modal',
+    imports: [SharedModule],
+    providers: [DepartmentService],
+    templateUrl: './department-modal.component.html',
+    styleUrl: './department-modal.component.scss'
 })
 export default class DepartmentModalComponent implements OnInit {
   data: any = inject(MAT_DIALOG_DATA);

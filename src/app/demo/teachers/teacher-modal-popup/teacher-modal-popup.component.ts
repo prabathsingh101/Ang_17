@@ -11,12 +11,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
-  selector: 'app-teacher-modal-popup',
-  standalone: true,
-  imports: [SharedModule],
-  providers:[provideNativeDateAdapter(), TeachersService, DatePipe, ToastrService],
-  templateUrl: './teacher-modal-popup.component.html',
-  styleUrl: './teacher-modal-popup.component.scss'
+    selector: 'app-teacher-modal-popup',
+    imports: [SharedModule],
+    providers: [provideNativeDateAdapter(), TeachersService, DatePipe, ToastrService],
+    templateUrl: './teacher-modal-popup.component.html',
+    styleUrl: './teacher-modal-popup.component.scss'
 })
 export class TeacherModalPopupComponent implements OnInit, OnDestroy {
 

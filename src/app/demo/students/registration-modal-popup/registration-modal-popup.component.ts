@@ -10,11 +10,10 @@ import { RegistrationService } from '../registration/services/registration.servi
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-registration-modal-popup',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './registration-modal-popup.component.html',
-  styleUrl: './registration-modal-popup.component.scss'
+    selector: 'app-registration-modal-popup',
+    imports: [SharedModule],
+    templateUrl: './registration-modal-popup.component.html',
+    styleUrl: './registration-modal-popup.component.scss'
 })
 export default class RegistrationModalPopupComponent implements OnInit, OnDestroy {
 

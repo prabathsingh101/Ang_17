@@ -30,23 +30,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-sign-in',
-  standalone: true,
-  imports: [
-    SharedModule,
-    RouterModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatDividerModule,
-    MatInputModule,
-    HttpClientModule
-  ],
-  providers: [LoginService, UserStoreService, ToastrService, SharedModule],
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+    selector: 'app-sign-in',
+    imports: [
+        SharedModule,
+        RouterModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatDividerModule,
+        MatInputModule,
+        HttpClientModule
+    ],
+    providers: [LoginService, UserStoreService, ToastrService, SharedModule],
+    templateUrl: './sign-in.component.html',
+    styleUrls: ['./sign-in.component.scss']
 })
 export default class SignInComponent implements OnInit {
   form: FormGroup = new FormGroup({

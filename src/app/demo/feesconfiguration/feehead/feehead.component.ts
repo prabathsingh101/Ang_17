@@ -8,12 +8,11 @@ import { FeesheadService } from '../services/feeshead.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-feehead',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [ClassService, ToastrService],
-  templateUrl: './feehead.component.html',
-  styleUrl: './feehead.component.scss'
+    selector: 'app-feehead',
+    imports: [SharedModule],
+    providers: [ClassService, ToastrService],
+    templateUrl: './feehead.component.html',
+    styleUrl: './feehead.component.scss'
 })
 export default class FeeheadComponent implements OnInit {
   @Output() parentFunction: EventEmitter<any> = new EventEmitter();

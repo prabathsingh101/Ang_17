@@ -45,11 +45,10 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-dash-analytics',
-  standalone: true,
-  imports: [SharedModule, NgApexchartsModule, ProductSaleComponent],
-  templateUrl: './dash-analytics.component.html',
-  styleUrls: ['./dash-analytics.component.scss']
+    selector: 'app-dash-analytics',
+    imports: [SharedModule, NgApexchartsModule, ProductSaleComponent],
+    templateUrl: './dash-analytics.component.html',
+    styleUrls: ['./dash-analytics.component.scss']
 })
 export default class DashAnalyticsComponent implements OnInit {
   // public props

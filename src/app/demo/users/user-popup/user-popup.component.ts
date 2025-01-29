@@ -21,23 +21,22 @@ import { Roles } from '../models/user.model';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-user-popup',
-  standalone: true,
-  imports: [
-    SharedModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    MatSelectModule,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogTitle,
-    MatDialogContent
-  ],
-  templateUrl: './user-popup.component.html',
-  styleUrl: './user-popup.component.scss'
+    selector: 'app-user-popup',
+    imports: [
+        SharedModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatCardModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDialogActions,
+        MatDialogClose,
+        MatDialogTitle,
+        MatDialogContent
+    ],
+    templateUrl: './user-popup.component.html',
+    styleUrl: './user-popup.component.scss'
 })
 export class UserPopupComponent implements OnInit {
   data: any = inject(MAT_DIALOG_DATA);

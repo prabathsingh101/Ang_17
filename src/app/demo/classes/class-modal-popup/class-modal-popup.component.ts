@@ -10,12 +10,11 @@ import { CourseService } from '../../cources/services/course.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-class-modal-popup',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [TeachersService, ClassService, ToastrService, CourseService],
-  templateUrl: './class-modal-popup.component.html',
-  styleUrl: './class-modal-popup.component.scss'
+    selector: 'app-class-modal-popup',
+    imports: [SharedModule],
+    providers: [TeachersService, ClassService, ToastrService, CourseService],
+    templateUrl: './class-modal-popup.component.html',
+    styleUrl: './class-modal-popup.component.scss'
 })
 export class ClassModalPopupComponent implements OnInit {
   constructor(

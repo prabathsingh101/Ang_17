@@ -15,12 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 import { ClassModalPopupComponent } from './class-modal-popup/class-modal-popup.component';
 
 @Component({
-  selector: 'app-classes',
-  standalone: true,
-  imports: [SharedModule, CreateClassComponent],
-  providers: [PromptService, ToastrService, ClassService],
-  templateUrl: './classes.component.html',
-  styleUrl: './classes.component.scss'
+    selector: 'app-classes',
+    imports: [SharedModule, CreateClassComponent],
+    providers: [PromptService, ToastrService, ClassService],
+    templateUrl: './classes.component.html',
+    styleUrl: './classes.component.scss'
 })
 export default class ClassesComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['id', 'classname','course', 'teachername', 'studentlimit', 'action'];

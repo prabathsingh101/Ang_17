@@ -11,11 +11,10 @@ interface ProgressBarItem {
 }
 
 @Component({
-  selector: 'app-product-sale',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './product-sale.component.html',
-  styleUrls: ['./product-sale.component.scss']
+    selector: 'app-product-sale',
+    imports: [SharedModule],
+    templateUrl: './product-sale.component.html',
+    styleUrls: ['./product-sale.component.scss']
 })
 export class ProductSaleComponent {
   // public method

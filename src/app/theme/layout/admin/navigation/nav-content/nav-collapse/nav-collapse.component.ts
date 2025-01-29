@@ -6,18 +6,19 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { NavigationItem } from '../../navigation';
 
 @Component({
-  selector: 'app-nav-collapse',
-  templateUrl: './nav-collapse.component.html',
-  styleUrls: ['./nav-collapse.component.scss'],
-  animations: [
-    trigger('slideInOut', [
-      transition(':enter', [
-        style({ transform: 'translateY(-100%)', display: 'block' }),
-        animate('250ms ease-in', style({ transform: 'translateY(0%)' }))
-      ]),
-      transition(':leave', [animate('250ms ease-in', style({ transform: 'translateY(-100%)' }))])
-    ])
-  ]
+    selector: 'app-nav-collapse',
+    templateUrl: './nav-collapse.component.html',
+    styleUrls: ['./nav-collapse.component.scss'],
+    animations: [
+        trigger('slideInOut', [
+            transition(':enter', [
+                style({ transform: 'translateY(-100%)', display: 'block' }),
+                animate('250ms ease-in', style({ transform: 'translateY(0%)' }))
+            ]),
+            transition(':leave', [animate('250ms ease-in', style({ transform: 'translateY(-100%)' }))])
+        ])
+    ],
+    standalone: false
 })
 export class NavCollapseComponent {
   // public props

@@ -9,12 +9,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AdmissionService } from '../registration/services/admission.service';
 
 @Component({
-  selector: 'app-admission',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [ClassService, RegistrationService],
-  templateUrl: './admission.component.html',
-  styleUrl: './admission.component.scss'
+    selector: 'app-admission',
+    imports: [SharedModule],
+    providers: [ClassService, RegistrationService],
+    templateUrl: './admission.component.html',
+    styleUrl: './admission.component.scss'
 })
 export default class AdmissionComponent implements OnInit, OnDestroy {
   constructor(

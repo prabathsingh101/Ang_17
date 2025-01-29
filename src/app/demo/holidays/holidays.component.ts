@@ -12,12 +12,11 @@ import HolidayModalPopupComponent from './holiday-modal-popup/holiday-modal-popu
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-holidays',
-  standalone: true,
-  imports: [SharedModule],
-  providers: [HolidaysService, ToastrService, PromptService, DatePipe],
-  templateUrl: './holidays.component.html',
-  styleUrl: './holidays.component.scss'
+    selector: 'app-holidays',
+    imports: [SharedModule],
+    providers: [HolidaysService, ToastrService, PromptService, DatePipe],
+    templateUrl: './holidays.component.html',
+    styleUrl: './holidays.component.scss'
 })
 export default class HolidaysComponent implements OnInit {
   constructor(
