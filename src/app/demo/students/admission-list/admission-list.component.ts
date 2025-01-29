@@ -13,11 +13,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { catchError, throwError, finalize } from 'rxjs';
 import PaymentModalPopupComponent from '../../feesconfiguration/payment-modal-popup/payment-modal-popup.component';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FilterPipe } from '../../shared/filter.pipe';
 
 @Component({
   selector: 'app-admission-list',
   standalone: true,
-  imports: [SharedModule, RouterLink,],
+  imports: [SharedModule, RouterLink, FilterPipe],
   providers: [DatePipe],
   templateUrl: './admission-list.component.html',
   styleUrl: './admission-list.component.scss'
@@ -30,6 +31,8 @@ export default class AdmissionListComponent implements OnInit {
     public promptSvc: PromptService,
     private toast: ToastrService
   ) {}
+
+  searchText:string="";
 
   loading = false;
 

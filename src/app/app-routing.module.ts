@@ -8,8 +8,6 @@ import { AdminComponent } from './theme/layout/admin/admin.component';
 import SignInComponent from './demo/authentication/sign-in/sign-in.component';
 import { authGuard } from './demo/authentication/services/auth.guard';
 
-
-
 const routes: Routes = [
   {
     path: '',
@@ -17,7 +15,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'auth/signin', component: SignInComponent
+    path: 'auth/signin',
+    component: SignInComponent
   },
   {
     path: '',
@@ -53,131 +52,166 @@ const routes: Routes = [
         loadComponent: () => import('./demo/sample-page/sample-page.component')
       },
       {
-        path: 'create', canActivate:[authGuard],
+        path: 'create',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/teachers/create-teacher/create-teacher.component')
       },
       {
-        path: 'list', canActivate:[authGuard],
+        path: 'list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/teachers/teacher-list/teacher-list.component')
       },
 
       {
-        path: 'payslip', canActivate:[authGuard],
+        path: 'payslip',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/teachers/teacher-payslip/teacher-payslip.component')
       },
       {
-        path: 'departments/create', canActivate:[authGuard],
+        path: 'departments/create',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/departments/create-department/create-department.component')
       },
       {
-        path: 'departments/list', canActivate:[authGuard],
+        path: 'departments/list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/departments/departments.component')
       },
 
       {
-        path: 'classes/create-class', canActivate:[authGuard],
+        path: 'classes/create-class',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/classes/classes.component')
       },
       {
-        path: 'classes/create-attendance', canActivate:[authGuard],
+        path: 'classes/create-attendance',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/classes/attendance-type/attendance-type.component')
       },
       {
-        path: 'classes/list-attendance', canActivate:[authGuard],
+        path: 'classes/list-attendance',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/classes/attendance-list/attendance-list.component')
       },
       {
-        path: 'courses/new-course', canActivate:[authGuard],
+        path: 'courses/new-course',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/cources/create-course/create-course.component')
       },
       {
-        path: 'courses/course-list', canActivate:[authGuard],
+        path: 'courses/course-list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/cources/cources.component')
       },
       {
-        path: 'courses/new-lesson', canActivate:[authGuard],
+        path: 'courses/new-lesson',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/cources/create-lesson/create-lesson.component')
       },
       {
-        path: 'courses/lesson-list', canActivate:[authGuard],
+        path: 'courses/lesson-list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/cources/lesson-list/lesson-list.component')
       },
       {
-        path: 'users/create', canActivate:[authGuard],
+        path: 'users/create',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/users/create-user/create-user.component')
       },
       {
-        path: 'users/list', canActivate:[authGuard],
+        path: 'users/list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/users/user-list/user-list.component')
       },
       {
-        path: 'users/profiles', canActivate:[authGuard],
+        path: 'users/profiles',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/users/user-profiles/user-profiles.component')
       },
       {
-        path: 'users/change-password', canActivate:[authGuard],
+        path: 'users/change-password',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/users/change-password/change-password.component')
       },
       {
-        path: 'students/registration', canActivate:[authGuard],
+        path: 'students/registration',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/students/registration/registration.component')
       },
       {
-        path: 'students/reg-list', canActivate:[authGuard],
+        path: 'students/reg-list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/students/registration-list/registration-list.component')
       },
 
       {
-        path: 'students/admission', canActivate:[authGuard],
+        path: 'students/admission',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/students/admission/admission.component')
       },
       {
-        path: 'students/adm-list', canActivate:[authGuard],
+        path: 'students/adm-list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/students/admission-list/admission-list.component')
       },
 
       {
-        path: 'holidays/create-holiday', canActivate:[authGuard],
+        path: 'holidays/create-holiday',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/holidays/create-holiday/create-holiday.component')
       },
       {
-        path: 'holidays/holiday-list', canActivate:[authGuard],
+        path: 'holidays/holiday-list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/holidays/holidays.component')
       },
       {
-        path: 'holidays/holiday-calendar', canActivate:[authGuard],
+        path: 'holidays/holiday-calendar',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/holidays/holidays-calendar/holidays-calendar.component')
       },
       {
-        path: 'employees/create-employee', canActivate:[authGuard],
+        path: 'employees/create-employee',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/employees/create-employee/create-employee.component')
       },
       {
-        path: 'employees/employees-list', canActivate:[authGuard],
+        path: 'employees/employees-list',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/employees/employees.component')
       },
       {
-        path: 'feesconfiguration/feesconfig', canActivate:[authGuard],
+        path: 'feesconfiguration/feesconfig',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/feesconfiguration/feesconfiguration.component')
       },
       {
-        path: 'feesconfiguration/feestype', canActivate:[authGuard],
+        path: 'feesconfiguration/feestype',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/feesconfiguration/feestypes/feestypes.component')
       },
       {
-        path: 'feesconfiguration/adm-fees/:id', canActivate:[authGuard],
+        path: 'feesconfiguration/adm-fees/:id',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/feesconfiguration/collect-admission-fees/collect-admission-fees.component')
       },
       {
-        path: 'fees-paid/fee-paid', canActivate:[authGuard],
+        path: 'fees-paid/fee-paid',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/fees-paid/fees-paid.component')
       },
       {
-        path: 'fees-paid/fee-history', canActivate:[authGuard],
+        path: 'fees-paid/fee-history',
+        canActivate: [authGuard],
         loadComponent: () => import('./demo/fees-paid/fees-paid-history/fees-paid-history.component')
+      },
+      {
+        path: 'products/list',
+        canActivate: [authGuard],
+        loadComponent: () => import('./demo/products/products.component')
       }
     ]
-  },
+  }
   // {
   //   path: '',
   //   component: GuestComponent,
@@ -192,7 +226,6 @@ const routes: Routes = [
   //     }
   //   ]
   // },
-
 ];
 
 @NgModule({

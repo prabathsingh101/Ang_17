@@ -108,7 +108,7 @@ export const NavigationItems: NavigationItem[] = [
             title: 'Admission List',
             type: 'item',
             url: '/students/adm-list'
-          },
+          }
           // {
           //   id: 'stusent-attendance',
           //   title: 'Attendance',
@@ -246,6 +246,37 @@ export const NavigationItems: NavigationItem[] = [
   },
 
   {
+    id: 'products',
+    title: 'Products',
+    type: 'group',
+    icon: 'icon-group',
+    children: [
+      {
+        id: 'products',
+        title: 'Products',
+        type: 'collapse',
+        icon: 'feather icon-box',
+        children: [
+          {
+            id: 'create',
+            title: 'Create',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/products/create-employee'
+          },
+          {
+            id: 'list',
+            title: 'Lists',
+            type: 'item',
+            icon: 'feather icon-at-sign',
+            url: '/products/list'
+          }
+        ]
+      }
+    ]
+  },
+
+  {
     id: 'courses',
     title: 'Courses',
     type: 'group',
@@ -269,9 +300,9 @@ export const NavigationItems: NavigationItem[] = [
             id: 'lesson-list',
             title: 'Lesson',
             type: 'item',
-            icon:'feather icon-at-sign',
+            icon: 'feather icon-at-sign',
             url: '/courses/lesson-list'
-          },
+          }
         ]
       }
     ]
@@ -302,8 +333,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             icon: 'feather icon-at-sign',
             url: '/feesconfiguration/feestype'
-          },
-
+          }
         ]
       }
     ]
@@ -334,8 +364,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             icon: 'feather icon-at-sign',
             url: '/fees-paid/fee-history'
-          },
-
+          }
         ]
       }
     ]

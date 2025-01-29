@@ -16,7 +16,7 @@ import 'mousetrap';
 
 // bootstrap import
 import { NgbDropdownModule, NgbNavModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { loginInterceptor } from 'src/app/demo/authentication/services/login.interceptor';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -39,7 +39,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
-
+import { HttpErrorInterceptorService } from 'src/app/demo/authentication/services/Httperror-interceptor-service';
 
 @NgModule({
   imports: [
@@ -73,7 +73,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDialogModule,
     MatTooltipModule,
     MatSlideToggleModule,
-MatRadioModule
+    MatRadioModule
   ],
   exports: [
     CommonModule,
@@ -111,7 +111,12 @@ MatRadioModule
   ],
   declarations: [DataFilterPipe, SpinnerComponent],
   providers: [
-
-    provideHttpClient(withInterceptors([loginInterceptor]))]
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true
+    }
+  ]
 })
 export class SharedModule {}

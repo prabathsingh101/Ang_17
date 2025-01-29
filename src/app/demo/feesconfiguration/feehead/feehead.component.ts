@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { ClassService } from '../../classes/services/class.service';
@@ -17,6 +17,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export default class FeeheadComponent implements OnInit {
   @Output() parentFunction: EventEmitter<any> = new EventEmitter();
+
+  //fees = inject(FeesheadService);
+
   constructor(
     public fb: FormBuilder,
     public classSvc: ClassService,

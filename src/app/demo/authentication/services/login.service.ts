@@ -11,53 +11,49 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class LoginService {
-
   private baseUrl: string = 'https://localhost:7226/api/Auth/';
 
-  private userPayload:any;
+  private userPayload: any;
 
-  constructor(private http: HttpClient, private router: Router,
+  constructor(
+    private http: HttpClient,
+    private router: Router,
     private toast: ToastrService
   ) {
-
     this.userPayload = this.decodedToken();
-
-   }
-
-
-  storeToken(tokenValue: string){
-    sessionStorage.setItem('token', tokenValue)
-  }
-  storeRefreshToken(tokenValue: string){
-    sessionStorage.setItem('refreshToken', tokenValue)
   }
 
-  getToken(){
-    return sessionStorage.getItem('token')
+  storeToken(tokenValue: string) {
+    sessionStorage.setItem('token', tokenValue);
   }
-  getRefreshToken(){
-    return sessionStorage.getItem('refreshToken')
-  }
-
-  isLoggedIn(): boolean{
-    return !!sessionStorage.getItem('token')
+  storeRefreshToken(tokenValue: string) {
+    sessionStorage.setItem('refreshToken', tokenValue);
   }
 
-  decodedToken(){
+  getToken() {
+    return sessionStorage.getItem('token');
+  }
+  getRefreshToken() {
+    return sessionStorage.getItem('refreshToken');
+  }
+
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem('token');
+  }
+
+  decodedToken() {
     const jwtHelper = new JwtHelperService();
     //alert(jwtHelper)
     const token = this.getToken()!;
-    console.log('decodetoken',jwtHelper.decodeToken(token))
-    return jwtHelper.decodeToken(token)
+    console.log('decodetoken', jwtHelper.decodeToken(token));
+    return jwtHelper.decodeToken(token);
   }
-  getfullNameFromToken(){
-    if(this.userPayload)
-    return this.userPayload.name;
+  getfullNameFromToken() {
+    if (this.userPayload) return this.userPayload.name;
   }
 
-  getRoleFromToken(){
-    if(this.userPayload)
-    return this.userPayload.role;
+  getRoleFromToken() {
+    if (this.userPayload) return this.userPayload.role;
   }
   renewToken(tokenApi: TokenApiModel) {
     return this.http.post<any>(`${this.baseUrl}refresh`, tokenApi);
@@ -77,7 +73,7 @@ export class LoginService {
 
   getName() {
     return this.http.get(`${this.baseUrl}GetName`, {
-      responseType: 'text',
+      responseType: 'text'
     });
   }
 }
